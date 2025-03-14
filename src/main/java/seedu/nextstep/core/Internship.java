@@ -1,6 +1,4 @@
-package seedu.nextstep;
-
-import java.util.Arrays;
+package seedu.nextstep.core;
 
 public class Internship {
     protected String company;
@@ -15,6 +13,10 @@ public class Internship {
         this.duration = duration;
         this.salary = salary;
         this.skills = new String[]{skill1, skill2, skill3};
+    }
+
+    public String[] getSkills() {
+        return skills;
     }
 
     @Override
