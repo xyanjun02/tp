@@ -1,9 +1,38 @@
 package seedu.nextstep;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NextStep {
     public static ArrayList<Internship> internships = new ArrayList<>();
+
+    // add c/apple r/swe d/12 s/3000 pre/python sql c++
+    public static void addInternship(String input) {
+        String company = extractValue(input, "c/");
+        String role = extractValue(input, "r/");
+        String durationStr = extractValue(input, "d/");
+        int duration = Integer.parseInt(durationStr);
+        String salaryStr = extractValue(input, "s/");
+        int salary = Integer.parseInt(salaryStr);
+        String prerequisiteInput = extractValue(input, "pre/");
+        String[] prereqs = prerequisiteInput.split(" ");
+        String prereq1 = prereqs[0];
+        String prereq2 = prereqs[1];
+        String prereq3 = prereqs[2];
+
+        Internship toAdd = new Internship(company, role, duration, salary, prereq1, prereq2, prereq3);
+        internships.add(toAdd);
+    }
+
+    public static String extractValue(String input, String prefix) {
+        int startIndex = input.indexOf(prefix) + prefix.length();
+        int endIndex = input.indexOf(" ", startIndex);
+        if (prefix.equals("pre/")) {
+            return input.substring(startIndex);
+        }
+        return input.substring(startIndex, endIndex);
+    }
+
 
     public static void deleteInternship(String input) {
         try {
@@ -43,6 +72,10 @@ public class NextStep {
             }
             String[] words = line.split(" ");
             switch (words[0]) {
+                case "add":
+                    addInternship(line);
+                    System.out.println(internships.get(internships.size() - 1));
+                    break;
                 case "delete":
                     deleteInternship(line);
                     break;
@@ -56,4 +89,3 @@ public class NextStep {
         sc.close();
     }
 }
-
