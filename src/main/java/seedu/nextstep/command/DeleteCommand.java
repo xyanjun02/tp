@@ -19,8 +19,11 @@ public class DeleteCommand {
             }
             Internship removed = NextStep.internships.remove(index);
             System.out.println("Deleted Internship: " + removed);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid index format. Use: delete <index>");
         } catch (Exception e) {
             System.out.println("Invalid input. Use: delete <index>");
         }
     }
 }
+

@@ -1,7 +1,7 @@
 package seedu.nextstep.command;
 
-import seedu.nextstep.core.Internship;
 import seedu.nextstep.NextStep;
+import seedu.nextstep.core.Internship;
 
 public class FindSkillCommand {
     private final String input;
@@ -12,6 +12,7 @@ public class FindSkillCommand {
 
     public void execute() {
         try {
+            // Split input correctly and trim to handle extra spaces
             String[] parts = input.split("find/s");
 
             if (parts.length < 2 || parts[1].trim().isEmpty()) {
@@ -19,11 +20,10 @@ public class FindSkillCommand {
                 return;
             }
 
-            String skillset = parts[1].trim();  // Skillset to search for
+            String skillset = parts[1].trim();
             System.out.println("Searching for internships with skillset: " + skillset);
             boolean found = false;
 
-            // Search through internships and match skills
             for (Internship internship : NextStep.internships) {
                 for (String skill : internship.getSkills()) {
                     if (skill.equalsIgnoreCase(skillset)) {

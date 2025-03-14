@@ -4,7 +4,7 @@ import seedu.nextstep.core.Internship;
 import seedu.nextstep.NextStep;
 
 public class AddCommand {
-    private String input;
+    private final String input;
 
     public AddCommand(String input) {
         this.input = input;
@@ -30,17 +30,18 @@ public class AddCommand {
                 return;
             }
 
-            String[] prereqs = prerequisiteInput.split(" ");
-            if (prereqs.length < 3) {
-                System.out.println("Error: Please provide 3 skills in the 'pre/' section.");
+            // Split the skills by commas, trim spaces, and filter out empty entries
+            String[] prereqs = prerequisiteInput.split(",");
+            for (int i = 0; i < prereqs.length; i++) {
+                prereqs[i] = prereqs[i].trim();
+            }
+
+            if (prereqs.length == 0) {
+                System.out.println("Error: Please provide at least one skill in the 'pre/' section.");
                 return;
             }
 
-            String prereq1 = prereqs[0];
-            String prereq2 = prereqs[1];
-            String prereq3 = prereqs[2];
-
-            Internship toAdd = new Internship(company, role, duration, salary, prereq1, prereq2, prereq3);
+            Internship toAdd = new Internship(company, role, duration, salary, prereqs);
             NextStep.internships.add(toAdd);
             System.out.println("Internship Added: " + toAdd);
 
@@ -63,3 +64,4 @@ public class AddCommand {
         return input.substring(startIndex, endIndex);
     }
 }
+

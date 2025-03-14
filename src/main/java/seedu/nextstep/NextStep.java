@@ -37,7 +37,7 @@ public class NextStep {
                     new FindSkillCommand(line).execute();
                     break;
                 default:
-                    System.out.println("Unknown command. Use 'delete <index>', or 'list'.");
+                    System.out.println("Unknown command. Type help for more information.");
             }
         }
         sc.close();
