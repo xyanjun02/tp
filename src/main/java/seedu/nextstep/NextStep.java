@@ -33,7 +33,7 @@ public class NextStep {
                 case "help":
                     new HelpCommand().execute();
                     break;
-                case "find /s":
+                case "find/s":
                     new FindSkillCommand(line).execute();
                     break;
                 default:
