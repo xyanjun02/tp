@@ -2,6 +2,7 @@ package seedu.nextstep;
 
 import seedu.nextstep.command.*;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.ui.Ui;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,14 +10,13 @@ public class NextStep {
     public static ArrayList<Internship> internships = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println("Get Ready to begin your Next Step!!!");
-        System.out.println("----------->>>>>");
-
+        Ui.printWelcomeMessage();
         Scanner sc = new Scanner(System.in);
+
         while (true) {
             String line = sc.nextLine();
             if (line.equalsIgnoreCase("bye")) {
-                System.out.println("Hope you get an internship dude...");
+                Ui.printExitMessage();
                 break;
             }
             String[] words = line.split(" ");

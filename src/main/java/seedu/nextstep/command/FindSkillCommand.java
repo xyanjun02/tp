@@ -16,17 +16,17 @@ public class FindSkillCommand {
             String[] parts = input.split("find/s");
 
             if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                System.out.println("Error: Please specify a skillset after '/s'.");
+                System.out.println("Error: Please specify a skill after '/s'.");
                 return;
             }
 
-            String skillset = parts[1].trim();
-            System.out.println("Searching for internships with skillset: " + skillset);
+            String skill = parts[1].trim();
+            System.out.println("Searching for internships with skill: " + skill);
             boolean found = false;
 
             for (Internship internship : NextStep.internships) {
-                for (String skill : internship.getSkills()) {
-                    if (skill.equalsIgnoreCase(skillset)) {
+                for (String s : internship.getSkills()) {
+                    if (s.equalsIgnoreCase(skill)) {
                         System.out.println(internship);
                         found = true;
                         break;
@@ -35,7 +35,7 @@ public class FindSkillCommand {
             }
 
             if (!found) {
-                System.out.println("No internships found with skill: " + skillset);
+                System.out.println("No internships found with skill: " + skill);
             }
 
         } catch (Exception e) {

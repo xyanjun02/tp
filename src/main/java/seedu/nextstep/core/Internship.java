@@ -7,14 +7,14 @@ public class Internship {
     protected String company;
     protected String role;
     protected int duration; // in months
-    protected int salary;
+    protected int allowance;
     private final String[] skills;
 
-    public Internship(String company, String role, int duration, int salary, String... skills) {
+    public Internship(String company, String role, int duration, int allowance, String... skills) {
         this.company = company;
         this.role = role;
         this.duration = duration;
-        this.salary = salary;
+        this.allowance = allowance;
         this.skills = skills;
     }
 
@@ -27,7 +27,7 @@ public class Internship {
         return "Company: " + company + System.lineSeparator() +
                 "Role: " + role + System.lineSeparator() +
                 "Duration: " + duration + " months" + System.lineSeparator() +
-                "Salary: $" + salary + System.lineSeparator() +
-                "Skills: " + String.join(", ", skills) + System.lineSeparator();
+                "Allowance: $" + allowance + System.lineSeparator() +
+                "Skills: " + String.join(", ", skills);
     }
 }
