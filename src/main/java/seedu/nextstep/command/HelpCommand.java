@@ -1,14 +1,18 @@
 package seedu.nextstep.command;
 
+import seedu.nextstep.ui.Ui;
+
 public class HelpCommand {
 
     public void execute() {
         // Show the help instructions for the commands
-        System.out.println("Do help yourself to these commands:");
-        System.out.println("add [n/COMPANY_NAME] [r/ROLE] [s/SKILLSETS] [l/LOCATION] [d/DEADLINE] - Adds a new internship");
-        System.out.println("delete [INDEX] - Deletes an internship at the specified index");
-        System.out.println("list - Lists all available internships");
-        System.out.println("find/s [SKILLSET] - Finds internships with specific skillset");
-        System.out.println("bye - Exit the application");
+        System.out.println("Do help yourself to these commands! (•ᴗ•)");
+        Ui.printLinebreak();
+        System.out.println("1. add [c/COMPANY] [r/ROLE] [d/DURATION] [a/ALLOWANCE] [s/SKILLS]- Adds a new internship");
+        System.out.println("2. delete [INDEX] - Deletes an internship at the specified index");
+        System.out.println("3. list - Lists all available internships");
+        System.out.println("4. find/s [SKILL] - Finds internships with specific skill");
+        System.out.println("5. bye - Exit the application");
+        Ui.printLinebreak();
     }
 }

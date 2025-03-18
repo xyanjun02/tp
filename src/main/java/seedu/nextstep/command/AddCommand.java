@@ -2,6 +2,7 @@ package seedu.nextstep.command;
 
 import seedu.nextstep.core.Internship;
 import seedu.nextstep.NextStep;
+import seedu.nextstep.ui.Ui;
 
 public class AddCommand {
     private final String input;
@@ -12,7 +13,7 @@ public class AddCommand {
 
     public void execute() {
         if (input.trim().equals("add")) {
-            System.out.println("Error: Please provide the details for the internship (e.g., c/, r/, d/, s/, pre/).");
+            System.out.println("Error: Please provide the details for the internship (e.g., c/, r/, d/, a/, s/).");
             return;
         }
 
@@ -21,29 +22,29 @@ public class AddCommand {
             String role = extractValue(input, "r/");
             String durationStr = extractValue(input, "d/");
             int duration = Integer.parseInt(durationStr);
-            String salaryStr = extractValue(input, "s/");
-            int salary = Integer.parseInt(salaryStr);
-            String prerequisiteInput = extractValue(input, "pre/");
+            String allowanceStr = extractValue(input, "a/");
+            int allowance = Integer.parseInt(allowanceStr);
+            String skillsInput = extractValue(input, "s/");
 
-            if (company.isEmpty() || role.isEmpty() || durationStr.isEmpty() || salaryStr.isEmpty() || prerequisiteInput.isEmpty()) {
+            if (company.isEmpty() || role.isEmpty() || durationStr.isEmpty() || allowanceStr.isEmpty() || skillsInput.isEmpty()) {
                 System.out.println("Error: Missing required parameters. Please ensure all fields are provided.");
                 return;
             }
 
             // Split the skills by commas, trim spaces, and filter out empty entries
-            String[] prereqs = prerequisiteInput.split(",");
-            for (int i = 0; i < prereqs.length; i++) {
-                prereqs[i] = prereqs[i].trim();
+            String[] skills = skillsInput.split(",");
+            for (int i = 0; i < skills.length; i++) {
+                skills[i] = skills[i].trim();
             }
 
-            if (prereqs.length == 0) {
-                System.out.println("Error: Please provide at least one skill in the 'pre/' section.");
+            if (skills.length == 0) {
+                System.out.println("Error: Please provide at least one skill in the 's/' section.");
                 return;
             }
 
-            Internship toAdd = new Internship(company, role, duration, salary, prereqs);
+            Internship toAdd = new Internship(company, role, duration, allowance, skills);
             NextStep.internships.add(toAdd);
-            System.out.println("Internship Added: " + toAdd);
+            Ui.printAddingMessage(toAdd);
 
         } catch (NumberFormatException e) {
             System.out.println("Error: Invalid number format. Please check the duration and salary values.");
