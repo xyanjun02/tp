@@ -4,13 +4,23 @@ import seedu.nextstep.core.Internship;
 import seedu.nextstep.NextStep;
 import seedu.nextstep.ui.Ui;
 
+/**
+ * Class to handle the adding of a new Internship into the internships ArrayList
+ */
 public class AddCommand {
     private final String input;
 
+    /**
+     * Constructs a new AddCommand class with the given String input.
+     * @param input
+     */
     public AddCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * Executes the adding of a new Internship.
+     */
     public void execute() {
         if (input.trim().equals("add")) {
             System.out.println("Error: Please provide the details for the internship (e.g., c/, r/, d/, a/, s/).");
@@ -32,7 +42,7 @@ public class AddCommand {
             }
 
             // Split the skills by commas, trim spaces, and filter out empty entries
-            String[] skills = skillsInput.split(",");
+            String[] skills = skillsInput.split(" ");
             for (int i = 0; i < skills.length; i++) {
                 skills[i] = skills[i].trim();
             }
@@ -43,6 +53,8 @@ public class AddCommand {
             }
 
             Internship toAdd = new Internship(company, role, duration, allowance, skills);
+            assert toAdd != null: "Internship should be succesfully added";
+            assert !toAdd.getSkills().isEmpty() : "There should be at least one skill";
             NextStep.internships.add(toAdd);
             Ui.printAddingMessage(toAdd);
 
@@ -53,16 +65,30 @@ public class AddCommand {
         }
     }
 
+    /**
+     * Returns a given internship field in String format.
+     * @param input The input containing the internship fields.
+     * @param prefix The prefix corresponding to the field being extracted.
+     * @return The field in String format.
+     */
     private String extractValue(String input, String prefix) {
-        int startIndex = input.indexOf(prefix) + prefix.length();
-        if (startIndex == -1 || startIndex >= input.length()) {
-            return "";
+        int startIndex = input.indexOf(prefix);
+        if (startIndex == -1) {
+            return ""; // prefix not found
         }
-        int endIndex = input.indexOf(" ", startIndex);
-        if (endIndex == -1) {
-            endIndex = input.length();
+        startIndex += prefix.length();
+
+        int endIndex = input.length();
+        for (String nextPrefix : new String[]{"c/", "r/", "d/", "a/", "s/"}) {
+            if (!nextPrefix.equals(prefix)) {
+                int nextPrefixIndex = input.indexOf(nextPrefix, startIndex);
+                if (nextPrefixIndex != -1 && nextPrefixIndex < endIndex) {
+                    endIndex = nextPrefixIndex;
+                }
+            }
         }
-        return input.substring(startIndex, endIndex);
+
+        return input.substring(startIndex, endIndex).trim();
     }
 }
 
