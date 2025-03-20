@@ -38,4 +38,21 @@ public class Ui {
         System.out.println(internship);
         printLinebreak();
     }
+
+    public static void printDeleteSuccess(Internship internship) {
+        System.out.println("Deleted Internship: " + internship);
+    }
+
+    public static void printSearchingForSkill(String skill) {
+        System.out.println("Searching for internships with skill: " + skill);
+    }
+
+    public static void printNoInternshipFound(String skill) {
+        System.out.println("No internships found with skill: " + skill);
+    }
+
+    public static void printInternship(Internship internship) {
+        System.out.println(internship);
+    }
 }
+
