@@ -1,10 +1,15 @@
 package seedu.nextstep;
 
-import seedu.nextstep.command.*;
+import seedu.nextstep.command.AddCommand;
+import seedu.nextstep.command.DeleteCommand;
+import seedu.nextstep.command.ListCommand;
+import seedu.nextstep.command.HelpCommand;
+import seedu.nextstep.command.FindSkillCommand;
 import seedu.nextstep.core.Internship;
 import seedu.nextstep.ui.Ui;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class NextStep {
     public static ArrayList<Internship> internships = new ArrayList<>();
@@ -14,6 +19,8 @@ public class NextStep {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            System.out.print("Enter command: ");
+            System.out.flush(); // Ensure prompt is shown immediately
             String line = sc.nextLine();
             if (line.equalsIgnoreCase("bye")) {
                 Ui.printExitMessage();
