@@ -18,6 +18,22 @@ public class Internship {
         this.skills = skills;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getAllowance() {
+        return allowance;
+    }
+
     public List<String> getSkills() {
         return List.of(skills);
     }
