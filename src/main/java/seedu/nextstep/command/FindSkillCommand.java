@@ -2,6 +2,8 @@ package seedu.nextstep.command;
 
 import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.exception.CommandException;
+import seedu.nextstep.ui.Ui;
 
 public class FindSkillCommand {
     private final String input;
@@ -12,22 +14,21 @@ public class FindSkillCommand {
 
     public void execute() {
         try {
-            // Split input correctly and trim to handle extra spaces
-            String[] parts = input.split("find/s");
-
+            // Split the input into two parts: command and skill parameter.
+            String[] parts = input.split("find/s", 2);
             if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                System.out.println("Error: Please specify a skill after '/s'.");
-                return;
+                throw new CommandException("Error: Please specify a skill after '/s'.");
             }
 
             String skill = parts[1].trim();
-            System.out.println("Searching for internships with skill: " + skill);
+            Ui.printSearchingForSkill(skill);
             boolean found = false;
 
+            // Search each internship's skills for a case-insensitive match.
             for (Internship internship : NextStep.internships) {
                 for (String s : internship.getSkills()) {
                     if (s.equalsIgnoreCase(skill)) {
-                        System.out.println(internship);
+                        Ui.printInternship(internship);
                         found = true;
                         break;
                     }
@@ -35,9 +36,10 @@ public class FindSkillCommand {
             }
 
             if (!found) {
-                System.out.println("No internships found with skill: " + skill);
+                Ui.printNoInternshipFound(skill);
             }
-
+        } catch (CommandException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("Error: Invalid input format. Please check the provided command.");
         }

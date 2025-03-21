@@ -1,6 +1,5 @@
 package seedu.nextstep.core;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Internship {

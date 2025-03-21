@@ -3,82 +3,91 @@ package seedu.nextstep.command;
 import seedu.nextstep.core.Internship;
 import seedu.nextstep.NextStep;
 import seedu.nextstep.ui.Ui;
+import seedu.nextstep.exception.CommandException;
 
-/**
- * Class to handle the adding of a new Internship into the internships ArrayList
- */
 public class AddCommand {
     private final String input;
 
-    /**
-     * Constructs a new AddCommand class with the given String input.
-     * @param input
-     */
     public AddCommand(String input) {
+        // Assert that the input is not null or empty.
+        assert input != null && !input.trim().isEmpty() : "Input must not be null or empty";
         this.input = input;
     }
 
     /**
      * Executes the adding of a new Internship.
+     * Handles all exceptions internally.
      */
     public void execute() {
-        if (input.trim().equals("add")) {
-            System.out.println("Error: Please provide the details for the internship (e.g., c/, r/, d/, a/, s/).");
-            return;
-        }
-
         try {
+            if (input.trim().equals("add")) {
+                throw new CommandException("Error: Please provide the details for the internship (e.g., c/, r/, d/, a/, s/).");
+            }
+
+            // Extract values for each field.
             String company = extractValue(input, "c/");
             String role = extractValue(input, "r/");
             String durationStr = extractValue(input, "d/");
-            int duration = Integer.parseInt(durationStr);
             String allowanceStr = extractValue(input, "a/");
-            int allowance = Integer.parseInt(allowanceStr);
             String skillsInput = extractValue(input, "s/");
 
-            if (company.isEmpty() || role.isEmpty() || durationStr.isEmpty() || allowanceStr.isEmpty() || skillsInput.isEmpty()) {
-                System.out.println("Error: Missing required parameters. Please ensure all fields are provided.");
-                return;
+            // Validate that none of the required fields are empty.
+            if (company.isEmpty() || role.isEmpty() || durationStr.isEmpty() ||
+                    allowanceStr.isEmpty() || skillsInput.isEmpty()) {
+                throw new CommandException("Error: Missing required parameters. Please ensure all fields are provided.");
             }
 
-            // Split the skills by commas, trim spaces, and filter out empty entries
-            String[] skills = skillsInput.split(" ");
+            int duration;
+            int allowance;
+            try {
+                // Parse numeric values only after confirming they are provided.
+                duration = Integer.parseInt(durationStr);
+                allowance = Integer.parseInt(allowanceStr);
+            } catch (NumberFormatException e) {
+                throw new CommandException("Error: Invalid number format. Please check the duration and salary values.");
+            }
+
+            // Process skills: split by commas and trim each entry.
+            String[] skills = skillsInput.split(",");
             for (int i = 0; i < skills.length; i++) {
                 skills[i] = skills[i].trim();
             }
-
-            if (skills.length == 0) {
-                System.out.println("Error: Please provide at least one skill in the 's/' section.");
-                return;
+            if (skills.length == 0 || (skills.length == 1 && skills[0].isEmpty())) {
+                throw new CommandException("Error: Please provide at least one skill in the 's/' section.");
             }
 
+            // Create the internship and add it to the list.
             Internship toAdd = new Internship(company, role, duration, allowance, skills);
-            assert toAdd != null: "Internship should be succesfully added";
+            // Assertions to verify key assumptions.
+            assert toAdd != null : "Internship object should not be null";
             assert !toAdd.getSkills().isEmpty() : "There should be at least one skill";
+
             NextStep.internships.add(toAdd);
             Ui.printAddingMessage(toAdd);
-
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Invalid number format. Please check the duration and salary values.");
+        } catch (CommandException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
-            System.out.println("Error: Invalid input format. Please check the provided command.");
+            System.out.println("Error: Unable to add internship. Please check the input format.");
         }
     }
 
     /**
-     * Returns a given internship field in String format.
-     * @param input The input containing the internship fields.
-     * @param prefix The prefix corresponding to the field being extracted.
-     * @return The field in String format.
+     * Extracts the value associated with the specified prefix from the input.
+     * If the prefix is not found, returns an empty string.
+     *
+     * @param input  the full user input
+     * @param prefix the prefix to look for (e.g., "c/", "r/")
+     * @return the extracted value as a String
      */
     private String extractValue(String input, String prefix) {
         int startIndex = input.indexOf(prefix);
         if (startIndex == -1) {
-            return ""; // prefix not found
+            return "";
         }
         startIndex += prefix.length();
 
         int endIndex = input.length();
+        // Look for the earliest occurrence of any other known prefix.
         for (String nextPrefix : new String[]{"c/", "r/", "d/", "a/", "s/"}) {
             if (!nextPrefix.equals(prefix)) {
                 int nextPrefixIndex = input.indexOf(nextPrefix, startIndex);
@@ -87,8 +96,6 @@ public class AddCommand {
                 }
             }
         }
-
         return input.substring(startIndex, endIndex).trim();
     }
 }
-
