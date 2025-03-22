@@ -21,7 +21,8 @@ public class AddCommand {
     public void execute() {
         try {
             if (input.trim().equals("add")) {
-                throw new CommandException("Error: Please provide the details for the internship (e.g., c/, r/, d/, a/, s/).");
+                throw new CommandException("Error: Please provide the details for the internship" +
+                        " (e.g., c/, r/, d/, a/, s/).");
             }
 
             // Extract values for each field.
@@ -34,7 +35,7 @@ public class AddCommand {
             // Validate that none of the required fields are empty.
             if (company.isEmpty() || role.isEmpty() || durationStr.isEmpty() ||
                     allowanceStr.isEmpty() || skillsInput.isEmpty()) {
-                throw new CommandException("Error: Missing required parameters. Please ensure all fields are provided.");
+                throw new CommandException("Error: Missing parameters. Please ensure all fields are provided.");
             }
 
             int duration;
@@ -44,7 +45,7 @@ public class AddCommand {
                 duration = Integer.parseInt(durationStr);
                 allowance = Integer.parseInt(allowanceStr);
             } catch (NumberFormatException e) {
-                throw new CommandException("Error: Invalid number format. Please check the duration and salary values.");
+                throw new CommandException("Error: Invalid number format. Please check the duration & salary values.");
             }
 
             // Process skills: split by commas and trim each entry.

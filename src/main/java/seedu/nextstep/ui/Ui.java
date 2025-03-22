@@ -14,7 +14,7 @@ public class Ui {
      */
     public static void printWelcomeMessage() {
         printLinebreak();
-        System.out.println("Welcome to NextStep, your personal internship tracking assistant! (•-•)");
+        System.out.println("Welcome to NextStep, your personal internship tracking assistant! (0_0)");
         System.out.println("What would you like to do today?");
         printLinebreak();
     }
@@ -24,7 +24,7 @@ public class Ui {
      */
     public static void printExitMessage() {
         printLinebreak();
-        System.out.println("Thank you for using NextStep, good luck on your search! (•-•)");
+        System.out.println("Thank you for using NextStep, good luck on your search! (0_0)");
         printLinebreak();
     }
 
@@ -33,7 +33,7 @@ public class Ui {
      * @param internship Internship to be added.
      */
     public static void printAddingMessage(Internship internship) {
-        System.out.println("New internship added below! (•ᴗ•)");
+        System.out.println("New internship added below! (0_0)");
         printLinebreak();
         System.out.println(internship);
         printLinebreak();
