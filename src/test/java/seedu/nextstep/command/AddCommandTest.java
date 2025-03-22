@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddCommandTest {
 

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeleteCommandTest {
 
@@ -13,8 +13,10 @@ class DeleteCommandTest {
     void setUp() {
         // Clear the internship list and add sample internships for testing.
         NextStep.internships.clear();
-        NextStep.internships.add(new Internship("Google", "Software Engineer", 6, 2000, new String[]{"Java", "Python"}));
-        NextStep.internships.add(new Internship("Amazon", "Data Engineer", 12, 2500, new String[]{"SQL", "Scala"}));
+        NextStep.internships.add(new Internship("Google", "Software Engineer",
+                6, 2000, new String[]{"Java", "Python"}));
+        NextStep.internships.add(new Internship("Amazon", "Data Engineer",
+                12, 2500, new String[]{"SQL", "Scala"}));
     }
 
     @Test

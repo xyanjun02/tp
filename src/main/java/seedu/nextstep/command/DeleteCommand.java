@@ -10,7 +10,7 @@ public class DeleteCommand {
 
     public DeleteCommand(String input) {
         // Assert that input is not null or empty.
-        assert input != null && !input.trim().isEmpty() : "Input for DeleteCommand should not be null or empty";
+        assert input != null && !input.trim().isEmpty() : "Input for DeleteCommand cannot be null or empty";
         this.input = input;
     }
 
