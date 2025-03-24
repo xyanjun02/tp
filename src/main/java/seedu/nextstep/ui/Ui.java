@@ -20,6 +20,13 @@ public class Ui {
     }
 
     /**
+     * Prints message to prompt user input
+     */
+    public static void printEnterCommand() {
+        System.out.print("Enter command: ");
+    }
+
+    /**
      * Prints exit message when NextStep exits.
      */
     public static void printExitMessage() {

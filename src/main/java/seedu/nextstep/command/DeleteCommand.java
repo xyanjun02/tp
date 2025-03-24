@@ -5,19 +5,17 @@ import seedu.nextstep.NextStep;
 import seedu.nextstep.ui.Ui;
 import seedu.nextstep.exception.CommandException;
 
-public class DeleteCommand {
-    private final String input;
+public class DeleteCommand extends Command {
 
     public DeleteCommand(String input) {
-        // Assert that input is not null or empty.
-        assert input != null && !input.trim().isEmpty() : "Input for DeleteCommand cannot be null or empty";
-        this.input = input;
+        super(input);
     }
 
     /**
      * Executes the deletion of an internship.
      * Handles all exceptions internally.
      */
+    @Override
     public void execute() {
         try {
             int index = parseIndex(input);

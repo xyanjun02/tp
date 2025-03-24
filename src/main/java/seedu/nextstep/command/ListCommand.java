@@ -4,7 +4,13 @@ import seedu.nextstep.NextStep;
 import seedu.nextstep.exception.CommandException;
 import seedu.nextstep.ui.Ui;
 
-public class ListCommand {
+public class ListCommand extends Command {
+
+    public ListCommand() {
+        super();
+    }
+
+    @Override
     public void execute() {
         try {
             if (NextStep.internships.isEmpty()) {
