@@ -2,8 +2,13 @@ package seedu.nextstep.command;
 
 import seedu.nextstep.ui.Ui;
 
-public class HelpCommand {
+public class HelpCommand extends Command {
 
+    public HelpCommand() {
+        super();
+    }
+
+    @Override
     public void execute() {
         // Show the help instructions for the commands
         System.out.println("Do help yourself to these commands! (•ᴗ•)");

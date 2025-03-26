@@ -5,19 +5,17 @@ import seedu.nextstep.NextStep;
 import seedu.nextstep.ui.Ui;
 import seedu.nextstep.exception.CommandException;
 
-public class AddCommand {
-    private final String input;
+public class AddCommand extends Command {
 
     public AddCommand(String input) {
-        // Assert that the input is not null or empty.
-        assert input != null && !input.trim().isEmpty() : "Input must not be null or empty";
-        this.input = input;
+        super(input);
     }
 
     /**
      * Executes the adding of a new Internship.
      * Handles all exceptions internally.
      */
+    @Override
     public void execute() {
         try {
             if (input.trim().equals("add")) {

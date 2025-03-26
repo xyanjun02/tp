@@ -5,13 +5,13 @@ import seedu.nextstep.core.Internship;
 import seedu.nextstep.exception.CommandException;
 import seedu.nextstep.ui.Ui;
 
-public class FindSkillCommand {
-    private final String input;
+public class FindSkillCommand extends Command {
 
     public FindSkillCommand(String input) {
-        this.input = input;
+        super(input);
     }
 
+    @Override
     public void execute() {
         try {
             // Split the input into two parts: command and skill parameter.
