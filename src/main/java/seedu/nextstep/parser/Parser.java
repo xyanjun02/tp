@@ -38,7 +38,7 @@ public class Parser {
             break;
         default:
             System.out.println("Unknown command... Type help for more information :v");
-        break;
+            break;
         }
     }
 }
