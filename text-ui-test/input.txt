@@ -1,6 +1,8 @@
 add c/Google r/Software Engineer d/6 a/5000 s/Java,Python
 list
 find/s Java
+find/r Software Engineer
+find/c Google
 delete 1
 list
 help

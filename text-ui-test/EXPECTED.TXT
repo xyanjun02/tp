@@ -24,6 +24,21 @@ Role: Software Engineer
 Duration: 6 months
 Allowance: $5000
 Skills: Java, Python
+____________________________________
+Enter command: Searching for internships with role: Software Engineer
+Company: Google
+Role: Software Engineer
+Duration: 6 months
+Allowance: $5000
+Skills: Java, Python
+____________________________________
+Enter command: Searching for internships with company: Google
+Company: Google
+Role: Software Engineer
+Duration: 6 months
+Allowance: $5000
+Skills: Java, Python
+____________________________________
 Enter command: Deleted Internship: Company: Google
 Role: Software Engineer
 Duration: 6 months
@@ -35,8 +50,10 @@ ____________________________________
 1. add [c/COMPANY] [r/ROLE] [d/DURATION] [a/ALLOWANCE] [s/SKILLS]- Adds a new internship
 2. delete [INDEX] - Deletes an internship at the specified index
 3. list - Lists all available internships
-4. find/s [SKILL] - Finds internships with specific skill
-5. bye - Exit the application
+4. find/s [SKILL] - Finds internships with specific skill(s)
+5. find/r [ROLE] - Finds internships with one or more specified role(s)
+6. find/c [COMPANY] - Finds internships with a specific company
+7. bye - Exit the application
 ____________________________________
 Enter command: ____________________________________
 Thank you for using NextStep, good luck on your search! (0_0)
