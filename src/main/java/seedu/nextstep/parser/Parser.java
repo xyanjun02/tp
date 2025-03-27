@@ -1,6 +1,13 @@
 package seedu.nextstep.parser;
 
-import seedu.nextstep.command.*;
+import seedu.nextstep.command.AddCommand;
+import seedu.nextstep.command.DeleteCommand;
+import seedu.nextstep.command.ListCommand;
+import seedu.nextstep.command.HelpCommand;
+import seedu.nextstep.command.FindSkillCommand;
+import seedu.nextstep.command.FindCompanyCommand;
+import seedu.nextstep.command.FindRoleCommand;
+import seedu.nextstep.command.FilterCommand;
 
 /**
  * Handles processing user input and executes the appropriate command.
