@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
      * Handles all exceptions internally.
      */
     @Override
-    public void execute() {
+    public  void execute() {
         try {
             int index = parseIndex(input);
             Internship removed = NextStep.internships.remove(index);

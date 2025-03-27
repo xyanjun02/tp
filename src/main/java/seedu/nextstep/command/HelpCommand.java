@@ -19,7 +19,11 @@ public class HelpCommand extends Command {
         System.out.println("4. find/s [SKILL] - Finds internships with specific skill(s)");
         System.out.println("5. find/r [ROLE] - Finds internships with one or more specified role(s)");
         System.out.println("6. find/c [COMPANY] - Finds internships with a specific company");
-        System.out.println("7. bye - Exit the application");
+        System.out.println("7. filter/a [MIN_VAL] [MAX_VAL] - Finds internships with allowances within range. " +
+                            "If no max is provided, finds those above min.");
+        System.out.println("8. filter/d [MIN_VAL] [MAX_VAL] - Finds internships with durations within range. " +
+                            "If no max is provided, finds those above min.");
+        System.out.println("9. bye - Exit the application");
         Ui.printLinebreak();
     }
 }
