@@ -31,7 +31,7 @@ class AddCommandTest {
 //        assertEquals(6, addedInternship.getDuration());
 //        assertEquals(2000, addedInternship.getAllowance());
 //        assertArrayEquals(new String[]{"Java", "React", "C++"}, addedInternship.getSkills().toArray());
-//    }
+    //    }
 //
 //    @Test
 //    void testAddCommandMissingField() {

@@ -29,7 +29,7 @@ class DeleteCommandTest {
 //        assertEquals(1, NextStep.internships.size());
 //        // Verify that the remaining internship is the second one originally added.
 //        assertEquals("Amazon", NextStep.internships.get(0).getCompany());
-//    }
+    //    }
 //
 //    @Test
 //    void testDeleteCommandMissingIndex() {
@@ -39,7 +39,7 @@ class DeleteCommandTest {
 //        // Since error is handled internally, no exception is thrown,
 //        // but we can verify that the internships list remains unchanged.
 //        assertEquals(2, NextStep.internships.size());
-//    }
+    //    }
 //
 //    @Test
 //    void testDeleteCommandInvalidIndex() {
