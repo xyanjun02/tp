@@ -61,6 +61,7 @@ public class Ui {
     public static void printInternship(Internship internship) {
         System.out.println(internship);
     }
+
     public static void printSearchingForRole(String role) {
         System.out.println("Searching for internships with role: " + role);
     }

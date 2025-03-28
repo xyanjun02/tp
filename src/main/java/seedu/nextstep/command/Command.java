@@ -20,7 +20,5 @@ public class Command {
     }
 
     // to be overridden
-    public void execute() {
-
-    }
+    public void execute() { }
 }
