@@ -11,6 +11,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute() {
         // Show the help instructions for the commands
+        Ui.printLinebreak();
         System.out.println("Do help yourself to these commands! (•ᴗ•)");
         Ui.printLinebreak();
         System.out.println("1. add [c/COMPANY] [r/ROLE] [d/DURATION] [a/ALLOWANCE] [s/SKILLS]- Adds a new internship");

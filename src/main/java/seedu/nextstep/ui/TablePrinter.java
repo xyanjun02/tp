@@ -4,6 +4,8 @@ import seedu.nextstep.core.Internship;
 
 import java.util.List;
 
+import static seedu.nextstep.ui.Ui.printLinebreak;
+
 public class TablePrinter {
     // Prevents instantiation
     private TablePrinter() {}
@@ -14,11 +16,7 @@ public class TablePrinter {
      * @param internships The list of internships to print.
      */
     public static void printTable(List<Internship> internships) {
-        if (internships.isEmpty()) {
-            System.out.println("No internships available! (•-•)");
-            return;
-        }
-
+        printLinebreak();
         System.out.println("Here is your list! (•ᴗ•)");
 
         String[] headers = {"No.", "Company", "Role", "Duration", "Allowance", "Skills"};
@@ -40,7 +38,6 @@ public class TablePrinter {
             };
             printRow(row, columnWidths);
         }
-
         printSeparator(columnWidths);
     }
 

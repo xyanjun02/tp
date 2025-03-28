@@ -15,7 +15,7 @@ public class Ui {
     public static void printWelcomeMessage() {
         printLinebreak();
         System.out.println("Welcome to NextStep, your personal internship tracking assistant! (0_0)");
-        System.out.println("What would you like to do today?");
+        System.out.println("What would you like to do today? [Type 'help' to see commands]");
         printLinebreak();
     }
 
@@ -40,22 +40,26 @@ public class Ui {
      * @param internship Internship to be added.
      */
     public static void printAddingMessage(Internship internship) {
+        printLinebreak();
         System.out.println("New internship added below! (0_0)");
-        printLinebreak();
         System.out.println(internship);
-        printLinebreak();
     }
 
     public static void printDeleteSuccess(Internship internship) {
-        System.out.println("Deleted Internship: " + internship);
+        printLinebreak();
+        System.out.println("The Following Internship is Deleted:");
+        System.out.println(internship);
     }
 
     public static void printSearchingForSkill(String skill) {
+        printLinebreak();
         System.out.println("Searching for internships with skill: " + skill);
     }
 
     public static void printNoInternshipFound(String skill) {
+        printLinebreak();
         System.out.println("No internships found with skill: " + skill);
+        printLinebreak();
     }
 
     public static void printInternship(Internship internship) {
@@ -63,19 +67,25 @@ public class Ui {
     }
 
     public static void printSearchingForRole(String role) {
+        printLinebreak();
         System.out.println("Searching for internships with role: " + role);
     }
 
     public static void printNoInternshipFoundForRole(String role) {
+        printLinebreak();
         System.out.println("No internships found with role: " + role);
+        printLinebreak();
     }
 
     public static void printSearchingForCompany(String company) {
+        printLinebreak();
         System.out.println("Searching for internships with company: " + company);
     }
 
     public static void printNoInternshipFoundForCompany(String company) {
+        printLinebreak();
         System.out.println("No internships found with company: " + company);
+        printLinebreak();
     }
 }
 
