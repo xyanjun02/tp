@@ -10,7 +10,7 @@ package seedu.nextstep.command;
 
 import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
-import seedu.nextstep.exception.CommandException;
+import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.ui.Ui;
 
 /**
@@ -37,55 +37,51 @@ public class FindSkillCommand extends Command {
      * criteria, an appropriate message is displayed.
      */
     @Override
-    public void execute() {
-        try {
-            // Split the input into two parts: command and skill parameter.
-            String[] parts = input.split("find/s", 2);
-            if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                throw new CommandException("Error: Please specify at least one skill after '/s'.");
-            }
+    public void execute() throws EmptyInputException {
+        // Split the input into two parts: command and skill parameter.
+        String[] parts = input.split("find/s", 2);
+        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+            throw new EmptyInputException("Error: Please specify at least one skill after '/s'.");
+        }
 
-            // Allow multiple skills, separated by commas.
-            String searchSkillsStr = parts[1].trim();
-            String[] searchSkills = searchSkillsStr.split(",");
-            for (int i = 0; i < searchSkills.length; i++) {
-                searchSkills[i] = searchSkills[i].trim();
-            }
+        // Allow multiple skills, separated by commas.
+        String searchSkillsStr = parts[1].trim();
+        String[] searchSkills = searchSkillsStr.split(",");
+        for (int i = 0; i < searchSkills.length; i++) {
+            searchSkills[i] = searchSkills[i].trim();
+        }
 
-            // Print which skills are being searched for.
-            Ui.printSearchingForSkill(String.join(", ", searchSkills));
+        // Print which skills are being searched for.
+        Ui.printSearchingForSkill(String.join(", ", searchSkills));
+        Ui.printLinebreak();
 
-            boolean found = false;
+        boolean found = false;
 
-            // Search each internship's skills for any match among the search skills.
-            for (Internship internship : NextStep.internships) {
-                boolean matchFound = false;
-                for (String searchSkill : searchSkills) {
-                    for (String s : internship.getSkills()) {
-                        if (s.equalsIgnoreCase(searchSkill)) {
-                            matchFound = true;
-                            break;
-                        }
-                    }
-                    if (matchFound) {
+        // Search each internship's skills for any match among the search skills.
+        for (Internship internship : NextStep.internships) {
+            boolean matchFound = false;
+            for (String searchSkill : searchSkills) {
+                for (String s : internship.getSkills()) {
+                    if (s.equalsIgnoreCase(searchSkill)) {
+                        matchFound = true;
                         break;
                     }
                 }
                 if (matchFound) {
-                    Ui.printInternship(internship);
-                    // Add a line break between each result.
-                    Ui.printLinebreak();
-                    found = true;
+                    break;
                 }
             }
-
-            if (!found) {
-                Ui.printNoInternshipFound(String.join(", ", searchSkills));
+            if (matchFound) {
+                Ui.printInternship(internship);
+                // Add a line break between each result.
+                Ui.printLinebreak();
+                found = true;
             }
-        } catch (CommandException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error: Invalid input format. Please check the provided command.");
+        }
+
+        if (!found) {
+            Ui.printNoInternshipFound(String.join(", ", searchSkills));
+            Ui.printLinebreak();
         }
     }
 }

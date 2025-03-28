@@ -26,6 +26,11 @@ public class Ui {
         System.out.print("Enter command: ");
     }
 
+    public static void printUnknownCommand() {
+        System.out.println("Unknown command. Type help for more info! (o.o)");
+        printLinebreak();
+    }
+
     /**
      * Prints exit message when NextStep exits.
      */
@@ -36,18 +41,38 @@ public class Ui {
     }
 
     /**
+     * Prints a message if user types filter/find without the tags.
+     * @param input The wrong command.
+     */
+    public static void printSimilarCommandError(String input) {
+        if (input.equals("filter")) {
+            System.out.println("Woops! Perhaps you mean filter/a or filter/d?");
+        } else if (input.equals("find")) {
+            System.out.println("Woops! Perhaps you mean find/c, find/r, or find/s?");
+        }
+        printLinebreak();
+    }
+
+    /**
      * Prints a message when an internship is successfully added.
      * @param internship Internship to be added.
      */
     public static void printAddingMessage(Internship internship) {
-        System.out.println("New internship added below! (0_0)");
+        System.out.println("New internship added below! (o_o)");
         printLinebreak();
         System.out.println(internship);
         printLinebreak();
     }
 
+    /**
+     * Prints a message when an internship is successfully deleted.
+     * @param internship
+     */
     public static void printDeleteSuccess(Internship internship) {
-        System.out.println("Deleted Internship: " + internship);
+        System.out.println("Deleted this internship! (o_o)");
+        printLinebreak();
+        System.out.println(internship);
+        printLinebreak();
     }
 
     public static void printSearchingForSkill(String skill) {
@@ -75,6 +100,11 @@ public class Ui {
 
     public static void printNoInternshipFoundForCompany(String company) {
         System.out.println("No internships found with company: " + company);
+    }
+
+    public static void printNoFilteredInternshipFound() {
+        System.out.println("No internships found here!");
+        Ui.printLinebreak();
     }
 }
 

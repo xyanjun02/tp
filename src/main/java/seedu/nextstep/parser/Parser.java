@@ -8,6 +8,10 @@ import seedu.nextstep.command.FindSkillCommand;
 import seedu.nextstep.command.FindCompanyCommand;
 import seedu.nextstep.command.FindRoleCommand;
 import seedu.nextstep.command.FilterCommand;
+import seedu.nextstep.exception.EmptyInputException;
+import seedu.nextstep.exception.InvalidIndexException;
+import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.ui.Ui;
 
 /**
  * Handles processing user input and executes the appropriate command.
@@ -18,10 +22,22 @@ public class Parser {
         String[] words = input.split(" ");
         switch (words[0]) {
         case "add":
-            new AddCommand(input).execute();
+            try {
+                new AddCommand(input).execute();
+            } catch (EmptyInputException | InvalidInputFormatException e) {
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Sorry! Allowance/Duration must be integers!");
+            }
             break;
         case "delete":
-            new DeleteCommand(input).execute();
+            try {
+                new DeleteCommand(input).execute();
+            } catch (EmptyInputException | InvalidIndexException | InvalidInputFormatException e) {
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Index given has to be an integer!");
+            }
             break;
         case "list":
             new ListCommand().execute();
@@ -30,20 +46,42 @@ public class Parser {
             new HelpCommand().execute();
             break;
         case "find/s":
-            new FindSkillCommand(input).execute();
+            try {
+                new FindSkillCommand(input).execute();
+            } catch (EmptyInputException e) {
+                System.out.println(e.getMessage());
+            }
             break;
         case "find/r":
-            new FindRoleCommand(input).execute();
+            try {
+                new FindRoleCommand(input).execute();
+            } catch (EmptyInputException e) {
+                System.out.println(e.getMessage());
+            }
             break;
         case "find/c":
-            new FindCompanyCommand(input).execute();
+            try {
+                new FindCompanyCommand(input).execute();
+            } catch (EmptyInputException e) {
+                System.out.println(e.getMessage());
+            }
             break;
         case "filter/a":
         case "filter/d":
-            new FilterCommand(input).execute();
+            try {
+                new FilterCommand(input).execute();
+            } catch (EmptyInputException | InvalidInputFormatException e) {
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Range given must be integers!");
+            }
+            break;
+        case "filter":
+        case "find":
+            Ui.printSimilarCommandError(words[0]);
             break;
         default:
-            System.out.println("Unknown command... Type help for more information :v");
+            Ui.printUnknownCommand();
             break;
         }
     }
