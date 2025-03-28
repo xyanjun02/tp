@@ -11,7 +11,7 @@ package seedu.nextstep.command;
 
 import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
-import seedu.nextstep.exception.CommandException;
+import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.ui.Ui;
 
 /**
@@ -36,45 +36,41 @@ public class FindRoleCommand extends Command {
      * specified queries. A line break is printed between each matching result.
      */
     @Override
-    public void execute() {
-        try {
-            // Split the input into command and role parameter.
-            String[] parts = input.split("find/r", 2);
-            if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                throw new CommandException("Error: Please specify at least one role after '/r'.");
-            }
+    public void execute() throws EmptyInputException {
+        // Split the input into command and role parameter.
+        String[] parts = input.split("find/r", 2);
+        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+            throw new EmptyInputException("Error: Please specify at least one role after '/r'.");
+        }
 
-            String roleQueryStr = parts[1].trim();
-            // Allow multiple roles, separated by commas.
-            String[] searchRoles = roleQueryStr.split(",");
-            for (int i = 0; i < searchRoles.length; i++) {
-                searchRoles[i] = searchRoles[i].trim();
-            }
+        String roleQueryStr = parts[1].trim();
+        // Allow multiple roles, separated by commas.
+        String[] searchRoles = roleQueryStr.split(",");
+        for (int i = 0; i < searchRoles.length; i++) {
+            searchRoles[i] = searchRoles[i].trim();
+        }
 
-            // Print the search prompt.
-            Ui.printSearchingForRole(String.join(", ", searchRoles));
+        // Print the search prompt.
+        Ui.printSearchingForRole(String.join(", ", searchRoles));
+        Ui.printLinebreak();
 
-            boolean found = false;
-            // Search through internships for a matching role.
-            for (Internship internship : NextStep.internships) {
-                for (String searchRole : searchRoles) {
-                    if (internship.getRole().equalsIgnoreCase(searchRole)) {
-                        Ui.printInternship(internship);
-                        Ui.printLinebreak();
-                        found = true;
-                        // If internship matches one role, no need to check further roles.
-                        break;
-                    }
+        boolean found = false;
+        // Search through internships for a matching role.
+        for (Internship internship : NextStep.internships) {
+            for (String searchRole : searchRoles) {
+                if (internship.getRole().equalsIgnoreCase(searchRole)) {
+                    Ui.printInternship(internship);
+                    Ui.printLinebreak();
+                    found = true;
+                    // If internship matches one role, no need to check further roles.
+                    break;
                 }
             }
+        }
 
-            if (!found) {
-                Ui.printNoInternshipFoundForRole(String.join(", ", searchRoles));
-            }
-        } catch (CommandException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error: Invalid input format. Please check the provided command.");
+        if (!found) {
+            Ui.printNoInternshipFoundForRole(String.join(", ", searchRoles));
+            Ui.printLinebreak();
         }
     }
 }
