@@ -1,24 +1,24 @@
-package seedu.nextstep.command;
-
-import org.junit.jupiter.api.BeforeEach;
-//  import org.junit.jupiter.api.Test;
-import seedu.nextstep.NextStep;
-import seedu.nextstep.core.Internship;
-
-//  import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class DeleteCommandTest {
-
-    @BeforeEach
-    void setUp() {
-        // Clear the internship list and add sample internships for testing.
-        NextStep.internships.clear();
-        NextStep.internships.add(new Internship("Google", "Software Engineer",
-                6, 2000, new String[]{"Java", "Python"}));
-        NextStep.internships.add(new Internship("Amazon", "Data Engineer",
-                12, 2500, new String[]{"SQL", "Scala"}));
-    }
-
+//package seedu.nextstep.command;
+//
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import seedu.nextstep.NextStep;
+//import seedu.nextstep.core.Internship;
+//
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//
+//class DeleteCommandTest {
+//
+//    @BeforeEach
+//    void setUp() {
+//        // Clear the internship list and add sample internships for testing.
+//        NextStep.internships.clear();
+//        NextStep.internships.add(new Internship("Google", "Software Engineer",
+//                6, 2000, new String[]{"Java", "Python"}));
+//        NextStep.internships.add(new Internship("Amazon", "Data Engineer",
+//                12, 2500, new String[]{"SQL", "Scala"}));
+//    }
+//
 //    @Test
 //    void testDeleteCommandValidInput() {
 //        // Deleting the first internship using a valid index ("delete 1").
@@ -29,7 +29,7 @@ class DeleteCommandTest {
 //        assertEquals(1, NextStep.internships.size());
 //        // Verify that the remaining internship is the second one originally added.
 //        assertEquals("Amazon", NextStep.internships.get(0).getCompany());
-    //    }
+//        }
 //
 //    @Test
 //    void testDeleteCommandMissingIndex() {
@@ -39,7 +39,7 @@ class DeleteCommandTest {
 //        // Since error is handled internally, no exception is thrown,
 //        // but we can verify that the internships list remains unchanged.
 //        assertEquals(2, NextStep.internships.size());
-    //    }
+//        }
 //
 //    @Test
 //    void testDeleteCommandInvalidIndex() {
@@ -48,6 +48,6 @@ class DeleteCommandTest {
 //        deleteCommand.execute();
 //        // Ensure that no internship is removed.
 //        assertEquals(2, NextStep.internships.size());
-    //      }
-}
-
+//          }
+//}
+//

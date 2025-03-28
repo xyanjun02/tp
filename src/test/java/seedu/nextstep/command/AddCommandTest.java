@@ -1,22 +1,22 @@
-package seedu.nextstep.command;
-
-import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-import seedu.nextstep.NextStep;
-// import seedu.nextstep.core.Internship;
-
+//package seedu.nextstep.command;
+//
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import seedu.nextstep.NextStep;
+//import seedu.nextstep.core.Internship;
+//
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
-
-class AddCommandTest {
-
-    @BeforeEach
-    void setUp() {
-        // Clear the internship list before each test
-        NextStep.internships.clear();
-    }
-
+//
+//class AddCommandTest {
+//
+//    @BeforeEach
+//    void setUp() {
+//        // Clear the internship list before each test
+//        NextStep.internships.clear();
+//    }
+//
 //    @Test
 //    void testAddCommandValidInput() {
 //        // Use comma-separated skills since AddCommand splits by commas.
@@ -31,7 +31,7 @@ class AddCommandTest {
 //        assertEquals(6, addedInternship.getDuration());
 //        assertEquals(2000, addedInternship.getAllowance());
 //        assertArrayEquals(new String[]{"Java", "React", "C++"}, addedInternship.getSkills().toArray());
-    //    }
+//    }
 //
 //    @Test
 //    void testAddCommandMissingField() {
@@ -40,7 +40,7 @@ class AddCommandTest {
 //        AddCommand addCommand = new AddCommand(input);
 //        addCommand.execute();
 //        assertTrue(NextStep.internships.isEmpty());
-    //      }
-}
-
-
+//    }
+//}
+//
+//
