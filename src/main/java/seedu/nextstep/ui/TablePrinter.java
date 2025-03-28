@@ -1,10 +1,9 @@
 package seedu.nextstep.ui;
 
 import seedu.nextstep.core.Internship;
+import static seedu.nextstep.ui.Ui.printLinebreak;
 
 import java.util.List;
-
-import static seedu.nextstep.ui.Ui.printLinebreak;
 
 public class TablePrinter {
     // Prevents instantiation
@@ -29,12 +28,12 @@ public class TablePrinter {
         for (int i = 0; i < internships.size(); i++) {
             Internship internship = internships.get(i);
             String[] row = {
-                    String.valueOf(i + 1),
-                    internship.getCompany(),
-                    internship.getRole(),
-                    internship.getDuration() + " months",
-                    "$" + internship.getAllowance(),
-                    String.join(", ", internship.getSkills())
+                String.valueOf(i + 1),
+                internship.getCompany(),
+                internship.getRole(),
+                internship.getDuration() + " months",
+                "$" + internship.getAllowance(),
+                String.join(", ", internship.getSkills())
             };
             printRow(row, columnWidths);
         }
