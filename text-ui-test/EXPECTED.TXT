@@ -2,7 +2,7 @@ ____________________________________
 Welcome to NextStep, your personal internship tracking assistant! (0_0)
 What would you like to do today?
 ____________________________________
-Enter command: New internship added below! (0_0)
+Enter command: New internship added below! (o_o)
 ____________________________________
 Company: Google
 Role: Software Engineer
@@ -39,11 +39,14 @@ Duration: 6 months
 Allowance: $5000
 Skills: Java, Python
 ____________________________________
-Enter command: Deleted Internship: Company: Google
+Enter command: Deleted this internship! (o_o)
+____________________________________
+Company: Google
 Role: Software Engineer
 Duration: 6 months
 Allowance: $5000
 Skills: Java, Python
+____________________________________
 Enter command: No internships here (•-•). Try adding some!
 Enter command: Do help yourself to these commands! (•ᴗ•)
 ____________________________________
