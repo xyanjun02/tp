@@ -48,6 +48,6 @@ class DeleteCommandTest {
 //        deleteCommand.execute();
 //        // Ensure that no internship is removed.
 //        assertEquals(2, NextStep.internships.size());
-//      }
+    //      }
 }
 
