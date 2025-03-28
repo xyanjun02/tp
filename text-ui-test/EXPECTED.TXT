@@ -1,57 +1,70 @@
 ____________________________________
 Welcome to NextStep, your personal internship tracking assistant! (0_0)
-What would you like to do today?
+What would you like to do today? [Type 'help' to see commands]
 ____________________________________
-Enter command: New internship added below! (o_o)
+Enter command: ____________________________________
+New internship added below! (0_0)
+--------------------------------
+Company   : Google
+Role      : Software Engineer
+Duration  : 6 months
+Allowance : $5000
+Skills    : Java, Python
+--------------------------------
+Enter command: ____________________________________
+Here is your list! (0u0)
++-----+---------+-------------------+----------+-----------+--------------+
+| No. | Company | Role              | Duration | Allowance | Skills       |
++-----+---------+-------------------+----------+-----------+--------------+
+| 1   | Google  | Software Engineer | 6 months | $5000     | Java, Python |
++-----+---------+-------------------+----------+-----------+--------------+
+Enter command: ____________________________________
+Searching for internships with skill: Java
 ____________________________________
-Company: Google
-Role: Software Engineer
-Duration: 6 months
-Allowance: $5000
-Skills: Java, Python
+--------------------------------
+Company   : Google
+Role      : Software Engineer
+Duration  : 6 months
+Allowance : $5000
+Skills    : Java, Python
+--------------------------------
 ____________________________________
-Enter command: Here is your list! (•ᴗ•)
+Enter command: ____________________________________
+Searching for internships with role: Software Engineer
 ____________________________________
-1. Company: Google
-Role: Software Engineer
-Duration: 6 months
-Allowance: $5000
-Skills: Java, Python
+--------------------------------
+Company   : Google
+Role      : Software Engineer
+Duration  : 6 months
+Allowance : $5000
+Skills    : Java, Python
+--------------------------------
 ____________________________________
-Enter command: Searching for internships with skill: Java
+Enter command: ____________________________________
+Searching for internships with company: Google
 ____________________________________
-Company: Google
-Role: Software Engineer
-Duration: 6 months
-Allowance: $5000
-Skills: Java, Python
+--------------------------------
+Company   : Google
+Role      : Software Engineer
+Duration  : 6 months
+Allowance : $5000
+Skills    : Java, Python
+--------------------------------
 ____________________________________
-Enter command: Searching for internships with role: Software Engineer
+Enter command: ____________________________________
+The Following Internship is Deleted:
+--------------------------------
+Company   : Google
+Role      : Software Engineer
+Duration  : 6 months
+Allowance : $5000
+Skills    : Java, Python
+--------------------------------
+Enter command: ____________________________________
+No internships here (0-0). Try adding some!
 ____________________________________
-Company: Google
-Role: Software Engineer
-Duration: 6 months
-Allowance: $5000
-Skills: Java, Python
-____________________________________
-Enter command: Searching for internships with company: Google
-____________________________________
-Company: Google
-Role: Software Engineer
-Duration: 6 months
-Allowance: $5000
-Skills: Java, Python
-____________________________________
-Enter command: Deleted this internship! (o_o)
-____________________________________
-Company: Google
-Role: Software Engineer
-Duration: 6 months
-Allowance: $5000
-Skills: Java, Python
-____________________________________
-Enter command: No internships here (•-•). Try adding some!
-Enter command: Do help yourself to these commands! (•ᴗ•)
+Enter command: ____________________________________
+Do help yourself to these commands! (0u0)
 ____________________________________
 1. add [c/COMPANY] [r/ROLE] [d/DURATION] [a/ALLOWANCE] [s/SKILLS]- Adds a new internship
 2. delete [INDEX] - Deletes an internship at the specified index
