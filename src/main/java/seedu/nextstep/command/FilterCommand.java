@@ -2,35 +2,57 @@ package seedu.nextstep.command;
 
 import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.exception.EmptyInputException;
+import seedu.nextstep.exception.InvalidInputFormatException;
 import seedu.nextstep.ui.Ui;
 
 /**
- * Executes filtering of internships based on user input and prints filtered internships.
+ * Filters internships based on user input and prints filtered internships.
  * Able to filter via allowance and internship.
- * If user enters one number - filters internships that have an allowance/duration higher than the input.
- * If user enters two numbers - filters internships that have an allowance/duration in between the 2 inputs.
  */
 public class FilterCommand extends Command {
     public FilterCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes the filtering.
+     * If user enters one number - filters internships that have an allowance/duration higher than the input.
+     * If user enters two numbers - filters internships that have an allowance/duration in between the 2 inputs.
+     * @throws EmptyInputException If no range is given by the user.
+     * @throws InvalidInputFormatException If user inputs more than 2 values.
+     * @throws NumberFormatException If ranges provided are not integers.
+     */
     @Override
-    public void execute() {
+    public void execute() throws EmptyInputException, InvalidInputFormatException, NumberFormatException {
+        if (input.trim().equals("filter/a") || input.trim().equals("filter/d")) {
+            throw new EmptyInputException("Error: Please provide the details for the filter" +
+                    " (e.g., MIN_VAL, MAX_VAL).");
+        }
+
         String[] words = input.split(" ");
         String filterType = words[0];
+
         int minVal = Integer.parseInt(words[1]);
         int maxVal;
         if (words.length == 2) {
             maxVal = -1;
-        } else {
+        } else if (words.length == 3) {
             maxVal = Integer.parseInt(words[2]);
+        } else {
+            throw new InvalidInputFormatException("Error: Please only provide 1 or 2 values.");
         }
+
+        boolean found = false;
         for (Internship internship : NextStep.internships) {
             if (isWithinRange(internship, filterType, minVal, maxVal)) {
                 Ui.printInternship(internship);
                 Ui.printLinebreak();
+                found = true;
             }
+        }
+        if (!found) {
+            Ui.printNoFilteredInternshipFound();
         }
     }
 
@@ -38,7 +60,7 @@ public class FilterCommand extends Command {
      * Helper function to check whether an internship is within the range of the user input.
      * @param internship The internship to be checked.
      * @param filterType The field to be filtered i.e. allowance or duration.
-     * @param minValue The minimum value .
+     * @param minValue The minimum value.
      * @param maxValue The maximum value - set to -1 if user only inputs 1 number.
      * @return True if the internship is within the given range, false otherwise.
      */

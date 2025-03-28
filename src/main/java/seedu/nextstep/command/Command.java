@@ -1,5 +1,9 @@
 package seedu.nextstep.command;
 
+import seedu.nextstep.exception.EmptyInputException;
+import seedu.nextstep.exception.InvalidIndexException;
+import seedu.nextstep.exception.InvalidInputFormatException;
+
 /**
  * Represents a parent Command to be inherited by other classes.
  * Provides constructors for commands that require input and commands that do not require input.
@@ -20,5 +24,7 @@ public class Command {
     }
 
     // to be overridden
-    public void execute() { }
+    public void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIndexException {
+
+    }
 }

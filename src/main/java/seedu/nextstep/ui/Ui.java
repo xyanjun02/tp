@@ -26,12 +26,30 @@ public class Ui {
         System.out.print("Enter command: ");
     }
 
+    public static void printUnknownCommand() {
+        System.out.println("Unknown command. Type help for more info! (o.o)");
+        printLinebreak();
+    }
+
     /**
      * Prints exit message when NextStep exits.
      */
     public static void printExitMessage() {
         printLinebreak();
         System.out.println("Thank you for using NextStep, good luck on your search! (0_0)");
+        printLinebreak();
+    }
+
+    /**
+     * Prints a message if user types filter/find without the tags.
+     * @param input The wrong command.
+     */
+    public static void printSimilarCommandError(String input) {
+        if (input.equals("filter")) {
+            System.out.println("Woops! Perhaps you mean filter/a or filter/d?");
+        } else if (input.equals("find")) {
+            System.out.println("Woops! Perhaps you mean find/c, find/r, or find/s?");
+        }
         printLinebreak();
     }
 
@@ -45,6 +63,10 @@ public class Ui {
         System.out.println(internship);
     }
 
+    /**
+     * Prints a message when an internship is successfully deleted.
+     * @param internship
+     */
     public static void printDeleteSuccess(Internship internship) {
         printLinebreak();
         System.out.println("The Following Internship is Deleted:");
@@ -86,6 +108,11 @@ public class Ui {
         printLinebreak();
         System.out.println("No internships found with company: " + company);
         printLinebreak();
+    }
+
+    public static void printNoFilteredInternshipFound() {
+        System.out.println("No internships found here!");
+        Ui.printLinebreak();
     }
 }
 
