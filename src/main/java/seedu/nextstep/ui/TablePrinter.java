@@ -17,7 +17,7 @@ public class TablePrinter {
      */
     public static void printTable(List<Internship> internships) {
         printLinebreak();
-        System.out.println("Here is your list! (•ᴗ•)");
+        System.out.println("Here is your list! (0u0)");
 
         String[] headers = {"No.", "Company", "Role", "Duration", "Allowance", "Skills"};
         int[] columnWidths = computeColumnWidths(internships, headers);

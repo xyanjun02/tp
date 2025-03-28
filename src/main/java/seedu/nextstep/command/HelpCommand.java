@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
     public void execute() {
         // Show the help instructions for the commands
         Ui.printLinebreak();
-        System.out.println("Do help yourself to these commands! (•ᴗ•)");
+        System.out.println("Do help yourself to these commands! (0u0)");
         Ui.printLinebreak();
         System.out.println("1. add [c/COMPANY] [r/ROLE] [d/DURATION] [a/ALLOWANCE] [s/SKILLS]- Adds a new internship");
         System.out.println("2. delete [INDEX] - Deletes an internship at the specified index");

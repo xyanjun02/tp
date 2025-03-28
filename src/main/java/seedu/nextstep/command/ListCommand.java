@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     public void execute() {
         if (NextStep.internships.isEmpty()) {
             Ui.printLinebreak();
-            System.out.println("No internships here (•-•). Try adding some!");
+            System.out.println("No internships here (0-0). Try adding some!");
             Ui.printLinebreak();
             return;
         }
