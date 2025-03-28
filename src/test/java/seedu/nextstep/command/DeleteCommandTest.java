@@ -1,11 +1,11 @@
 package seedu.nextstep.command;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+//  import org.junit.jupiter.api.Test;
 import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//  import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeleteCommandTest {
 
@@ -48,6 +48,6 @@ class DeleteCommandTest {
 //        deleteCommand.execute();
 //        // Ensure that no internship is removed.
 //        assertEquals(2, NextStep.internships.size());
-//    }
+//      }
 }
 

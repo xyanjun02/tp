@@ -1,13 +1,13 @@
 package seedu.nextstep.command;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+// import org.junit.jupiter.api.Test;
 import seedu.nextstep.NextStep;
-import seedu.nextstep.core.Internship;
+// import seedu.nextstep.core.Internship;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+//import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddCommandTest {
 
@@ -40,7 +40,7 @@ class AddCommandTest {
 //        AddCommand addCommand = new AddCommand(input);
 //        addCommand.execute();
 //        assertTrue(NextStep.internships.isEmpty());
-//    }
+//      }
 }
 
 
