@@ -33,7 +33,8 @@ public class HelpCommand extends Command {
                 "If no max is provided, finds those above min.");
         System.out.println("8. filter/d [MIN_VAL] [MAX_VAL] - Finds internships with durations within range. " +
                 "If no max is provided, finds those above min.");
-        System.out.println("9. bye - Exit the application");
+        System.out.println("9. edit [INDEX] - Edit an internship at the specified index");
+        System.out.println("10. bye - Exit the application");
         Ui.printLinebreak();
     }
 }
