@@ -39,10 +39,12 @@ public class Internship {
 
     @Override
     public String toString() {
-        return "Company: " + company + System.lineSeparator() +
-                "Role: " + role + System.lineSeparator() +
-                "Duration: " + duration + " months" + System.lineSeparator() +
-                "Allowance: $" + allowance + System.lineSeparator() +
-                "Skills: " + String.join(", ", skills);
+        return "--------------------------------\n" +
+                "Company   : " + company + System.lineSeparator() +
+                "Role      : " + role + System.lineSeparator() +
+                "Duration  : " + duration + " months" + System.lineSeparator() +
+                "Allowance : $" + allowance + System.lineSeparator() +
+                "Skills    : " + String.join(", ", skills) + System.lineSeparator() +
+                "--------------------------------";
     }
 }

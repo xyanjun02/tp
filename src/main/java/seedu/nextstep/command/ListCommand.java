@@ -2,6 +2,8 @@ package seedu.nextstep.command;
 
 import seedu.nextstep.NextStep;
 import seedu.nextstep.ui.Ui;
+import seedu.nextstep.ui.TablePrinter;
+import static seedu.nextstep.NextStep.internships;
 
 public class ListCommand extends Command {
 
@@ -12,14 +14,11 @@ public class ListCommand extends Command {
     @Override
     public void execute() {
         if (NextStep.internships.isEmpty()) {
-            System.out.println("No internships here (•-•). Try adding some!");
+            Ui.printLinebreak();
+            System.out.println("No internships here (0-0). Try adding some!");
+            Ui.printLinebreak();
             return;
         }
-        System.out.println("Here is your list! (•ᴗ•)");
-        Ui.printLinebreak();
-        for (int i = 0; i < NextStep.internships.size(); i++) {
-            System.out.println((i + 1) + ". " + NextStep.internships.get(i));
-            Ui.printLinebreak();
-        }
+        TablePrinter.printTable(internships); // Calls Table utility
     }
 }
