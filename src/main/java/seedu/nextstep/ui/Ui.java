@@ -74,6 +74,14 @@ public class Ui {
     }
 
     /**
+     * Prints a message to ask for the internship to be edited.
+     */
+    public static void printEditMessage() {
+        printLinebreak();
+        System.out.print("What would you like to edit? (separated by commas): ");
+    }
+
+    /**
      * Prints a message when an internship is successfully edited.
      * @param internship Internship to be edited.
      */
