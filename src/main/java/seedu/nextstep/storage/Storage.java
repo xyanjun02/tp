@@ -2,7 +2,12 @@ package seedu.nextstep.storage;
 
 import seedu.nextstep.core.InternshipList;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
 public class Storage {
     private static final String FILE_PATH = "./data/nextstep.txt";
