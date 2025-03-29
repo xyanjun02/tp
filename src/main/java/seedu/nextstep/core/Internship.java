@@ -10,7 +10,7 @@ public class Internship {
     protected String role;
     protected int duration; // in months
     protected int allowance;
-    private final String[] skills;
+    private String[] skills;
 
     /**
      * Constructs an Internship instance.
@@ -39,12 +39,30 @@ public class Internship {
     }
 
     /**
+     * Sets the company offering the internship.
+     *
+     * @param company The new company name.
+     */
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    /**
      * Gets the role of the internship.
      *
      * @return The role title.
      */
     public String getRole() {
         return role;
+    }
+
+    /**
+     * Sets the role of the internship.
+     *
+     * @param role The new role title.
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**
@@ -57,6 +75,15 @@ public class Internship {
     }
 
     /**
+     * Sets the duration of the internship in months.
+     *
+     * @param duration The new duration in months.
+     */
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    /**
      * Gets the monthly allowance for the internship.
      *
      * @return The allowance amount.
@@ -66,12 +93,30 @@ public class Internship {
     }
 
     /**
+     * Sets the monthly allowance for the internship.
+     *
+     * @param allowance The new allowance amount.
+     */
+    public void setAllowance(int allowance) {
+        this.allowance = allowance;
+    }
+
+    /**
      * Gets the list of skills required for the internship.
      *
      * @return A list of skills.
      */
     public List<String> getSkills() {
         return List.of(skills);
+    }
+
+    /**
+     * Sets the skills required for the internship.
+     *
+     * @param skills The new list of required skills.
+     */
+    public void setSkills(String... skills) {
+        this.skills = skills;
     }
 
     /**
