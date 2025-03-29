@@ -52,36 +52,36 @@ public class EditCommand extends Command {
 
         for (String field : fieldsToEdit) {
             switch (field.toLowerCase()) {
-                case "company":
-                    System.out.print("Updated Company: ");
-                    internship.setCompany(scanner.nextLine());
-                    break;
-                case "role":
-                    System.out.print("Updated Role: ");
-                    internship.setRole(scanner.nextLine());
-                    break;
-                case "duration":
-                    System.out.print("Updated Duration (in months): ");
-                    try {
-                        internship.setDuration(Integer.parseInt(scanner.nextLine()));
-                    } catch (NumberFormatException e) {
-                        throw new InvalidInputFormatException("Duration must be a valid number.");
-                    }
-                    break;
-                case "allowance":
-                    System.out.print("Updated Allowance ($): ");
-                    try {
-                        internship.setAllowance(Integer.parseInt(scanner.nextLine()));
-                    } catch (NumberFormatException e) {
-                        throw new InvalidInputFormatException("Allowance must be a valid number.");
-                    }
-                    break;
-                case "skills":
-                    System.out.print("Updated Skills (comma-separated): ");
-                    internship.setSkills(scanner.nextLine().split(",\\s*"));
-                    break;
-                default:
-                    throw new InvalidInputFormatException(field + " is an invalid field to edit.");
+            case "company":
+                System.out.print("Updated Company: ");
+                internship.setCompany(scanner.nextLine());
+                break;
+            case "role":
+                System.out.print("Updated Role: ");
+                internship.setRole(scanner.nextLine());
+                break;
+            case "duration":
+                System.out.print("Updated Duration (in months): ");
+                try {
+                    internship.setDuration(Integer.parseInt(scanner.nextLine()));
+                } catch (NumberFormatException e) {
+                    throw new InvalidInputFormatException("Duration must be a valid number.");
+                }
+                break;
+            case "allowance":
+                System.out.print("Updated Allowance ($): ");
+                try {
+                    internship.setAllowance(Integer.parseInt(scanner.nextLine()));
+                } catch (NumberFormatException e) {
+                    throw new InvalidInputFormatException("Allowance must be a valid number.");
+                }
+                break;
+            case "skills":
+                System.out.print("Updated Skills (comma-separated): ");
+                internship.setSkills(scanner.nextLine().split(",\\s*"));
+                break;
+            default:
+                throw new InvalidInputFormatException(field + " is an invalid field to edit.");
             }
         }
         printEditSuccess(internship);
