@@ -8,6 +8,7 @@ import seedu.nextstep.command.FindSkillCommand;
 import seedu.nextstep.command.FindCompanyCommand;
 import seedu.nextstep.command.FindRoleCommand;
 import seedu.nextstep.command.FilterCommand;
+import seedu.nextstep.command.EditCommand;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
@@ -33,6 +34,15 @@ public class Parser {
         case "delete":
             try {
                 new DeleteCommand(input).execute();
+            } catch (EmptyInputException | InvalidIndexException | InvalidInputFormatException e) {
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e) {
+                System.out.println("Index given has to be an integer!");
+            }
+            break;
+        case "edit":
+            try {
+                new EditCommand(input).execute();
             } catch (EmptyInputException | InvalidIndexException | InvalidInputFormatException e) {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {

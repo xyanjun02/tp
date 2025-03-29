@@ -65,11 +65,29 @@ public class Ui {
 
     /**
      * Prints a message when an internship is successfully deleted.
-     * @param internship
+     * @param internship Internship to be deleted.
      */
     public static void printDeleteSuccess(Internship internship) {
         printLinebreak();
         System.out.println("The Following Internship is Deleted:");
+        System.out.println(internship);
+    }
+
+    /**
+     * Prints a message to ask for the internship to be edited.
+     */
+    public static void printEditMessage() {
+        printLinebreak();
+        System.out.print("What would you like to edit? (separated by commas): ");
+    }
+
+    /**
+     * Prints a message when an internship is successfully edited.
+     * @param internship Internship to be edited.
+     */
+    public static void printEditSuccess(Internship internship) {
+        printLinebreak();
+        System.out.println("Successfully edited the following Internship:");
         System.out.println(internship);
     }
 
