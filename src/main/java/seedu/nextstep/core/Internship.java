@@ -1,11 +1,12 @@
 package seedu.nextstep.core;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Represents an internship with company details, role, duration, allowance, and required skills.
  */
-public class Internship {
+public class Internship implements Serializable {
     protected String company;
     protected String role;
     protected int duration; // in months

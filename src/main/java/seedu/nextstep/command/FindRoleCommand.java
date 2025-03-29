@@ -9,8 +9,8 @@
 
 package seedu.nextstep.command;
 
-import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.ui.Ui;
 
@@ -25,8 +25,8 @@ public class FindRoleCommand extends Command {
      *
      * @param input the user input containing the command and role query.
      */
-    public FindRoleCommand(String input) {
-        super(input);
+    public FindRoleCommand(String input, InternshipList internships) {
+        super(input, internships);
     }
 
     /**
@@ -52,11 +52,10 @@ public class FindRoleCommand extends Command {
 
         // Print the search prompt.
         Ui.printSearchingForRole(String.join(", ", searchRoles));
-        Ui.printLinebreak();
 
         boolean found = false;
         // Search through internships for a matching role.
-        for (Internship internship : NextStep.internships) {
+        for (Internship internship : internships.getAllInternships()) {
             for (String searchRole : searchRoles) {
                 if (internship.getRole().equalsIgnoreCase(searchRole)) {
                     Ui.printInternship(internship);
@@ -70,7 +69,6 @@ public class FindRoleCommand extends Command {
 
         if (!found) {
             Ui.printNoInternshipFoundForRole(String.join(", ", searchRoles));
-            Ui.printLinebreak();
         }
     }
 }

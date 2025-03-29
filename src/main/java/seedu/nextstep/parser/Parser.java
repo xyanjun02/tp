@@ -1,5 +1,6 @@
 package seedu.nextstep.parser;
 
+import seedu.nextstep.command.Command;
 import seedu.nextstep.command.AddCommand;
 import seedu.nextstep.command.DeleteCommand;
 import seedu.nextstep.command.ListCommand;
@@ -9,90 +10,77 @@ import seedu.nextstep.command.FindCompanyCommand;
 import seedu.nextstep.command.FindRoleCommand;
 import seedu.nextstep.command.FilterCommand;
 import seedu.nextstep.command.EditCommand;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
 import seedu.nextstep.ui.Ui;
+import seedu.nextstep.storage.Storage;
 
 /**
  * Handles processing user input and executes the appropriate command.
  */
 public class Parser {
+    private final InternshipList internships;
+    private final Storage storage;
 
-    public static void processCommand(String input) {
+    public Parser(InternshipList internships, Storage storage) {
+        this.internships = internships;
+        this.storage = storage;
+    }
+
+    public void processCommand(String input) {
         String[] words = input.split(" ");
-        switch (words[0]) {
+        try {
+            Command command = createCommand(words[0], input);
+            command.execute();
+        } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
+            Ui.showError(e.getMessage());
+        } catch (NumberFormatException e) {
+            handleNumberFormatException(words[0]);
+        } catch (IllegalArgumentException e) {
+            Ui.printUnknownCommand();
+        }
+    }
+
+    private Command createCommand(String commandWord, String input) {
+        switch (commandWord) {
         case "add":
-            try {
-                new AddCommand(input).execute();
-            } catch (EmptyInputException | InvalidInputFormatException e) {
-                System.out.println(e.getMessage());
-            } catch (NumberFormatException e) {
-                System.out.println("Sorry! Allowance/Duration must be integers!");
-            }
-            break;
+            return new AddCommand(input, internships, storage);
         case "delete":
-            try {
-                new DeleteCommand(input).execute();
-            } catch (EmptyInputException | InvalidIndexException | InvalidInputFormatException e) {
-                System.out.println(e.getMessage());
-            } catch (NumberFormatException e) {
-                System.out.println("Index given has to be an integer!");
-            }
-            break;
+            return new DeleteCommand(input, internships, storage);
         case "edit":
-            try {
-                new EditCommand(input).execute();
-            } catch (EmptyInputException | InvalidIndexException | InvalidInputFormatException e) {
-                System.out.println(e.getMessage());
-            } catch (NumberFormatException e) {
-                System.out.println("Index given has to be an integer!");
-            }
-            break;
+            return new EditCommand(input, internships, storage);
         case "list":
-            new ListCommand().execute();
-            break;
+            return new ListCommand(internships);
         case "help":
-            new HelpCommand().execute();
-            break;
+            return new HelpCommand();
         case "find/s":
-            try {
-                new FindSkillCommand(input).execute();
-            } catch (EmptyInputException e) {
-                System.out.println(e.getMessage());
-            }
-            break;
+            return new FindSkillCommand(input, internships);
         case "find/r":
-            try {
-                new FindRoleCommand(input).execute();
-            } catch (EmptyInputException e) {
-                System.out.println(e.getMessage());
-            }
-            break;
+            return new FindRoleCommand(input, internships);
         case "find/c":
-            try {
-                new FindCompanyCommand(input).execute();
-            } catch (EmptyInputException e) {
-                System.out.println(e.getMessage());
-            }
-            break;
+            return new FindCompanyCommand(input, internships);
         case "filter/a":
         case "filter/d":
-            try {
-                new FilterCommand(input).execute();
-            } catch (EmptyInputException | InvalidInputFormatException e) {
-                System.out.println(e.getMessage());
-            } catch (NumberFormatException e) {
-                System.out.println("Range given must be integers!");
-            }
-            break;
+            return new FilterCommand(input, internships);
         case "filter":
         case "find":
-            Ui.printSimilarCommandError(words[0]);
-            break;
+            Ui.printSimilarCommandError(commandWord);
+            throw new IllegalArgumentException();
         default:
             Ui.printUnknownCommand();
-            break;
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void handleNumberFormatException(String commandWord) {
+        if (commandWord.equals("add")) {
+            Ui.showError("Sorry! Allowance/Duration must be integers!");
+        } else if (commandWord.equals("delete") || commandWord.equals("edit")) {
+            Ui.showError("Index given has to be an integer!");
+        } else if (commandWord.startsWith("filter")) {
+            Ui.showError("Range given must be integers!");
         }
     }
 }

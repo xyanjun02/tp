@@ -9,8 +9,8 @@
 
 package seedu.nextstep.command;
 
-import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.ui.Ui;
 
@@ -26,8 +26,8 @@ public class FindCompanyCommand extends Command {
      *
      * @param input the user input containing the command and company query.
      */
-    public FindCompanyCommand(String input) {
-        super(input);
+    public FindCompanyCommand(String input, InternshipList internships) {
+        super(input, internships);
     }
 
     /**
@@ -47,11 +47,10 @@ public class FindCompanyCommand extends Command {
         String companyQuery = parts[1].trim();
         // Print the search prompt (assumes corresponding method exists in Ui).
         Ui.printSearchingForCompany(companyQuery);
-        Ui.printLinebreak();
 
         boolean found = false;
         // Search through internships for a matching company.
-        for (Internship internship : NextStep.internships) {
+        for (Internship internship : internships.getAllInternships()) {
             if (internship.getCompany().equalsIgnoreCase(companyQuery)) {
                 Ui.printInternship(internship);
                 Ui.printLinebreak();
@@ -62,7 +61,6 @@ public class FindCompanyCommand extends Command {
         if (!found) {
             // Print message if no matching internship is found.
             Ui.printNoInternshipFoundForCompany(companyQuery);
-            Ui.printLinebreak();
         }
     }
 }

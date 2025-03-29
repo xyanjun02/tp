@@ -40,6 +40,12 @@ public class Ui {
         printLinebreak();
     }
 
+    public static void showError(String message) {
+        printLinebreak();
+        System.out.println(message);
+        printLinebreak();
+    }
+
     /**
      * Prints a message if user types filter/find without the tags.
      * @param input The wrong command.

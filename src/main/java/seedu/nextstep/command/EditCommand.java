@@ -1,28 +1,40 @@
+/*
+ * EditCommand.java
+ *
+ * This class defines the EditCommand used to edit internship entries
+ * that was previously stored by user. The user will then be prompted
+ * the fields to be edited and will require to type the updated fields after.
+ *
+ */
+
 package seedu.nextstep.command;
 
 import java.util.Scanner;
 
-import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
-
-import static seedu.nextstep.ui.Ui.printEditMessage;
-import static seedu.nextstep.ui.Ui.printEditSuccess;
+import seedu.nextstep.storage.Storage;
+import seedu.nextstep.ui.Ui;
 
 /**
  * Represents a command to edit an existing internship entry.
  */
 public class EditCommand extends Command {
+    private final Scanner scanner;
+    private final Storage storage;
 
     /**
      * Constructs an EditCommand object.
      *
      * @param input The user input, which includes the index of the internship to edit.
      */
-    public EditCommand(String input) {
-        super(input);
+    public EditCommand(String input, InternshipList internships, Storage storage) {
+        super(input, internships);
+        this.scanner = new Scanner(System.in);
+        this.storage = storage;
     }
 
     /**
@@ -37,78 +49,68 @@ public class EditCommand extends Command {
     @Override
     public void execute() throws EmptyInputException, InvalidIndexException, InvalidInputFormatException,
             NumberFormatException {
-        Internship internship = getInternship();
-        Scanner scanner = new Scanner(System.in);
+        Internship internship = getInternshipToEdit();
 
         // Prompt user for fields to edit
-        printEditMessage();
+        Ui.printEditMessage();
         String fieldsInput = scanner.nextLine().trim();
         if (fieldsInput.isEmpty()) {
             throw new EmptyInputException("Fields to edit cannot be empty.");
         }
 
-        // Split user input into field names
-        String[] fieldsToEdit = fieldsInput.split(",\\s*");
-
-        for (String field : fieldsToEdit) {
-            switch (field.toLowerCase()) {
-            case "company":
-                System.out.print("Updated Company: ");
-                internship.setCompany(scanner.nextLine());
-                break;
-            case "role":
-                System.out.print("Updated Role: ");
-                internship.setRole(scanner.nextLine());
-                break;
-            case "duration":
-                System.out.print("Updated Duration (in months): ");
-                try {
-                    internship.setDuration(Integer.parseInt(scanner.nextLine()));
-                } catch (NumberFormatException e) {
-                    throw new InvalidInputFormatException("Duration must be a valid number.");
-                }
-                break;
-            case "allowance":
-                System.out.print("Updated Allowance ($): ");
-                try {
-                    internship.setAllowance(Integer.parseInt(scanner.nextLine()));
-                } catch (NumberFormatException e) {
-                    throw new InvalidInputFormatException("Allowance must be a valid number.");
-                }
-                break;
-            case "skills":
-                System.out.print("Updated Skills (comma-separated): ");
-                internship.setSkills(scanner.nextLine().split(",\\s*"));
-                break;
-            default:
-                throw new InvalidInputFormatException(field + " is an invalid field to edit.");
-            }
-        }
-        printEditSuccess(internship);
+        processFieldEdits(internship, fieldsInput.split(",\\s*"));
+        storage.save(internships);
+        Ui.printEditSuccess(internship);
     }
 
-    private Internship getInternship() throws EmptyInputException, InvalidInputFormatException, InvalidIndexException {
-        if (input == null || input.trim().isEmpty()) {
-            throw new EmptyInputException("Input cannot be empty");
-        }
-
-        // Split input to extract index
+    private Internship getInternshipToEdit() throws InvalidIndexException, InvalidInputFormatException {
         String[] parts = input.split(" ");
         if (parts.length < 2) {
             throw new InvalidInputFormatException("Invalid format. Usage: edit <index>");
         }
 
-        int index;
         try {
-            index = Integer.parseInt(parts[1]) - 1;  // Convert index to zero-based
+            int index = Integer.parseInt(parts[1]) - 1;
+            return internships.getInternship(index);
         } catch (NumberFormatException e) {
             throw new InvalidInputFormatException("Index must be a number.");
         }
+    }
 
-        if (index < 0 || index >= NextStep.internships.size()) {
-            throw new InvalidIndexException("Invalid index number.");
+    private void processFieldEdits(Internship internship, String[] fieldsToEdit) throws InvalidInputFormatException {
+        for (String field : fieldsToEdit) {
+            switch (field.toLowerCase()) {
+                case "company":
+                    System.out.print("Updated Company: ");
+                    internship.setCompany(scanner.nextLine());
+                    break;
+                case "role":
+                    System.out.print("Updated Role: ");
+                    internship.setRole(scanner.nextLine());
+                    break;
+                case "duration":
+                    System.out.print("Updated Duration (months): ");
+                    try {
+                        internship.setDuration(Integer.parseInt(scanner.nextLine()));
+                    } catch (NumberFormatException e) {
+                        throw new InvalidInputFormatException("Duration must be a number");
+                    }
+                    break;
+                case "allowance":
+                    System.out.print("Updated Allowance ($): ");
+                    try {
+                        internship.setAllowance(Integer.parseInt(scanner.nextLine()));
+                    } catch (NumberFormatException e) {
+                        throw new InvalidInputFormatException("Allowance must be a number");
+                    }
+                    break;
+                case "skills":
+                    System.out.print("Updated Skills (comma-separated): ");
+                    internship.setSkills(scanner.nextLine().split(",\\s*"));
+                    break;
+                default:
+                    throw new InvalidInputFormatException(field + " is an invalid field");
+            }
         }
-
-        return NextStep.internships.get(index);
     }
 }
