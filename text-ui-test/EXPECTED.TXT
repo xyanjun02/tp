@@ -74,7 +74,8 @@ ____________________________________
 6. find/c [COMPANY] - Finds internships with a specific company
 7. filter/a [MIN_VAL] [MAX_VAL] - Finds internships with allowances within range. If no max is provided, finds those above min.
 8. filter/d [MIN_VAL] [MAX_VAL] - Finds internships with durations within range. If no max is provided, finds those above min.
-9. bye - Exit the application
+9. edit [INDEX] - Edit an internship at the specified index
+10. bye - Exit the application
 ____________________________________
 Enter command: ____________________________________
 Thank you for using NextStep, good luck on your search! (0_0)
