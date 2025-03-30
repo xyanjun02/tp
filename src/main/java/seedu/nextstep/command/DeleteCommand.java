@@ -23,8 +23,7 @@ public class DeleteCommand extends Command {
      * @throws NumberFormatException If index given is not an integer.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidIndexException, InvalidInputFormatException,
-                        NumberFormatException {
+    public void execute() throws EmptyInputException, InvalidIndexException, InvalidInputFormatException {
         int index = parseIndex(input);
         Internship removed = internships.deleteInternship(index);
 
@@ -43,24 +42,19 @@ public class DeleteCommand extends Command {
      * @throws InvalidIndexException If index given is out of bounds.
      * @throws NumberFormatException If index given is not an integer.
      */
-    private int parseIndex(String input) throws EmptyInputException, InvalidIndexException, InvalidInputFormatException,
-                                        NumberFormatException {
+    private int parseIndex(String input) throws EmptyInputException, InvalidIndexException, InvalidInputFormatException{
         String[] tokens = input.split(" ");
         if (tokens.length < 2) {
-            throw new EmptyInputException("Error: Missing index. Use: delete <index>");
+            throw new EmptyInputException("Error: Missing index. Use: delete <index>.");
         }
         if (tokens.length > 2) {
-            throw new InvalidInputFormatException("Error: Too many indexes. Use: delete <index>");
+            throw new InvalidInputFormatException("Error: Too many indexes. Use: delete <index>.");
         }
 
-        try {
-            int index = Integer.parseInt(tokens[1]) - 1;
-            if (index < 0 || index >= internships.size()) {
-                throw new InvalidIndexException("Invalid index. Please enter a valid internship number.");
-            }
-            return index;
-        } catch (NumberFormatException e) {
-            throw new InvalidInputFormatException("Index must be a number");
+        int index = Integer.parseInt(tokens[1]) - 1;
+        if (index < 0 || index >= internships.size()) {
+            throw new InvalidIndexException("Error: Invalid index. Please enter a valid internship number.");
         }
+        return index;
     }
 }

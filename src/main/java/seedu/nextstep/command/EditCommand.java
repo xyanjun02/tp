@@ -47,15 +47,14 @@ public class EditCommand extends Command {
      * @throws NumberFormatException      If numeric values are not properly formatted.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidIndexException, InvalidInputFormatException,
-            NumberFormatException {
+    public void execute() throws EmptyInputException, InvalidIndexException, InvalidInputFormatException {
         Internship internship = getInternshipToEdit();
 
         // Prompt user for fields to edit
         Ui.printEditMessage();
         String fieldsInput = scanner.nextLine().trim();
         if (fieldsInput.isEmpty()) {
-            throw new EmptyInputException("Fields to edit cannot be empty.");
+            throw new EmptyInputException("Error: Fields to edit cannot be empty.");
         }
 
         processFieldEdits(internship, fieldsInput.split(",\\s*"));
@@ -66,15 +65,13 @@ public class EditCommand extends Command {
     private Internship getInternshipToEdit() throws InvalidIndexException, InvalidInputFormatException {
         String[] parts = input.split(" ");
         if (parts.length < 2) {
-            throw new InvalidInputFormatException("Invalid format. Usage: edit <index>");
+            throw new InvalidInputFormatException("Error: Invalid format. Usage: edit <index>.");
         }
-
-        try {
-            int index = Integer.parseInt(parts[1]) - 1;
-            return internships.getInternship(index);
-        } catch (NumberFormatException e) {
-            throw new InvalidInputFormatException("Index must be a number.");
+        int index = Integer.parseInt(parts[1]) - 1;
+        if (index < 0 || index >= internships.size()) {
+            throw new InvalidIndexException("Error: Invalid index. Please enter a valid internship number.");
         }
+        return internships.getInternship(index);
     }
 
     private void processFieldEdits(Internship internship, String[] fieldsToEdit) throws InvalidInputFormatException {
@@ -93,7 +90,7 @@ public class EditCommand extends Command {
                 try {
                     internship.setDuration(Integer.parseInt(scanner.nextLine()));
                 } catch (NumberFormatException e) {
-                    throw new InvalidInputFormatException("Duration must be a number");
+                    throw new InvalidInputFormatException("Error: Duration must be a number.");
                 }
                 break;
             case "allowance":
@@ -101,7 +98,7 @@ public class EditCommand extends Command {
                 try {
                     internship.setAllowance(Integer.parseInt(scanner.nextLine()));
                 } catch (NumberFormatException e) {
-                    throw new InvalidInputFormatException("Allowance must be a number");
+                    throw new InvalidInputFormatException("Error: Allowance must be a number.");
                 }
                 break;
             case "skills":
@@ -109,7 +106,7 @@ public class EditCommand extends Command {
                 internship.setSkills(scanner.nextLine().split(",\\s*"));
                 break;
             default:
-                throw new InvalidInputFormatException(field + " is an invalid field");
+                throw new InvalidInputFormatException("Error: " + field + " is an invalid field.");
             }
         }
     }
