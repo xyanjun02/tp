@@ -8,8 +8,8 @@
 
 package seedu.nextstep.command;
 
-import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.ui.Ui;
 
@@ -25,8 +25,8 @@ public class FindSkillCommand extends Command {
      *
      * @param input the user input containing the command and skill(s)
      */
-    public FindSkillCommand(String input) {
-        super(input);
+    public FindSkillCommand(String input, InternshipList internships) {
+        super(input, internships);
     }
 
     /**
@@ -53,12 +53,11 @@ public class FindSkillCommand extends Command {
 
         // Print which skills are being searched for.
         Ui.printSearchingForSkill(String.join(", ", searchSkills));
-        Ui.printLinebreak();
 
         boolean found = false;
 
         // Search each internship's skills for any match among the search skills.
-        for (Internship internship : NextStep.internships) {
+        for (Internship internship : internships.getAllInternships()) {
             boolean matchFound = false;
             for (String searchSkill : searchSkills) {
                 for (String s : internship.getSkills()) {
@@ -81,7 +80,6 @@ public class FindSkillCommand extends Command {
 
         if (!found) {
             Ui.printNoInternshipFound(String.join(", ", searchSkills));
-            Ui.printLinebreak();
         }
     }
 }

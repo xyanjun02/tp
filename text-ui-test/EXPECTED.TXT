@@ -20,7 +20,6 @@ Here is your list! (0u0)
 +-----+---------+-------------------+----------+-----------+--------------+
 Enter command: ____________________________________
 Searching for internships with skill: Java
-____________________________________
 --------------------------------
 Company   : Google
 Role      : Software Engineer
@@ -31,7 +30,6 @@ Skills    : Java, Python
 ____________________________________
 Enter command: ____________________________________
 Searching for internships with role: Software Engineer
-____________________________________
 --------------------------------
 Company   : Google
 Role      : Software Engineer
@@ -42,7 +40,6 @@ Skills    : Java, Python
 ____________________________________
 Enter command: ____________________________________
 Searching for internships with company: Google
-____________________________________
 --------------------------------
 Company   : Google
 Role      : Software Engineer

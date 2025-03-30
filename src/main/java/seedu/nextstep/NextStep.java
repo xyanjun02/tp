@@ -1,33 +1,45 @@
 package seedu.nextstep;
 
-import seedu.nextstep.core.Internship;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.parser.Parser;
+import seedu.nextstep.storage.Storage;
 import seedu.nextstep.ui.Ui;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NextStep {
-    public static ArrayList<Internship> internships = new ArrayList<>();
+    private final InternshipList internships;
+    private final Storage storage;
+    private final Parser parser;
 
-    public static void main(String[] args) {
+    public NextStep() {
+        this.storage = new Storage();
+        this.internships = storage.load();
+        this.parser = new Parser(internships, storage);
+    }
+
+    public void run() {
         boolean isRunning = true;
         Ui.printWelcomeMessage();
         Scanner sc = new Scanner(System.in);
 
         while (isRunning) {
             Ui.printEnterCommand();
-            System.out.flush(); // Ensure prompt is shown immediately
             String line = sc.nextLine();
 
             if (line.equalsIgnoreCase("bye")) {
+                storage.save(internships);
                 Ui.printExitMessage();
                 isRunning = false;
                 continue;
             }
 
-            Parser.processCommand(line);
+            parser.processCommand(line);
         }
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        new NextStep().run();
     }
 }

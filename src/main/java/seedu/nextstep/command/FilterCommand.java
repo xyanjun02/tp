@@ -1,7 +1,7 @@
 package seedu.nextstep.command;
 
-import seedu.nextstep.NextStep;
 import seedu.nextstep.core.Internship;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidInputFormatException;
 import seedu.nextstep.ui.Ui;
@@ -11,8 +11,8 @@ import seedu.nextstep.ui.Ui;
  * Able to filter via allowance and internship.
  */
 public class FilterCommand extends Command {
-    public FilterCommand(String input) {
-        super(input);
+    public FilterCommand(String input, InternshipList internships) {
+        super(input, internships);
     }
 
     /**
@@ -44,7 +44,7 @@ public class FilterCommand extends Command {
         }
 
         boolean found = false;
-        for (Internship internship : NextStep.internships) {
+        for (Internship internship : internships.getAllInternships()) {
             if (isWithinRange(internship, filterType, minVal, maxVal)) {
                 Ui.printInternship(internship);
                 Ui.printLinebreak();

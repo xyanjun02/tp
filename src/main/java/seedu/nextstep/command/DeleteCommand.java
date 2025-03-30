@@ -1,16 +1,19 @@
 package seedu.nextstep.command;
 
 import seedu.nextstep.core.Internship;
-import seedu.nextstep.NextStep;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.storage.Storage;
 import seedu.nextstep.ui.Ui;
 
 public class DeleteCommand extends Command {
+    private final Storage storage;
 
-    public DeleteCommand(String input) {
-        super(input);
+    public DeleteCommand(String input, InternshipList internships, Storage storage) {
+        super(input, internships);
+        this.storage = storage;
     }
 
     /**
@@ -23,10 +26,11 @@ public class DeleteCommand extends Command {
     public void execute() throws EmptyInputException, InvalidIndexException, InvalidInputFormatException,
                         NumberFormatException {
         int index = parseIndex(input);
-        Internship removed = NextStep.internships.remove(index);
+        Internship removed = internships.deleteInternship(index);
 
         // Assert that the removed internship is not null.
         assert removed != null : "Removed internship should not be null";
+        storage.save(internships);
         Ui.printDeleteSuccess(removed);
     }
 
@@ -48,10 +52,15 @@ public class DeleteCommand extends Command {
         if (tokens.length > 2) {
             throw new InvalidInputFormatException("Error: Too many indexes. Use: delete <index>");
         }
-        int index = Integer.parseInt(tokens[1]) - 1; // Convert from 1-based to 0-based index.
-        if (index < 0 || index >= NextStep.internships.size()) {
-            throw new InvalidIndexException("Invalid index. Please enter a valid internship number.");
+
+        try {
+            int index = Integer.parseInt(tokens[1]) - 1;
+            if (index < 0 || index >= internships.size()) {
+                throw new InvalidIndexException("Invalid index. Please enter a valid internship number.");
+            }
+            return index;
+        } catch (NumberFormatException e) {
+            throw new InvalidInputFormatException("Index must be a number");
         }
-        return index;
     }
 }

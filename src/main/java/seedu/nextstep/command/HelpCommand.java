@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
      * Constructs a HelpCommand instance.
      */
     public HelpCommand() {
-        super();
+        super(null, null);
     }
 
     /**

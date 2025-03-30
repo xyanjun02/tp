@@ -1,15 +1,18 @@
 package seedu.nextstep.command;
 
 import seedu.nextstep.core.Internship;
-import seedu.nextstep.NextStep;
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.storage.Storage;
 import seedu.nextstep.ui.Ui;
 
 public class AddCommand extends Command {
+    private final Storage storage;
 
-    public AddCommand(String input) {
-        super(input);
+    public AddCommand(String input, InternshipList internships, Storage storage) {
+        super(input, internships);
+        this.storage = storage;
     }
 
     /**
@@ -19,7 +22,7 @@ public class AddCommand extends Command {
      * @throws NumberFormatException If allowance/duration are not integers.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidInputFormatException, NumberFormatException {
+    public void execute() throws EmptyInputException, InvalidInputFormatException{
         if (input.trim().equals("add")) {
             throw new EmptyInputException("Error: Please provide the details for the internship" +
                     " (e.g., c/, r/, d/, a/, s/).");
@@ -33,28 +36,22 @@ public class AddCommand extends Command {
         String skillsInput = extractValue(input, "s/");
 
         // Validate that none of the required fields are empty.
-        if (company.isEmpty() || role.isEmpty() || durationStr.isEmpty() ||
-                allowanceStr.isEmpty() || skillsInput.isEmpty()) {
-            throw new InvalidInputFormatException("Error: Missing parameters. Please ensure all fields are provided.");
-        }
+        validateFields(company, role, durationStr, allowanceStr, skillsInput);
 
         int duration = Integer.parseInt(durationStr);
         int allowance = Integer.parseInt(allowanceStr);
 
         // Process skills: split by commas and trim each entry.
-        String[] skills = skillsInput.split(",");
-        for (int i = 0; i < skills.length; i++) {
-            skills[i] = skills[i].trim();
-        }
+        String[] skills = processSkills(skillsInput);
 
-        Internship toAdd = new Internship(company, role, duration, allowance, skills);
+        Internship internship = new Internship(company, role, duration, allowance, skills);
 
         // Assertions to verify key assumptions.
-        assert toAdd != null : "Internship object should not be null";
-        assert !toAdd.getSkills().isEmpty() : "There should be at least one skill";
+        assert !internship.getSkills().isEmpty() : "There should be at least one skill";
 
-        NextStep.internships.add(toAdd);
-        Ui.printAddingMessage(toAdd);
+        internships.addInternship(internship);
+        storage.save(internships);
+        Ui.printAddingMessage(internship);
     }
 
     /**
@@ -83,5 +80,21 @@ public class AddCommand extends Command {
             }
         }
         return input.substring(startIndex, endIndex).trim();
+    }
+
+    private void validateFields(String... fields) throws InvalidInputFormatException {
+        for (String field : fields) {
+            if (field.isEmpty()) {
+                throw new InvalidInputFormatException("Error: Missing parameters");
+            }
+        }
+    }
+
+    private String[] processSkills(String skillsInput) {
+        String[] skills = skillsInput.split(",");
+        for (int i = 0; i < skills.length; i++) {
+            skills[i] = skills[i].trim();
+        }
+        return skills;
     }
 }
