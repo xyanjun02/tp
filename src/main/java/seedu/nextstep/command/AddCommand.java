@@ -22,10 +22,10 @@ public class AddCommand extends Command {
      * @throws NumberFormatException If allowance/duration are not integers.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidInputFormatException{
+    public void execute() throws EmptyInputException, InvalidInputFormatException {
         if (input.trim().equals("add")) {
             throw new EmptyInputException("Error: Please provide the details for the internship" +
-                    " (e.g., c/, r/, d/, a/, s/).");
+                    " (e.g. c/, r/, d/, a/, s/).");
         }
 
         // Extract values for each field.
@@ -85,7 +85,7 @@ public class AddCommand extends Command {
     private void validateFields(String... fields) throws InvalidInputFormatException {
         for (String field : fields) {
             if (field.isEmpty()) {
-                throw new InvalidInputFormatException("Error: Missing parameters");
+                throw new InvalidInputFormatException("Error: Missing parameters (e.g. c/, r/, d/, a/, s/).");
             }
         }
     }

@@ -58,7 +58,7 @@ Allowance : $5000
 Skills    : Java, Python
 --------------------------------
 Enter command: ____________________________________
-No internships here (0-0). Try adding some!
+No internships here (0-0). Try adding some.
 ____________________________________
 Enter command: ____________________________________
 Do help yourself to these commands! (0u0)

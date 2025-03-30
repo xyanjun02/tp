@@ -27,7 +27,7 @@ public class Ui {
     }
 
     public static void printUnknownCommand() {
-        System.out.println("Unknown command. Type help for more info! (o.o)");
+        System.out.println("Unknown command. Type help for more info. (o.o)");
         printLinebreak();
     }
 
@@ -41,7 +41,6 @@ public class Ui {
     }
 
     public static void showError(String message) {
-        printLinebreak();
         System.out.println(message);
         printLinebreak();
     }
@@ -52,9 +51,9 @@ public class Ui {
      */
     public static void printSimilarCommandError(String input) {
         if (input.equals("filter")) {
-            System.out.println("Woops! Perhaps you mean filter/a or filter/d?");
+            System.out.println("No command found.! Perhaps you mean filter/a or filter/d?");
         } else if (input.equals("find")) {
-            System.out.println("Woops! Perhaps you mean find/c, find/r, or find/s?");
+            System.out.println("No command found. Perhaps you mean find/c, find/r, or find/s?");
         }
         printLinebreak();
     }

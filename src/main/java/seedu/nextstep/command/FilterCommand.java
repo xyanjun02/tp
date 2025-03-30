@@ -24,42 +24,23 @@ public class FilterCommand extends Command {
      * @throws NumberFormatException If ranges provided are not integers.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidInputFormatException, NumberFormatException {
-        // Check for completely missing filter details
+    public void execute() throws EmptyInputException, InvalidInputFormatException {
         if (input.trim().equals("filter/a") || input.trim().equals("filter/d")) {
-            throw new EmptyInputException("Error: Please provide the details for the filter (e.g., MIN_VAL, MAX_VAL).");
+            throw new EmptyInputException("Error: Please provide the details for the filter" +
+                    " (e.g., MIN_VAL, MAX_VAL).");
         }
 
         String[] words = input.split(" ");
-        // Ensure we have at least a filter command and a min value
-        if (words.length < 2 || words[1].trim().isEmpty()) {
-            throw new EmptyInputException("Error: Missing minimum value for filtering.");
-        }
-
         String filterType = words[0];
-        int minVal;
-        int maxVal = -1; // default when only one number is provided
 
-        try {
-            minVal = Integer.parseInt(words[1]);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("Error: Minimum value must be an integer.");
-        }
-
-        // Check for a maximum value if provided
-        if (words.length >= 3) {
-            if (words[2].trim().isEmpty()) {
-                throw new EmptyInputException("Error: Maximum value is empty. Please provide a valid number or omit it.");
-            }
-            if (words.length == 3) {
-                try {
-                    maxVal = Integer.parseInt(words[2]);
-                } catch (NumberFormatException e) {
-                    throw new NumberFormatException("Error: Maximum value must be an integer.");
-                }
-            } else {
-                throw new InvalidInputFormatException("Error: Please only provide 1 or 2 values.");
-            }
+        int minVal = Integer.parseInt(words[1]);
+        int maxVal;
+        if (words.length == 2) {
+            maxVal = -1;
+        } else if (words.length == 3) {
+            maxVal = Integer.parseInt(words[2]);
+        } else {
+            throw new InvalidInputFormatException("Error: Please only provide 1 or 2 values.");
         }
 
         boolean found = false;
@@ -74,7 +55,6 @@ public class FilterCommand extends Command {
             Ui.printNoFilteredInternshipFound();
         }
     }
-
 
     /**
      * Helper function to check whether an internship is within the range of the user input.
