@@ -1,5 +1,6 @@
 package seedu.nextstep.parser;
 
+import java.util.Scanner;
 import seedu.nextstep.command.Command;
 import seedu.nextstep.command.AddCommand;
 import seedu.nextstep.command.DeleteCommand;
@@ -23,54 +24,59 @@ import seedu.nextstep.storage.Storage;
 public class Parser {
     private final InternshipList internships;
     private final Storage storage;
+    private final Scanner scanner; // Shared scanner from NextStep
 
-    public Parser(InternshipList internships, Storage storage) {
+    public Parser(InternshipList internships, Storage storage, Scanner scanner) {
         this.internships = internships;
         this.storage = storage;
+        this.scanner = scanner;
     }
 
     public void processCommand(String input) {
-        String[] words = input.split(" ");
+        String[] words = input.split(" ", 2); // Split into max 2 parts
         try {
             Command command = createCommand(words[0], input);
             command.execute();
         } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             handleNumberFormatException(words[0]);
         } catch (IllegalArgumentException e) {
-            Ui.printUnknownCommand();
+            System.out.println("Unknown command");
+        } finally {
+            System.out.flush();
         }
     }
 
     private Command createCommand(String commandWord, String input) {
         switch (commandWord) {
-        case "add":
-            return new AddCommand(input, internships, storage);
-        case "delete":
-            return new DeleteCommand(input, internships, storage);
-        case "edit":
-            return new EditCommand(input, internships, storage);
-        case "list":
-            return new ListCommand(internships);
-        case "help":
-            return new HelpCommand();
-        case "find/s":
-            return new FindSkillCommand(input, internships);
-        case "find/r":
-            return new FindRoleCommand(input, internships);
-        case "find/c":
-            return new FindCompanyCommand(input, internships);
-        case "filter/a":
-        case "filter/d":
-            return new FilterCommand(input, internships);
-        case "filter":
-        case "find":
-            Ui.printSimilarCommandError(commandWord);
-            throw new IllegalArgumentException();
-        default:
-            Ui.printUnknownCommand();
-            throw new IllegalArgumentException();
+            case "add":
+                return new AddCommand(input, internships, storage);
+            case "delete":
+                return new DeleteCommand(input, internships, storage);
+            case "edit":
+                // Pass the shared scanner to commands that require additional input.
+                return new EditCommand(input, internships, storage, scanner);
+            case "list":
+                return new ListCommand(internships);
+            case "help":
+                return new HelpCommand();
+            case "find/s":
+                return new FindSkillCommand(input, internships);
+            case "find/r":
+                return new FindRoleCommand(input, internships);
+            case "find/c":
+                return new FindCompanyCommand(input, internships);
+            case "filter/a":
+            case "filter/d":
+                return new FilterCommand(input, internships);
+            case "filter":
+            case "find":
+                Ui.printSimilarCommandError(commandWord);
+                throw new IllegalArgumentException();
+            default:
+                Ui.printUnknownCommand();
+                throw new IllegalArgumentException();
         }
     }
 
