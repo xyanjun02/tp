@@ -14,6 +14,7 @@ import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.SimilarCommandException;
 import seedu.nextstep.ui.Ui;
 import seedu.nextstep.storage.Storage;
 
@@ -35,7 +36,10 @@ public class Parser {
             Command command = createCommand(words[0], input);
             command.execute();
         } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
-            Ui.showError(e.getMessage());
+            System.out.println(e.getMessage());
+            Ui.printLinebreak();
+        } catch (SimilarCommandException e) {
+            Ui.printSimilarCommandError(words[0]);
         } catch (NumberFormatException e) {
             handleNumberFormatException(words[0]);
         } catch (IllegalArgumentException e) {
@@ -43,7 +47,7 @@ public class Parser {
         }
     }
 
-    private Command createCommand(String commandWord, String input) {
+    private Command createCommand(String commandWord, String input) throws SimilarCommandException {
         switch (commandWord) {
         case "add":
             return new AddCommand(input, internships, storage);
@@ -66,21 +70,19 @@ public class Parser {
             return new FilterCommand(input, internships);
         case "filter":
         case "find":
-            Ui.printSimilarCommandError(commandWord);
-            throw new IllegalArgumentException();
+            throw new SimilarCommandException();
         default:
-            Ui.printUnknownCommand();
             throw new IllegalArgumentException();
         }
     }
 
     private void handleNumberFormatException(String commandWord) {
         if (commandWord.equals("add")) {
-            Ui.showError("Sorry! Allowance/Duration must be integers!");
+            Ui.showError("Error: Allowance/duration have to be integers.");
         } else if (commandWord.equals("delete") || commandWord.equals("edit")) {
-            Ui.showError("Index given has to be an integer!");
+            Ui.showError("Error: Index given must be an integer.");
         } else if (commandWord.startsWith("filter")) {
-            Ui.showError("Range given must be integers!");
+            Ui.showError("Error: Range given must be integers.");
         }
     }
 }

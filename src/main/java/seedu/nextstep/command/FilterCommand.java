@@ -24,7 +24,7 @@ public class FilterCommand extends Command {
      * @throws NumberFormatException If ranges provided are not integers.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidInputFormatException, NumberFormatException {
+    public void execute() throws EmptyInputException, InvalidInputFormatException {
         if (input.trim().equals("filter/a") || input.trim().equals("filter/d")) {
             throw new EmptyInputException("Error: Please provide the details for the filter" +
                     " (e.g., MIN_VAL, MAX_VAL).");
