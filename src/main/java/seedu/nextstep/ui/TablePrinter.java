@@ -1,8 +1,6 @@
 package seedu.nextstep.ui;
 
 import seedu.nextstep.core.Internship;
-import static seedu.nextstep.ui.Ui.printLinebreak;
-
 import java.util.List;
 
 public class TablePrinter {
@@ -18,7 +16,7 @@ public class TablePrinter {
         printLinebreak();
         System.out.println("Here is your list! (0u0)");
 
-        String[] headers = {"No.", "Company", "Role", "Duration", "Allowance", "Skills"};
+        String[] headers = {"No.", "Company", "Role", "Duration", "Allowance", "Skills", "Status"};
         int[] columnWidths = computeColumnWidths(internships, headers);
 
         printSeparator(columnWidths);
@@ -28,12 +26,13 @@ public class TablePrinter {
         for (int i = 0; i < internships.size(); i++) {
             Internship internship = internships.get(i);
             String[] row = {
-                String.valueOf(i + 1),
-                internship.getCompany(),
-                internship.getRole(),
-                internship.getDuration() + " months",
-                "$" + internship.getAllowance(),
-                String.join(", ", internship.getSkills())
+                    String.valueOf(i + 1),
+                    internship.getCompany(),
+                    internship.getRole(),
+                    internship.getDuration() + " months",
+                    "$" + internship.getAllowance(),
+                    String.join(", ", internship.getSkills()),
+                    internship.getStatus()
             };
             printRow(row, columnWidths);
         }
@@ -44,7 +43,7 @@ public class TablePrinter {
      * Computes the column widths based on internship data.
      *
      * @param internships The list of internships.
-     * @param headers The table headers.
+     * @param headers     The table headers.
      * @return An array of column widths.
      */
     public static int[] computeColumnWidths(List<Internship> internships, String[] headers) {
@@ -56,12 +55,13 @@ public class TablePrinter {
         }
 
         for (Internship internship : internships) {
-            widths[0] = Math.max(widths[0], String.valueOf(internships.size()).length());  // No.
-            widths[1] = Math.max(widths[1], internship.getCompany().length());             // Company
-            widths[2] = Math.max(widths[2], internship.getRole().length());                // Role
-            widths[3] = Math.max(widths[3], String.valueOf(internship.getDuration()).length());  // Duration
-            widths[4] = Math.max(widths[4], ("$" + internship.getAllowance()).length());  // Allowance
+            widths[0] = Math.max(widths[0], String.valueOf(internships.size()).length()); // No.
+            widths[1] = Math.max(widths[1], internship.getCompany().length());            // Company
+            widths[2] = Math.max(widths[2], internship.getRole().length());               // Role
+            widths[3] = Math.max(widths[3], String.valueOf(internship.getDuration()).length() + 6); // Duration + " months"
+            widths[4] = Math.max(widths[4], ("$" + internship.getAllowance()).length()); // Allowance
             widths[5] = Math.max(widths[5], String.join(", ", internship.getSkills()).length()); // Skills
+            widths[6] = Math.max(widths[6], internship.getStatus().length());             // Status
         }
 
         return widths;
@@ -83,7 +83,7 @@ public class TablePrinter {
     /**
      * Prints a row of data.
      *
-     * @param row The row data.
+     * @param row          The row data.
      * @param columnWidths The width of each column.
      */
     public static void printRow(String[] row, int[] columnWidths) {
@@ -93,4 +93,9 @@ public class TablePrinter {
         }
         System.out.printf(format + "%n", (Object[]) row);
     }
+
+    private static void printLinebreak() {
+        Ui.printLinebreak();
+    }
 }
+
