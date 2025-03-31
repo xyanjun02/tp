@@ -12,6 +12,7 @@ public class Internship implements Serializable {
     protected int duration; // in months
     protected int allowance;
     private String[] skills;
+    private String status;
 
     /**
      * Constructs an Internship instance.
@@ -28,6 +29,7 @@ public class Internship implements Serializable {
         this.duration = duration;
         this.allowance = allowance;
         this.skills = skills;
+        this.status = "-";
     }
 
     /**
@@ -121,6 +123,24 @@ public class Internship implements Serializable {
     }
 
     /**
+     * Gets the current status of the internship.
+     *
+     * @return The internship status.
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the status of the internship.
+     *
+     * @param status The new status.
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
      * Returns a string representation of the internship details.
      *
      * @return A formatted string containing internship details.
@@ -133,6 +153,7 @@ public class Internship implements Serializable {
                 "Duration  : " + duration + " months" + System.lineSeparator() +
                 "Allowance : $" + allowance + System.lineSeparator() +
                 "Skills    : " + String.join(", ", skills) + System.lineSeparator() +
+                "Status    : " + status + System.lineSeparator() +
                 "--------------------------------";
     }
 }
