@@ -23,8 +23,10 @@ public class FindSkillCommand extends Command {
 
     /**
      * Executes the find skill command by extracting the skill parameters, splitting them into individual skills,
-     * and searching the internships list for any matching skills. If a match is found, the internship details are printed
-     * along with a line break after each result. If no internships match the search criteria, an appropriate message is displayed.
+     * and searching the internships list for any matching skills.
+     * If a match is found, the internship details are printed
+     * along with a line break after each result. If no internships match the search criteria,
+     * an appropriate message is displayed.
      *
      * @throws EmptyInputException if no skills are provided after the command prefix.
      */

@@ -6,7 +6,8 @@ import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.ui.Ui;
 
 /**
- * The FindRoleCommand class processes user input to search for internships that have a role matching any of the specified queries.
+ * The FindRoleCommand class processes user input to search for internships that have a role matching
+ * any of the specified queries.
  */
 public class FindRoleCommand extends Command {
 

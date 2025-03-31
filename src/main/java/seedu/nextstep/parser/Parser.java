@@ -49,30 +49,30 @@ public class Parser {
 
     private Command createCommand(String commandWord, String input) throws SimilarCommandException {
         switch (commandWord) {
-            case "add":
-                return new AddCommand(input, internships, storage);
-            case "delete":
-                return new DeleteCommand(input, internships, storage);
-            case "edit":
-                return new EditCommand(input, internships, storage);
-            case "list":
-                return new ListCommand(internships);
-            case "help":
-                return new HelpCommand();
-            case "find/s":
-                return new FindSkillCommand(input, internships);
-            case "find/r":
-                return new FindRoleCommand(input, internships);
-            case "find/c":
-                return new FindCompanyCommand(input, internships);
-            case "filter/a":
-            case "filter/d":
-                return new FilterCommand(input, internships);
-            case "filter":
-            case "find":
-                throw new SimilarCommandException();
-            default:
-                throw new IllegalArgumentException();
+        case "add":
+            return new AddCommand(input, internships, storage);
+        case "delete":
+            return new DeleteCommand(input, internships, storage);
+        case "edit":
+            return new EditCommand(input, internships, storage);
+        case "list":
+            return new ListCommand(internships);
+        case "help":
+            return new HelpCommand();
+        case "find/s":
+            return new FindSkillCommand(input, internships);
+        case "find/r":
+            return new FindRoleCommand(input, internships);
+        case "find/c":
+            return new FindCompanyCommand(input, internships);
+        case "filter/a":
+        case "filter/d":
+            return new FilterCommand(input, internships);
+        case "filter":
+        case "find":
+            throw new SimilarCommandException();
+        default:
+            throw new IllegalArgumentException();
         }
     }
 

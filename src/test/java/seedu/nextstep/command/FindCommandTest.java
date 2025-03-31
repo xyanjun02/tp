@@ -24,7 +24,8 @@ public class FindCommandTest {
         internships = new InternshipList();
         internships.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "Java", "Python"));
         internships.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "SQL", "Scala"));
-        internships.addInternship(new Internship("Facebook", "Product Manager", 3, 1500, "Communication", "Management"));
+        internships.addInternship(new Internship("Facebook", "Product Manager", 3, 1500, "Communication", "Management")
+        );
 
         // Redirect System.out to capture output for verification.
         outContent = new ByteArrayOutputStream();

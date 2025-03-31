@@ -37,7 +37,8 @@ public class DeleteCommandTest {
         try {
             deleteCommand.execute();
         } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
-            org.junit.jupiter.api.Assertions.fail("No exception should be thrown for valid deletion: " + e.getMessage());
+            org.junit.jupiter.api.Assertions.fail("No exception should be thrown for valid deletion: " + e.getMessage()
+            );
         }
         assertEquals(1, internships.size());
         Internship remaining = internships.getAllInternships().get(0);
