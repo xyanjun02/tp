@@ -63,9 +63,9 @@ class FilterCommandTest {
         FilterCommand filterCommand = new FilterCommand(input, internships);
 
         try {
-           filterCommand.execute();
+            filterCommand.execute();
         } catch (InvalidInputFormatException | EmptyInputException e) {
-           fail(e.getMessage());
+            fail(e.getMessage());
         }
         String output = outContent.toString();
         assertTrue(output.contains("Google"));
