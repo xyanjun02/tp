@@ -14,17 +14,32 @@ public abstract class Command {
     protected String input;
     protected InternshipList internships;
 
-    // Main constructor for commands that require input
+    /**
+     * Main constructor for commands that require input.
+     *
+     * @param input       the user input.
+     * @param internships the internship list.
+     */
     public Command(String input, InternshipList internships) {
         this.input = input;
         this.internships = internships;
     }
 
-    // Constructor for commands that do not require input
+    /**
+     * Constructor for commands that do not require input.
+     *
+     * @param internships the internship list.
+     */
     public Command(InternshipList internships) {
         this(null, internships);
     }
 
-    // to be overridden
+    /**
+     * Executes the command.
+     *
+     * @throws EmptyInputException         if input is empty.
+     * @throws InvalidInputFormatException if input format is invalid.
+     * @throws InvalidIndexException       if an invalid index is used.
+     */
     public abstract void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIndexException;
 }

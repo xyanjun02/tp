@@ -8,6 +8,7 @@ import seedu.nextstep.ui.Ui;
 import java.util.Scanner;
 
 public class NextStep {
+
     private final InternshipList internships;
     private final Storage storage;
     private final Parser parser;
