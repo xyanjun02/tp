@@ -10,6 +10,7 @@ import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.storage.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeleteCommandTest {
     private InternshipList internships;
@@ -37,7 +38,7 @@ public class DeleteCommandTest {
         try {
             deleteCommand.execute();
         } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
-            org.junit.jupiter.api.Assertions.fail("No exception should be thrown for valid deletion: " + e.getMessage()
+            fail("No exception should be thrown for valid deletion: " + e.getMessage()
             );
         }
         assertEquals(1, internships.size());
@@ -50,7 +51,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand("delete", internships, dummyStorage);
         try {
             deleteCommand.execute();
-            org.junit.jupiter.api.Assertions.fail("Expected an exception for missing index.");
+            fail("Expected an exception for missing index.");
         } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
             // Expected exception; do nothing.
         }
@@ -62,7 +63,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand("delete 3", internships, dummyStorage);
         try {
             deleteCommand.execute();
-            org.junit.jupiter.api.Assertions.fail("Expected an exception for invalid index.");
+            fail("Expected an exception for invalid index.");
         } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
             // Expected exception; do nothing.
         }
