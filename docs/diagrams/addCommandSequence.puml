@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+participant NextStep
+participant Parser
+participant AddCommand
+participant InternshipList
+participant Internship
+participant Storage
+participant Ui
+
+User -> NextStep : enters "add c/Google r/SWE d/6 a/5000 s/Java,Python"
+activate NextStep
+
+NextStep -> Parser : processCommand(input)
+activate Parser
+
+Parser -> AddCommand : createCommand()
+activate AddCommand
+AddCommand -> AddCommand : new(input, internships, storage)
+AddCommand --> Parser : return command
+deactivate AddCommand
+
+Parser -> AddCommand : execute()
+activate AddCommand
+
+AddCommand -> AddCommand : extractValue() for each field
+activate AddCommand #lightblue
+AddCommand --> AddCommand : return values
+deactivate AddCommand
+
+AddCommand -> AddCommand : validateFields()
+activate AddCommand #lightblue
+AddCommand --> AddCommand : return
+deactivate AddCommand
+
+AddCommand -> AddCommand : processSkills()
+activate AddCommand #lightblue
+AddCommand --> AddCommand : return skills[]
+deactivate AddCommand
+
+AddCommand -> InternshipList : create entry
+activate InternshipList
+InternshipList -> Internship : new(company, role, duration, allowance, skills)
+activate Internship
+Internship --> InternshipList : return new
+deactivate Internship
+InternshipList --> AddCommand : return
+deactivate InternshipList
+
+AddCommand -> Storage : save(internships)
+activate Storage
+Storage --> AddCommand : return
+deactivate Storage
+
+AddCommand -> Ui : printAddingMessage(internship)
+activate Ui
+Ui --> User : shows success message
+Ui --> AddCommand : return
+deactivate Ui
+
+AddCommand --> Parser : return
+deactivate AddCommand
+
+Parser --> NextStep : return
+deactivate Parser
+
+NextStep --> User
+deactivate NextStep
+@enduml
