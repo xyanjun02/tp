@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+participant NextStep
+participant Parser
+participant DeleteCommand
+participant InternshipList
+participant Internship
+participant Storage
+participant Ui
+
+User -> NextStep : enters "delete 1"
+activate NextStep
+
+NextStep -> Parser : processCommand(input)
+activate Parser
+
+Parser -> DeleteCommand : createCommand()
+activate DeleteCommand
+DeleteCommand -> DeleteCommand : new(input, internships, storage)
+DeleteCommand --> Parser : return command
+deactivate DeleteCommand
+
+Parser -> DeleteCommand : execute()
+activate DeleteCommand
+
+DeleteCommand -> DeleteCommand : parseIndex(input)
+activate DeleteCommand #lightblue
+DeleteCommand --> DeleteCommand : return index
+deactivate DeleteCommand
+
+DeleteCommand -> InternshipList : deleteInternship(index)
+activate InternshipList
+InternshipList -> Internship : removeAt(index)
+activate Internship
+Internship --> InternshipList : return removedInternship
+deactivate Internship
+InternshipList --> DeleteCommand : return removedInternship
+deactivate InternshipList
+
+DeleteCommand -> Storage : save(internships)
+activate Storage
+Storage --> DeleteCommand : return
+deactivate Storage
+
+DeleteCommand -> Ui : printDeleteSuccess(removedInternship)
+activate Ui
+Ui --> DeleteCommand : return
+deactivate Ui
+
+DeleteCommand --> Parser : return
+deactivate DeleteCommand
+
+Parser --> NextStep : return
+deactivate Parser
+
+NextStep --> User : shows success message
+deactivate NextStep
+@enduml
