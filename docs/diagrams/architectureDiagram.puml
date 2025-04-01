@@ -1,0 +1,61 @@
+@startuml NextStep_Architecture
+skinparam monochrome true
+skinparam shadowing false
+skinparam nodesep 20
+skinparam ranksep 30
+
+package "NextStep" {
+    [NextStep] as Main
+}
+
+package "Core" {
+    [InternshipList]
+    [Internship]
+}
+
+package "UI" {
+    [Ui]
+}
+
+package "Storage" {
+    [Storage] as StorageComponent
+}
+
+package "Parser" {
+    [Parser] as ParserComponent
+}
+
+package "Commands" {
+    [Command]
+}
+
+' Main relationships
+Main --> StorageComponent
+Main --> ParserComponent
+Main --> Ui
+Main --> InternshipList
+
+' Parser relationships
+ParserComponent --> Command
+ParserComponent --> InternshipList
+ParserComponent --> StorageComponent
+ParserComponent --> Ui
+
+' Storage relationships
+StorageComponent --> InternshipList
+
+' Core relationships
+InternshipList "1" *-- "0..*" Internship
+
+' UI relationships
+Ui --> Internship
+
+note right of Main
+  <b>Execution Flow:</b>
+  1. Main initializes components
+  2. Parser processes commands
+  3. Commands modify model
+  4. Storage persists data
+end note
+
+@enduml
