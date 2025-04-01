@@ -47,6 +47,7 @@ public class AddCommand extends Command {
         Internship internship = new Internship(company, role, duration, allowance, skills);
 
         // Assertions to verify key assumptions.
+        assert internship != null;
         assert !internship.getSkills().isEmpty() : "There should be at least one skill";
 
         internships.addInternship(internship);
