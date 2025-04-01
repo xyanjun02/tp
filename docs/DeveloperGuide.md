@@ -1,4 +1,4 @@
-# Developer Guide
+ # Developer Guide
 
 ## Acknowledgements
 
@@ -36,6 +36,31 @@ Additionally, ```AddCommand``` implements various exception handling to deal wit
 + ```EmptyInputException```: Thrown when no details are provided after "add"
 + ```InvalidInputFormatException```: Thrown when required fields are missing
 + ```NumberFormatException```: Caught by the Parser when allowance/duration are not integers
+
+### Deleting Internship
+The `delete` command allows users to remove an existing internship from the Internship List by specifying its index.
+
+#### Implementation Flow
+1. The user enters a `delete` command with an index.
+2. The parser receives the command and creates a new `DeleteCommand` instance.
+3. Once the new instance is created, `DeleteCommand.execute()` is invoked.
+4. The `execute()` method extracts the index from the user input, validates it (ensuring that:
+    - An index is provided.
+    - The index is a valid integer.
+    - The index is within the bounds of the Internship List), and processes it if valid.
+5. The internship corresponding to the specified index is then removed from the Internship List.
+6. The updated list is saved into `storage` (if persistence is implemented).
+7. A confirmation message is then printed to the user via the `Ui` class.
+
+The sequence diagram below showcases the flow of execution:
+
+![deleteCommandSequence.png](images/deleteCommandSequence.png)
+
+#### Error Handling
+Additionally, `DeleteCommand` implements various exception handling to deal with errors.
+- `EmptyInputException`: Thrown when no index is provided after "delete".
+- `InvalidIndexException`: Thrown when the index given is out of bounds.
+- `NumberFormatException`: Thrown when the provided index is not a valid integer.
 
 ## Product scope
 ### Target user profile
