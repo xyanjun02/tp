@@ -2,13 +2,13 @@
 'https://plantuml.com/sequence-diagram
 
 actor User
-participant NextStep
-participant Parser
-participant DeleteCommand
-participant InternshipList
-participant Internship
-participant Storage
-participant Ui
+participant ":NextStep" as NextStep
+participant ":Parser" as Parser
+participant ":DeleteCommand" as DeleteCommand
+participant ":InternshipList" as InternshipList
+participant ":Internship" as Internship
+participant ":Storage" as Storage
+participant "<<Class>> \nUi" as Ui
 
 User -> NextStep : enters "delete 1"
 activate NextStep
