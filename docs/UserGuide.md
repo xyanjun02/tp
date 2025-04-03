@@ -155,12 +155,13 @@ find/c Google
 
 ###  Filtering Internships
 #### By Allowance: `filter/a`
-Finds internships based on salary range.
+Finds internships between a given salary range.
 
 **Format**:
 ```bash
 filter/a MIN MAX
 ```
+If no ```MAX``` is provided, finds internships above ```MIN```.
 
 **Examples**:
 ```bash
@@ -169,12 +170,14 @@ filter/a 3000       # Finds internships paying $3000 and above
 ```
 
 #### By Duration: `filter/d`
-Finds internships based on duration.
+Finds internships between a given duration range.
 
 **Format**:
 ```bash
 filter/d MIN MAX
 ```
+
+If no ```MAX``` is provided, finds internships above ```MIN```.
 
 **Examples**:
 ```bash
@@ -183,12 +186,22 @@ filter/d 12   # Finds internships lasting 12+ months
 ```
 
 ### Editing an Internship: `edit`
-Modifies details of an existing internship.
+Modifies details of an existing internship, allows the modification of any field.
 
 **Format**:
 ```bash
 edit INDEX
 ```
+
+**Examples**
+```bash
+> edit 2
+[System] What would you like to edit? (separated by commas): 
+> Company
+[System] Updated Company: 
+> Microsoft
+```
+
 
 ### Exiting NextStep: `bye`
 Closes the application.

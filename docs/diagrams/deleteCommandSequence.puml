@@ -18,7 +18,7 @@ activate Parser
 
 Parser -> DeleteCommand : createCommand()
 activate DeleteCommand
-DeleteCommand -> DeleteCommand : new(input, internships, storage)
+DeleteCommand -> DeleteCommand
 DeleteCommand --> Parser : return command
 deactivate DeleteCommand
 
@@ -41,18 +41,18 @@ deactivate InternshipList
 
 DeleteCommand -> Storage : save(internships)
 activate Storage
-Storage --> DeleteCommand : return
+Storage --> DeleteCommand
 deactivate Storage
 
 DeleteCommand -> Ui : printDeleteSuccess(removedInternship)
 activate Ui
-Ui --> DeleteCommand : return
+Ui --> DeleteCommand
 deactivate Ui
 
-DeleteCommand --> Parser : return
+DeleteCommand --> Parser
 deactivate DeleteCommand
 
-Parser --> NextStep : return
+Parser --> NextStep
 deactivate Parser
 
 NextStep --> User : shows success message

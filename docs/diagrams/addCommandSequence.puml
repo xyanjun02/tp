@@ -18,7 +18,6 @@ activate Parser
 
 Parser -> AddCommand : createCommand()
 activate AddCommand
-AddCommand -> AddCommand : new(input, internships, storage)
 AddCommand --> Parser : return command
 deactivate AddCommand
 
@@ -32,7 +31,6 @@ deactivate AddCommand
 
 AddCommand -> AddCommand : validateFields()
 activate AddCommand #lightblue
-AddCommand --> AddCommand : return
 deactivate AddCommand
 
 AddCommand -> AddCommand : processSkills()
@@ -44,25 +42,25 @@ AddCommand -> InternshipList : create entry
 activate InternshipList
 InternshipList -> Internship : new(company, role, duration, allowance, skills)
 activate Internship
-Internship --> InternshipList : return new
+Internship --> InternshipList : return new Internship
 deactivate Internship
-InternshipList --> AddCommand : return
+InternshipList --> AddCommand
 deactivate InternshipList
 
 AddCommand -> Storage : save(internships)
 activate Storage
-Storage --> AddCommand : return
+Storage --> AddCommand
 deactivate Storage
 
 AddCommand -> Ui : printAddingMessage(internship)
 activate Ui
-Ui --> AddCommand : return
+Ui --> AddCommand
 deactivate Ui
 
-AddCommand --> Parser : return
+AddCommand --> Parser
 deactivate AddCommand
 
-Parser --> NextStep : return
+Parser --> NextStep
 deactivate Parser
 
 NextStep --> User : show success message

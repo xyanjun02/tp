@@ -51,7 +51,7 @@ The **NextStep component** serves as the central hub of the system, coordinating
 
 ## 2. Core (InternshipList & Internship)
 
-The **Core** package contains the core data model, which consists of **InternshipList** and **Internship**. The **InternshipList** serves as the container for storing multiple internship data entries, while **Internship** represents individual internship records.
+The **Core** component contains the core data model, which consists of **InternshipList** and **Internship**. The **InternshipList** serves as the container for storing multiple internship data entries, while **Internship** represents individual internship records.
 
 ### Responsibilities:
 - **InternshipList**: Stores all internship data.
@@ -59,24 +59,24 @@ The **Core** package contains the core data model, which consists of **Internshi
 
 ## 3. UI (User Interface)
 
-The **UI** package is responsible for interacting with the user. It displays information such as internship data, command results, and error messages. The UI acts as the front-end interface that communicates with the backend logic to display the processed data to the user.
+The **UI** is responsible for interacting with the user. It displays information such as internship data, command results, and error messages. The UI acts as the front-end interface that communicates with the backend logic to display the processed data to the user.
 
 ### Responsibilities:
 - Handles user interactions.
 - Displays internship data and the results of executed commands.
 - Provides a responsive and intuitive interface for the user.
 
-## 4. Storage (StorageComponent)
+## 4. Storage
 
-The **StorageComponent** handles the persistence of data. It ensures that internship data is saved to a storage system and can be retrieved later when needed.
+The **Storage component** handles the persistence of data. It ensures that internship data is saved to a storage system and can be retrieved later when needed.
 
 ### Responsibilities:
 - Saves and loads internship data to ensure persistence.
 - Handles the storage of data when the application is closed or restarted.
 
-## 5. Parser (ParserComponent)
+## 5. Parser 
 
-The **ParserComponent** is responsible for processing user input. It reads and interprets the commands given by the user and directs them to the appropriate component to execute.
+The **Parser** is responsible for processing user input. It reads and interprets the commands given by the user and directs them to the appropriate component to execute.
 
 ### Responsibilities:
 - Reads and processes user commands.
@@ -85,12 +85,14 @@ The **ParserComponent** is responsible for processing user input. It reads and i
 
 ## 6. Commands
 
-The **Commands** package contains various actions that users can perform, such as adding, deleting, finding, or filtering internships. These commands are implemented as individual classes, each responsible for a specific action.
+The **Commands** component contains various actions that users can perform, such as adding, deleting, finding, or filtering internships. These commands are implemented as individual classes, each responsible for a specific action.
+
+![commandsComponent.png](images/commandsComponent.png)
 
 ### Responsibilities:
 - Each command interacts with **InternshipList** to modify or retrieve data.
 - Handles operations like **Add**, **Delete**, **Find**, and **Filter**.
-- Commands are processed by the **ParserComponent** and executed based on user input.
+- Commands are created by the **Parser** and executed based on user input.
 
 ---
 ## **Implementation**
