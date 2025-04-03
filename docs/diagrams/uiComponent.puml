@@ -1,0 +1,21 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Ui {
+  + printWelcomeMessage()
+  + printEnterCommand()
+  + printExitMessage()
+  + showError()
+  + printInternship()
+}
+
+class TablePrinter {
+  + printTable()
+}
+
+Ui --> TablePrinter : uses
+
+@enduml
+
+

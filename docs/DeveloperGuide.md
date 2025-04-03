@@ -53,6 +53,8 @@ The **NextStep component** serves as the central hub of the system, coordinating
 
 The **Core** component contains the core data model, which consists of **InternshipList** and **Internship**. The **InternshipList** serves as the container for storing multiple internship data entries, while **Internship** represents individual internship records.
 
+![coreComponent.png](images/coreComponent.png)
+
 ### Responsibilities:
 - **InternshipList**: Stores all internship data.
 - **Internship**: Represents individual internship details, such as job role, company, and description.
@@ -60,6 +62,8 @@ The **Core** component contains the core data model, which consists of **Interns
 ## 3. UI (User Interface)
 
 The **UI** is responsible for interacting with the user. It displays information such as internship data, command results, and error messages. The UI acts as the front-end interface that communicates with the backend logic to display the processed data to the user.
+
+![uiComponent.png](images/uiComponent.png)
 
 ### Responsibilities:
 - Handles user interactions.
@@ -69,6 +73,8 @@ The **UI** is responsible for interacting with the user. It displays information
 ## 4. Storage
 
 The **Storage component** handles the persistence of data. It ensures that internship data is saved to a storage system and can be retrieved later when needed.
+
+![storageComponent.png](images/storageComponent.png)
 
 ### Responsibilities:
 - Saves and loads internship data to ensure persistence.

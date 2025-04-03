@@ -1,0 +1,26 @@
+@startuml
+hide circle
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Internship {
+  - company : String
+  - role : String
+  - duration : int
+  - allowance : int
+  - skills : String[]
+  - status : String
+}
+
+class InternshipList {
+  + addInternship()
+  + deleteInternship()
+  + size() : int
+}
+
+InternshipList "1" *-- "*" Internship
+
+@enduml
+
+
