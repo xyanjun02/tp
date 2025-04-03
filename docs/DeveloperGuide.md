@@ -34,7 +34,7 @@ NextStep's architecture consists of the following few components:
 - ```Core```: Maintains current data state of NextStep.
 - ```Storage```: Reads data from, and writes data to, the hard disk.
 
-![img.png](img.png)
+![architechtureDiagram.png](images/architectureDiagram.png)
 
 # NextStep Architecture Overview
 

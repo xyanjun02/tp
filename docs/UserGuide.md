@@ -33,11 +33,11 @@
 2. **Download** the latest `nextstep.jar` from our [releases page](https://github.com/AY2425S2-CS2113-F12-2/tp/releases).
 3. **Copy** the file to your preferred folder.
 4. **Run** the application using:
-   ```bash
+   ```
    java -jar nextstep.jar
    ```
 5. **Type commands** to manage your internships (see examples below):
-   ```bash
+   ```
    add c/Google r/Software Engineer d/6 a/3000 s/Java,Python
    list
    find/s Python
@@ -61,22 +61,22 @@
 Displays a list of available commands and their descriptions.
 
 **Format**:
-```bash
+```
 help
 ```
 
 ### Adding an Internship: `add`
-Adds a new internship with details.
+Adds a new internship with details, all fields are required.
 
 **Format**:
-```bash
+```
 add c/COMPANY r/ROLE d/DURATION a/ALLOWANCE s/SKILLS
 ```
 
 **Examples**:
-```bash
-add c/Google r/Software Engineer d/6 a/5000 s/Java,Python
-add c/Microsoft r/Data Analyst d/12 a/1800 s/Python,SQL
+```
+add c/Google r/Software Engineer d/6 a/5000 s/Java, Python
+add c/Microsoft r/Data Analyst d/12 a/1800 s/Python, SQL
 ```
 
 | Symbol | Parameter | Description                       |
@@ -91,21 +91,21 @@ add c/Microsoft r/Data Analyst d/12 a/1800 s/Python,SQL
 Displays all saved internships.
 
 **Format**:
-```bash
+```
 list
 ```
 
 ###  Deleting an Internship: `delete`
-Removes an internship from the list.
+Removes an internship from the list at the specified index.
 
 **Format**:
-```bash
+```
 delete INDEX
 ```
 
 **Examples**:
-```bash
-delete 2  # Removes internship at index 2
+```
+delete 2
 ```
 
 | Symbol | Parameter | Description                |
@@ -117,12 +117,12 @@ delete 2  # Removes internship at index 2
 Searches for internships that require a specific skill.
 
 **Format**:
-```bash
+```
 find/s SKILL
 ```
 
 **Examples**:
-```bash
+```
 find/s Java
 find/s Python
 ```
@@ -131,12 +131,12 @@ find/s Python
 Finds internships for a given role.
 
 **Format**:
-```bash
+```
 find/r ROLE
 ```
 
 **Examples**:
-```bash
+```
 find/r Data Analyst
 ```
 
@@ -144,12 +144,12 @@ find/r Data Analyst
 Finds internships offered by a specific company.
 
 **Format**:
-```bash
+```
 find/c COMPANY
 ```
 
 **Example**:
-```bash
+```
 find/c Google
 ```
 
@@ -158,45 +158,51 @@ find/c Google
 Finds internships between a given salary range.
 
 **Format**:
-```bash
+```
 filter/a MIN MAX
 ```
 If no ```MAX``` is provided, finds internships above ```MIN```.
 
 **Examples**:
-```bash
-filter/a 2000 5000  # Finds internships paying $2000 - $5000
-filter/a 3000       # Finds internships paying $3000 and above
+```
+filter/a 2000 5000  // Finds internships paying $2000 - $5000
+filter/a 3000       // Finds internships paying $3000 and above
 ```
 
 #### By Duration: `filter/d`
 Finds internships between a given duration range.
 
 **Format**:
-```bash
+```
 filter/d MIN MAX
 ```
 
 If no ```MAX``` is provided, finds internships above ```MIN```.
 
 **Examples**:
-```bash
-filter/d 3 6  # Finds internships lasting 3-6 months
-filter/d 12   # Finds internships lasting 12+ months
+```
+filter/d 3 6  // Finds internships lasting 3-6 months
+filter/d 12   // Finds internships lasting 12+ months
 ```
 
 ### Editing an Internship: `edit`
-Modifies details of an existing internship, allows the modification of any field.
+Modifies an existing internship at the specified index.
 
 **Format**:
-```bash
+```
 edit INDEX
 ```
 
 **Examples**
-```bash
+```
+edit 2
+```
+After inputting the command, the user is able to modify any field of the selected internship.
+
+**Example**
+```
 > edit 2
-[System] What would you like to edit? (separated by commas): 
+[System] What would you like to edit? (separated by commas):
 > Company
 [System] Updated Company: 
 > Microsoft
@@ -207,7 +213,7 @@ edit INDEX
 Closes the application.
 
 **Format**:
-```bash
+```
 bye
 ```
 
