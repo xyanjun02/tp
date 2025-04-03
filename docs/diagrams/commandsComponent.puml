@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+package "Commands" {
+    abstract class Command <<Abstract >> {
+        +{abstract} execute()
+        +input: String
+        +internships: InternshipList
+    }
+
+    class AddCommand
+    class DeleteCommand
+    class EditCommand
+    class FindCompanyCommand
+    class FindRoleCommand
+    class FindSkillCommand
+    class HelpCommand
+    class ListCommand
+
+    Command <|-- AddCommand
+    Command <|-- DeleteCommand
+    Command <|-- EditCommand
+    Command <|-- FindCompanyCommand
+    Command <|-- FindRoleCommand
+    Command <|-- FindSkillCommand
+    Command <|-- FilterCommand
+    Command <|-- HelpCommand
+    Command <|-- ListCommand
+}
+
+package "core" {
+    class InternshipList
+    class Internship
+}
+
+package "parser" {
+    class Parser
+}
+
+package "ui" {
+    class Ui
+}
+
+package "storage" {
+    class Storage {
+    + save(internships: InternshipList)
+    }
+}
+' External Dependencies
+Parser --> Command : creates
+Command --> InternshipList
+AddCommand --> Storage
+DeleteCommand --> Storage
+EditCommand --> Storage
+AddCommand --> Ui
+DeleteCommand --> Ui
+EditCommand --> Ui
+FindCompanyCommand --> Ui
+FindRoleCommand --> Ui
+FindSkillCommand --> Ui
+FilterCommand --> Ui
+HelpCommand --> Ui
+ListCommand --> Ui
+
+@enduml
