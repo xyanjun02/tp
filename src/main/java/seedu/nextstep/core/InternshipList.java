@@ -38,4 +38,8 @@ public class InternshipList implements Serializable {
     public int size() {
         return internships.size();
     }
+
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
 }

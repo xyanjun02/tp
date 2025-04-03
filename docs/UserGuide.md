@@ -112,6 +112,7 @@ delete 2
 |--------|-----------|----------------------------|
 | `-`    | INDEX     | Internship index in `list` |
 
+//@@author xyanjun02
 ### Finding Internships
 #### By Skill: `find/s`
 Searches for internships that require a specific skill.
@@ -168,6 +169,7 @@ If no ```MAX``` is provided, finds internships above ```MIN```.
 filter/a 2000 5000  // Finds internships paying $2000 - $5000
 filter/a 3000       // Finds internships paying $3000 and above
 ```
+//@@author
 
 #### By Duration: `filter/d`
 Finds internships between a given duration range.

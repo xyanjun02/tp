@@ -31,6 +31,14 @@ public class Parser {
     }
 
     public void processCommand(String input) {
+        //@@author jiajun2002
+        input = input.trim();
+        if (input.isEmpty()) {
+            System.out.println("Error: No command entered.");
+            Ui.printLinebreak();
+            return;
+        }
+        //@@author
         String[] words = input.split(" ");
         try {
             Command command = createCommand(words[0], input);
