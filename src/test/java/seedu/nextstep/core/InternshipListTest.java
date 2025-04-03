@@ -6,7 +6,8 @@ import seedu.nextstep.exception.InvalidIndexException;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InternshipListTest {
 
