@@ -1,11 +1,12 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
 
 package "Commands" {
-    abstract class Command <<Abstract >> {
-        +{abstract} execute()
-        +input: String
-        +internships: InternshipList
+    abstract class Command {
+        + execute() {abstract}
+        + input : String
+        + internships : InternshipList
     }
 
     class AddCommand
@@ -14,6 +15,7 @@ package "Commands" {
     class FindCompanyCommand
     class FindRoleCommand
     class FindSkillCommand
+    class FilterCommand
     class HelpCommand
     class ListCommand
 
@@ -43,9 +45,10 @@ package "ui" {
 
 package "storage" {
     class Storage {
-    + save(internships: InternshipList)
+        + save(internships : InternshipList)
     }
 }
+
 ' External Dependencies
 Parser --> Command : creates
 Command --> InternshipList
@@ -63,3 +66,4 @@ HelpCommand --> Ui
 ListCommand --> Ui
 
 @enduml
+

@@ -1,0 +1,17 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Storage {
+  + save()
+  + load() : InternshipList
+}
+
+class InternshipList
+
+Storage ..> InternshipList : persists
+
+@enduml
+
+
+

@@ -88,7 +88,7 @@ add c/Microsoft r/Data Analyst d/12 a/1800 s/Python, SQL
 | `s/`   | SKILLS    | Required skills (comma-separated) |
 
 ### Listing Internships: `list`
-Displays all saved internships.
+Displays all saved internships with their current application status.
 
 **Format**:
 ```
