@@ -17,13 +17,10 @@
   - [Launch and Basic Commands](#launch-and-basic-commands)
   - [Core Functionality Tests](#core-functionality-tests)
 
+---
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
----
-## Setting up, Getting started
-Follow the guide here()
 
 ---
 ## Design
@@ -34,7 +31,7 @@ NextStep's architecture consists of the following few components:
 - ```Core```: Maintains current data state of NextStep.
 - ```Storage```: Reads data from, and writes data to, the hard disk.
 
-![img.png](img.png)
+![architechtureDiagram.png](images/architectureDiagram.png)
 
 # NextStep Architecture Overview
 
@@ -222,13 +219,12 @@ NextStep streamlines internship management for students by:
 ## Instructions for Manual Testing
 
 Before testing, ensure you have:
-1. Java 11+ installed
-2. Built the project using `gradlew build`
-3. Run the app at least once to generate default data files
+1. Java 17 installed
 
 ### Launch and Basic Commands
 1. **Initial Launch**
-   - Test case: `java -jar NextStep.jar`
+   - Download the NextStep.jar file and copy it into an empty folder
+   - Start the application by running `java -jar NextStep.jar`
    - Expected: Shows welcome message with basic help info
    - Verify: `data/nextstep.txt` is created automatically
 
@@ -240,7 +236,7 @@ Before testing, ensure you have:
 ### Core Functionality Tests
 #### Adding Internships
 1. **Normal Add**
-   - Test case: `add c/Google r/SWE intern s/Java,Python d/2024-12-31`
+   - Test case: `add c/Google r/SWE d/6 a/3000 s/Java,Python`
    - Expected: Success message with added entry details
    - Verify: Entry appears in next `list` output
 
@@ -258,14 +254,39 @@ Before testing, ensure you have:
 #### Editing Entries
 1. **Guided Edit**
    - Test case: `edit 1`
-   - Expected: Prompts for each editable field sequentially
-   - Verify: Fields are prompted based on what is required to be edited
+   - Expected: Prompts the user to edit a particular field in the first internship.
+   - Verify: Fields are prompted based on what is required to be edited.
+
+#### Deleting Entries
+1. **Normal Delete**
+   - Test case: `delete 1`
+   - Expected: Deletes the first internship from the list.
+   - Verify: `list` command no longer displays the selected internship.
+
+#### Finding Entries
+1. **Finding Company**
+   - Test case: `find/c Google`
+   - Expected: Displays all internships with "Google" as the company.
+2. **Finding Role**
+   - Test case: `find/r SWE`
+   - Expected: Displays all internships with "SWE" as the role.
+3. **Finding skill**
+   - Test case: `find/s Java`
+   - Expected: Displays all internships that contains "Java" as a skill.
+
+#### Filtering Entries
+1. **Filtering Allowance**
+   - Test case: `filter/a 1000 5000`
+   - Expected: Displays internships with allowances between $1000 and $5000.
+2. **Filtering Duration**
+   - Test case: `filter/d 4`
+   - Expected: Displays internships with duration equal to or above 4 months.
 
 ### File Operations
 1. **Data Persistence**
    - Steps:
       1. Add several test entries
-      2. Exit with `exit`
+      2. Exit with `bye`
       3. Relaunch application
    - Expected: Previous entries load automatically
    - Verify: Entry counts match before/after restart
