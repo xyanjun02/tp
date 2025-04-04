@@ -51,7 +51,7 @@ Given below are my contributions to the project.
 
 ### Project Management
 - Managed 2 releases on GitHub (v1.0 and v2.0)
-- Initiated multiple issues to help track team progress
+- Initiated  issues to help track team progress
 - Conducted code reviews for team members
 
 ### Documentation
