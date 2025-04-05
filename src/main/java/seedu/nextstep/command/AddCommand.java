@@ -52,7 +52,7 @@ public class AddCommand extends Command {
         }
 
         // Validate Status.
-        if (!isValidStatus(status)) {
+        if (!checkIsValidStatus(status)) {
             throw new InvalidInputFormatException("Error: Status must be 'A', 'P', 'R' or '-'.");
         }
 
@@ -116,7 +116,7 @@ public class AddCommand extends Command {
      * @param status The status to be checked.
      * @return true is status is valid, false otherwise.
      */
-    private boolean isValidStatus(String status) {
+    private boolean checkIsValidStatus(String status) {
         return status.equals("A") || status.equals("P") || status.equals("R") || status.equals("-");
     }
 
