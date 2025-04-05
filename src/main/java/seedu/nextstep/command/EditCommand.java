@@ -152,7 +152,6 @@ public class EditCommand extends Command {
      * @return true is status is valid, false otherwise.
      */
     private boolean isValidStatus(String status) {
-        return status.equalsIgnoreCase("A") || status.equalsIgnoreCase("P") ||
-                status.equalsIgnoreCase("R") || status.equalsIgnoreCase("-");
+        return status.equals("A") || status.equals("P") || status.equals("R") || status.equals("-");
     }
 }
