@@ -17,7 +17,7 @@ public class InternshipTest {
 
     @BeforeEach
     void setUp() {
-        internship = new Internship("Google", "Software Engineer", 6, 2000, "Java", "Python");
+        internship = new Internship("Google", "Software Engineer", 6, 2000, "P", "Java", "Python");
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
     }
@@ -83,13 +83,13 @@ public class InternshipTest {
 
     @Test
     void testGetStatus() {
-        assertEquals("-", internship.getStatus());
+        assertEquals("P", internship.getStatus());
     }
 
     @Test
     void testSetStatus() {
-        internship.setStatus("Pending");
-        assertEquals("Pending", internship.getStatus());
+        internship.setStatus("-");
+        assertEquals("-", internship.getStatus());
     }
 
     @Test
@@ -100,6 +100,6 @@ public class InternshipTest {
         assertTrue(output.contains("Duration  : 6 months"));
         assertTrue(output.contains("Allowance : $2000"));
         assertTrue(output.contains("Skills    : Java, Python"));
-        assertTrue(output.contains("Status    : -"));
+        assertTrue(output.contains("Status    : P"));
     }
 }
