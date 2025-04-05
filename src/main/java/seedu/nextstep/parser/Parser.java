@@ -10,8 +10,14 @@ import seedu.nextstep.command.FindRoleCommand;
 import seedu.nextstep.command.FindCompanyCommand;
 import seedu.nextstep.command.FilterCommand;
 import seedu.nextstep.command.EditCommand;
+
+import seedu.nextstep.exception.EmptyInputException;
+import seedu.nextstep.exception.InvalidIntegerException;
+import seedu.nextstep.exception.InvalidIndexException;
+import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.SimilarCommandException;
+
 import seedu.nextstep.core.InternshipList;
-import seedu.nextstep.exception.*;
 import seedu.nextstep.ui.Ui;
 import seedu.nextstep.storage.Storage;
 
