@@ -10,11 +10,14 @@ import seedu.nextstep.command.FindRoleCommand;
 import seedu.nextstep.command.FindCompanyCommand;
 import seedu.nextstep.command.FilterCommand;
 import seedu.nextstep.command.EditCommand;
-import seedu.nextstep.core.InternshipList;
+
 import seedu.nextstep.exception.EmptyInputException;
+import seedu.nextstep.exception.InvalidIntegerException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
 import seedu.nextstep.exception.SimilarCommandException;
+
+import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.ui.Ui;
 import seedu.nextstep.storage.Storage;
 
@@ -43,7 +46,8 @@ public class Parser {
         try {
             Command command = createCommand(words[0], input);
             command.execute();
-        } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException e) {
+        } catch (EmptyInputException | InvalidInputFormatException |
+                 InvalidIndexException | InvalidIntegerException e) {
             System.out.println(e.getMessage());
             Ui.printLinebreak();
         } catch (SimilarCommandException e) {

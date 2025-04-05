@@ -6,6 +6,7 @@ import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.InvalidIntegerException;
 import seedu.nextstep.storage.Storage;
 import seedu.nextstep.ui.Ui;
 
@@ -37,9 +38,11 @@ public class EditCommand extends Command {
      * @throws InvalidIndexException       if the provided index is out of bounds.
      * @throws InvalidInputFormatException if the user input format is incorrect.
      * @throws NumberFormatException       if numeric values are not properly formatted.
+     * @throws InvalidIntegerException     if allowance is negative or duration is non-positive.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidIndexException, InvalidInputFormatException {
+    public void execute()
+            throws EmptyInputException, InvalidIndexException, InvalidInputFormatException, InvalidIntegerException {
         Internship internship = getInternshipToEdit();
 
         // Prompt user for fields to edit
@@ -67,7 +70,7 @@ public class EditCommand extends Command {
     }
 
     private void processFieldEdits(Internship internship, String[] fieldsToEdit)
-            throws EmptyInputException, InvalidInputFormatException {
+            throws EmptyInputException, InvalidInputFormatException, InvalidIntegerException {
         for (String field : fieldsToEdit) {
             switch (field.toLowerCase()) {
             case "company":
@@ -93,7 +96,11 @@ public class EditCommand extends Command {
                     throw new EmptyInputException("Error: Duration cannot be empty.");
                 }
                 try {
-                    internship.setDuration(Integer.parseInt(durationInput));
+                    int durationInteger = Integer.parseInt(durationInput);
+                    if (durationInteger <= 0) {
+                        throw new InvalidIntegerException("Error: Duration must be greater than 0.");
+                    }
+                    internship.setDuration(durationInteger);
                 } catch (NumberFormatException e) {
                     throw new InvalidInputFormatException("Error: Duration must be a number.");
                 }
@@ -105,7 +112,11 @@ public class EditCommand extends Command {
                     throw new EmptyInputException("Error: Allowance cannot be empty.");
                 }
                 try {
-                    internship.setAllowance(Integer.parseInt(allowanceInput));
+                    int allowanceInteger = Integer.parseInt(allowanceInput);
+                    if (allowanceInteger < 0) {
+                        throw new InvalidIntegerException("Error: Allowance cannot be negative.");
+                    }
+                    internship.setAllowance(allowanceInteger);
                 } catch (NumberFormatException e) {
                     throw new InvalidInputFormatException("Error: Allowance must be a number.");
                 }

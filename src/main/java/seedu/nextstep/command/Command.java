@@ -4,6 +4,7 @@ import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.InvalidIntegerException;
 
 /**
  * Represents a parent Command to be inherited by other classes.
@@ -40,6 +41,9 @@ public abstract class Command {
      * @throws EmptyInputException         if input is empty.
      * @throws InvalidInputFormatException if input format is invalid.
      * @throws InvalidIndexException       if an invalid index is used.
+     * @throws InvalidIntegerException     if an invalid integer is provided.
+     *
      */
-    public abstract void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIndexException;
+    public abstract void execute()
+            throws EmptyInputException, InvalidInputFormatException, InvalidIndexException, InvalidIntegerException;
 }

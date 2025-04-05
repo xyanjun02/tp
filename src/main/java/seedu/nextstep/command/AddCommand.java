@@ -4,6 +4,7 @@ import seedu.nextstep.core.Internship;
 import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.InvalidIntegerException;
 import seedu.nextstep.storage.Storage;
 import seedu.nextstep.ui.Ui;
 
@@ -20,9 +21,10 @@ public class AddCommand extends Command {
      * @throws EmptyInputException If no details are given after "add".
      * @throws InvalidInputFormatException If there are missing fields.
      * @throws NumberFormatException If allowance/duration are not integers.
+     * @throws InvalidIntegerException If allowance is negative or duration is non-positive.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidInputFormatException {
+    public void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIntegerException {
         if (input.trim().equals("add")) {
             throw new EmptyInputException("Error: Please provide the details for the internship" +
                     " (e.g. c/, r/, d/, a/, s/).");
@@ -39,7 +41,13 @@ public class AddCommand extends Command {
         validateFields(company, role, durationStr, allowanceStr, skillsInput);
 
         int duration = Integer.parseInt(durationStr);
+        if (duration <= 0) {
+            throw new InvalidIntegerException("Error: Duration must be greater than 0.");
+        }
         int allowance = Integer.parseInt(allowanceStr);
+        if (allowance < 0) {
+            throw new InvalidIntegerException("Error: Allowance cannot be negative.");
+        }
 
         // Process skills: split by commas and trim each entry.
         String[] skills = processSkills(skillsInput);
