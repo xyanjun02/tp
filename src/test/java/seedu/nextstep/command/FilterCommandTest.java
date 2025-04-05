@@ -9,6 +9,7 @@ import seedu.nextstep.core.Internship;
 import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.InvalidIntegerException;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -46,7 +47,7 @@ class FilterCommandTest {
 
         try {
             filterCommand.execute();
-        } catch (InvalidInputFormatException | EmptyInputException e) {
+        } catch (InvalidInputFormatException | EmptyInputException | InvalidIntegerException e) {
             fail(e.getMessage());
         }
         String output = outContent.toString();
@@ -64,7 +65,7 @@ class FilterCommandTest {
 
         try {
             filterCommand.execute();
-        } catch (InvalidInputFormatException | EmptyInputException e) {
+        } catch (InvalidInputFormatException | EmptyInputException | InvalidIntegerException e) {
             fail(e.getMessage());
         }
         String output = outContent.toString();
@@ -82,7 +83,7 @@ class FilterCommandTest {
 
         try {
             filterCommand.execute();
-        } catch (InvalidInputFormatException | EmptyInputException e) {
+        } catch (InvalidInputFormatException | EmptyInputException | InvalidIntegerException e) {
             fail(e.getMessage());
         }
         String output = outContent.toString();
@@ -115,5 +116,19 @@ class FilterCommandTest {
         String input = "filter/a thousand";
         FilterCommand filterCommand = new FilterCommand(input, internships);
         assertThrows(NumberFormatException.class, filterCommand::execute);
+    }
+
+    @Test
+    void testFilterCommandMinHigherThanMax() {
+        String input = "filter/a 3000 2000";
+        FilterCommand filterCommand = new FilterCommand(input, internships);
+        assertThrows(InvalidInputFormatException.class, filterCommand::execute);
+    }
+
+    @Test
+    void testFilterCommandNegativeValues() {
+        String input = "filter/d -5";
+        FilterCommand filterCommand = new FilterCommand(input, internships);
+        assertThrows(InvalidIntegerException.class, filterCommand::execute);
     }
 }

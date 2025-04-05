@@ -7,6 +7,7 @@ import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidIndexException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.InvalidIntegerException;
 import seedu.nextstep.storage.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +37,7 @@ class AddCommandTest {
         AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
         try {
             addCommand.execute();
-        } catch (InvalidInputFormatException | EmptyInputException e) {
+        } catch (InvalidInputFormatException | EmptyInputException | InvalidIntegerException e) {
             fail(e.getMessage());
         }
         assertEquals(1, internships.size());
@@ -81,6 +82,14 @@ class AddCommandTest {
         String input = "add c/Microsoft r/Data Analyst d/Six a/2000 s/SQL, Python";
         AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
         assertThrows(NumberFormatException.class, addCommand::execute);
+        assertEquals(0, internships.size());
+    }
+
+    @Test
+    void testAddCommandNegativeAllowance() {
+        String input = "add c/Amazon r/Project Manager d/12 a/-3000 s/Excel";
+        AddCommand addComand = new AddCommand(input, internships, dummyStorage);
+        assertThrows(InvalidIntegerException.class, addComand::execute);
         assertEquals(0, internships.size());
     }
 }

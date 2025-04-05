@@ -40,7 +40,8 @@ public class Parser {
         try {
             Command command = createCommand(words[0], input);
             command.execute();
-        } catch (EmptyInputException | InvalidInputFormatException | InvalidIndexException | InvalidIntegerException e) {
+        } catch (EmptyInputException | InvalidInputFormatException |
+                 InvalidIndexException | InvalidIntegerException e) {
             System.out.println(e.getMessage());
             Ui.printLinebreak();
         } catch (SimilarCommandException e) {
