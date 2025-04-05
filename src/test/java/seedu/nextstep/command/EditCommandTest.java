@@ -18,8 +18,8 @@ class EditCommandTest {
     @BeforeEach
     void setUp() {
         internships = new InternshipList();
-        internships.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "Java, React"));
-        internships.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "SQL, Python"));
+        internships.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "P", "Java", "React"));
+        internships.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "P", "SQL", "Python"));
 
         dummyStorage = new Storage() {
             @Override

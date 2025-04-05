@@ -131,9 +131,12 @@ public class EditCommand extends Command {
                 break;
             case "status":
                 System.out.print("Updated Status: ");
-                String newStatus = scanner.nextLine().trim();
+                String newStatus = scanner.nextLine().trim().toUpperCase();
                 if (newStatus.isEmpty()) {
                     throw new EmptyInputException("Error: Status cannot be empty.");
+                }
+                if (!isValidStatus(newStatus)) {
+                    throw new InvalidInputFormatException("Error: Status must be 'A', 'P', 'R' or '-'.");
                 }
                 internship.setStatus(newStatus);
                 break;
@@ -141,5 +144,15 @@ public class EditCommand extends Command {
                 throw new InvalidInputFormatException("Error: " + field + " is an invalid field.");
             }
         }
+    }
+
+    /**
+     * Checks if status provided is valid.
+     * @param status The status to be checked.
+     * @return true is status is valid, false otherwise.
+     */
+    private boolean isValidStatus(String status) {
+        return status.equalsIgnoreCase("A") || status.equalsIgnoreCase("P") ||
+                status.equalsIgnoreCase("R") || status.equalsIgnoreCase("-");
     }
 }

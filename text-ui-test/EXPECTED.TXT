@@ -10,14 +10,14 @@ Role      : Software Engineer
 Duration  : 6 months
 Allowance : $5000
 Skills    : Java, Python
-Status    : -
+Status    : P
 --------------------------------
 Enter command: ____________________________________
 Here is your list! (0u0)
 +-----+---------+-------------------+----------+-----------+--------------+--------+
 | No. | Company | Role              | Duration | Allowance | Skills       | Status |
 +-----+---------+-------------------+----------+-----------+--------------+--------+
-| 1   | Google  | Software Engineer | 6 months | $5000     | Java, Python | -      |
+| 1   | Google  | Software Engineer | 6 months | $5000     | Java, Python | P      |
 +-----+---------+-------------------+----------+-----------+--------------+--------+
 Enter command: ____________________________________
 Searching for internships with skill: Java
@@ -27,7 +27,7 @@ Role      : Software Engineer
 Duration  : 6 months
 Allowance : $5000
 Skills    : Java, Python
-Status    : -
+Status    : P
 --------------------------------
 ____________________________________
 Enter command: ____________________________________
@@ -38,7 +38,7 @@ Role      : Software Engineer
 Duration  : 6 months
 Allowance : $5000
 Skills    : Java, Python
-Status    : -
+Status    : P
 --------------------------------
 ____________________________________
 Enter command: ____________________________________
@@ -49,7 +49,7 @@ Role      : Software Engineer
 Duration  : 6 months
 Allowance : $5000
 Skills    : Java, Python
-Status    : -
+Status    : P
 --------------------------------
 ____________________________________
 Enter command: ____________________________________
@@ -60,7 +60,7 @@ Role      : Software Engineer
 Duration  : 6 months
 Allowance : $5000
 Skills    : Java, Python
-Status    : -
+Status    : P
 --------------------------------
 Enter command: ____________________________________
 No internships here (0-0). Try adding some.
@@ -68,7 +68,7 @@ ____________________________________
 Enter command: ____________________________________
 Do help yourself to these commands! (0u0)
 ____________________________________
-1. add [c/COMPANY] [r/ROLE] [d/DURATION] [a/ALLOWANCE] [s/SKILLS]- Adds a new internship
+1. add [c/COMPANY] [r/ROLE] [d/DURATION] [a/ALLOWANCE] [s/SKILLS] [st/STATUS] - Adds a new internship
 2. delete [INDEX] - Deletes an internship at the specified index
 3. list - Lists all available internships
 4. find/s [SKILL] - Finds internships with specific skill(s)
@@ -76,8 +76,8 @@ ____________________________________
 6. find/c [COMPANY] - Finds internships with a specific company
 7. filter/a [MIN_VAL] [MAX_VAL] - Finds internships with allowances within range. If no max is provided, finds those above min.
 8. filter/d [MIN_VAL] [MAX_VAL] - Finds internships with durations within range. If no max is provided, finds those above min.
-9. edit [INDEX] - Edit an internship at the specified index
-10. bye - Exit the application
+9. edit [INDEX] - Edits an internship at the specified index
+10. bye - Exits the application
 ____________________________________
 Enter command: ____________________________________
 Thank you for using NextStep, good luck on your search! (0_0)

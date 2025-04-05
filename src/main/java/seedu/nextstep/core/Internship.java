@@ -22,14 +22,15 @@ public class Internship implements Serializable {
      * @param duration The duration of the internship in months.
      * @param allowance The monthly allowance for the internship.
      * @param skills   The skills required for the internship.
+     * @param status   The status for the internship
      */
-    public Internship(String company, String role, int duration, int allowance, String... skills) {
+    public Internship(String company, String role, int duration, int allowance, String status, String... skills) {
         this.company = company;
         this.role = role;
         this.duration = duration;
         this.allowance = allowance;
+        this.status = status;
         this.skills = skills;
-        this.status = "-";
     }
 
     /**

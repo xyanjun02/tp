@@ -28,8 +28,8 @@ public class DeleteCommandTest {
         };
 
         // Preload two internships for deletion testing.
-        internships.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "Java", "Python"));
-        internships.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "SQL", "Scala"));
+        internships.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "Java", "Python", "A"));
+        internships.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "SQL", "Scala", "A"));
     }
 
     @Test

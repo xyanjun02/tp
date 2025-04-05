@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     public void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIntegerException {
         if (input.trim().equals("add")) {
             throw new EmptyInputException("Error: Please provide the details for the internship" +
-                    " (e.g. c/, r/, d/, a/, s/).");
+                    " (e.g. c/, r/, d/, a/, s/, st/).");
         }
 
         // Extract values for each field.
@@ -36,10 +36,12 @@ public class AddCommand extends Command {
         String durationStr = extractValue(input, "d/");
         String allowanceStr = extractValue(input, "a/");
         String skillsInput = extractValue(input, "s/");
+        String status = extractValue(input, "st/").toUpperCase();
 
         // Validate that none of the required fields are empty.
-        validateFields(company, role, durationStr, allowanceStr, skillsInput);
+        validateFields(company, role, durationStr, allowanceStr, skillsInput, status);
 
+        // Validate duration and allowance.
         int duration = Integer.parseInt(durationStr);
         if (duration <= 0) {
             throw new InvalidIntegerException("Error: Duration must be greater than 0.");
@@ -49,10 +51,15 @@ public class AddCommand extends Command {
             throw new InvalidIntegerException("Error: Allowance cannot be negative.");
         }
 
+        // Validate Status.
+        if (!isValidStatus(status)) {
+            throw new InvalidInputFormatException("Error: Status must be 'A', 'P', 'R' or '-'.");
+        }
+
         // Process skills: split by commas and trim each entry.
         String[] skills = processSkills(skillsInput);
 
-        Internship internship = new Internship(company, role, duration, allowance, skills);
+        Internship internship = new Internship(company, role, duration, allowance, status, skills);
 
         // Assertions to verify key assumptions.
         assert internship != null;
@@ -80,7 +87,7 @@ public class AddCommand extends Command {
 
         int endIndex = input.length();
         // Look for the earliest occurrence of any other known prefix.
-        for (String nextPrefix : new String[]{"c/", "r/", "d/", "a/", "s/"}) {
+        for (String nextPrefix : new String[]{"c/", "r/", "d/", "a/", "s/", "st/"}) {
             if (!nextPrefix.equals(prefix)) {
                 int nextPrefixIndex = input.indexOf(nextPrefix, startIndex);
                 if (nextPrefixIndex != -1 && nextPrefixIndex < endIndex) {
@@ -91,12 +98,27 @@ public class AddCommand extends Command {
         return input.substring(startIndex, endIndex).trim();
     }
 
+    /**
+     * Checks if any field is empty
+     * @param fields The fields entered.
+     * @throws InvalidInputFormatException If any field is empty.
+     */
     private void validateFields(String... fields) throws InvalidInputFormatException {
         for (String field : fields) {
             if (field.isEmpty()) {
-                throw new InvalidInputFormatException("Error: Missing parameters (e.g. c/, r/, d/, a/, s/).");
+                throw new InvalidInputFormatException("Error: Missing parameters (e.g. c/, r/, d/, a/, s/, st/).");
             }
         }
+    }
+
+    /**
+     * Checks if status provided is valid.
+     * @param status The status to be checked.
+     * @return true is status is valid, false otherwise.
+     */
+    private boolean isValidStatus(String status) {
+        return status.equalsIgnoreCase("A") || status.equalsIgnoreCase("P") ||
+                status.equalsIgnoreCase("R") || status.equalsIgnoreCase("-");
     }
 
     private String[] processSkills(String skillsInput) {

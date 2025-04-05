@@ -37,8 +37,8 @@ public class ListCommandTest {
 
     @Test
     void testListCommandWithInternships() {
-        internships.addInternship(new Internship("Google", "SWE", 6, 2000, "Java"));
-        internships.addInternship(new Internship("Amazon", "PM", 3, 1500, "Leadership"));
+        internships.addInternship(new Internship("Google", "SWE", 6, 2000, "P", "Java"));
+        internships.addInternship(new Internship("Amazon", "PM", 3, 1500, "-", "Leadership"));
 
         ListCommand listCommand = new ListCommand(internships);
         try {
@@ -56,7 +56,7 @@ public class ListCommandTest {
 
     @Test
     void testListCommandNoSideEffects() {
-        internships.addInternship(new Internship("Meta", "DS", 12, 3000, "Python"));
+        internships.addInternship(new Internship("Meta", "DS", 12, 3000, "-", "Python"));
 
         ListCommand listCommand = new ListCommand(internships);
         try {
