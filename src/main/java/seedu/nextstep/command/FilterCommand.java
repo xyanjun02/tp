@@ -4,6 +4,7 @@ import seedu.nextstep.core.Internship;
 import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.EmptyInputException;
 import seedu.nextstep.exception.InvalidInputFormatException;
+import seedu.nextstep.exception.InvalidIntegerException;
 import seedu.nextstep.ui.Ui;
 
 /**
@@ -24,9 +25,10 @@ public class FilterCommand extends Command {
      * @throws EmptyInputException         if no range is given by the user.
      * @throws InvalidInputFormatException if more than 2 values are provided.
      * @throws NumberFormatException       if the ranges provided are not integers.
+     * @throws InvalidIntegerException     if values provided are negative.
      */
     @Override
-    public void execute() throws EmptyInputException, InvalidInputFormatException {
+    public void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIntegerException {
         if (input.trim().equals("filter/a") || input.trim().equals("filter/d")) {
             throw new EmptyInputException("Error: Please provide the details for the filter (e.g., MIN_VAL, MAX_VAL).");
         }
@@ -35,11 +37,20 @@ public class FilterCommand extends Command {
         String filterType = words[0];
 
         int minVal = Integer.parseInt(words[1]);
+        if (minVal < 0) {
+            throw new InvalidIntegerException("Error: Minimum value cannot be negative.");
+        }
         int maxVal;
         if (words.length == 2) {
             maxVal = -1;
         } else if (words.length == 3) {
             maxVal = Integer.parseInt(words[2]);
+            if (maxVal < 0) {
+                throw new InvalidIntegerException("Error: Maximum value cannot be negative.");
+            }
+            if (maxVal < minVal) {
+                throw new InvalidInputFormatException("Error: Maximum value cannot be less than minimum value.");
+            }
         } else {
             throw new InvalidInputFormatException("Error: Please only provide 1 or 2 values.");
         }
