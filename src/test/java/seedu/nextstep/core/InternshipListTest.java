@@ -16,8 +16,8 @@ public class InternshipListTest {
     @BeforeEach
     void setUp() {
         internshipList = new InternshipList();
-        internshipList.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "Java", "Python"));
-        internshipList.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "SQL", "Scala"));
+        internshipList.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "-", "Java", "Python"));
+        internshipList.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "-", "SQL", "Scala"));
     }
 
     @Test

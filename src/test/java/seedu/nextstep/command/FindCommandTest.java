@@ -22,9 +22,9 @@ public class FindCommandTest {
     void setUp() {
         // Create a new internship list and preload sample data.
         internships = new InternshipList();
-        internships.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "Java", "Python"));
-        internships.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "SQL", "Scala"));
-        internships.addInternship(new Internship("Facebook", "Product Manager", 3, 1500, "Communication", "Management")
+        internships.addInternship(new Internship("Google", "Software Engineer", 6, 2000, "P", "Java", "Python"));
+        internships.addInternship(new Internship("Amazon", "Data Engineer", 12, 2500, "P", "SQL", "Scala"));
+        internships.addInternship(new Internship("Meta", "Product Manager", 3, 1500, "-", "Teamwork", "Management")
         );
 
         // Redirect System.out to capture output for verification.
@@ -111,7 +111,7 @@ public class FindCommandTest {
         String output = outContent.toString();
         // Verify that the output contains details for both roles.
         assertTrue(output.contains("Searching for internships with role: Product Manager, Software Engineer"));
-        assertTrue(output.contains("Facebook")); // Matches Product Manager
+        assertTrue(output.contains("Meta")); // Matches Product Manager
         assertTrue(output.contains("Google"));   // Matches Software Engineer
     }
 

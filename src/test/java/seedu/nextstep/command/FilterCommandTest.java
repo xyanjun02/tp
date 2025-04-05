@@ -24,11 +24,11 @@ class FilterCommandTest {
     @BeforeEach
     void setUp() {
         internships = new InternshipList();
-        internships.addInternship(new Internship("Google", "Software Engineer", 3, 5000, "Java", "Python"));
-        internships.addInternship(new Internship("Apple", "iOS Developer", 6, 4000, "Swift", "Objective-C"));
-        internships.addInternship(new Internship("Amazon", "Data Scientist", 4, 3000, "Python", "R"));
-        internships.addInternship(new Internship("Microsoft", "Product Manager", 3, 6000, "Excel", "PowerPoint"));
-        internships.addInternship(new Internship("Netflix", "UI/UX Designer", 2, 2500, "Figma", "Sketch"));
+        internships.addInternship(new Internship("Google", "Software Engineer", 3, 5000, "A", "Java", "Python"));
+        internships.addInternship(new Internship("Apple", "iOS Developer", 6, 4000, "P","Swift", "Objective-C"));
+        internships.addInternship(new Internship("Amazon", "Data Scientist", 4, 3000, "P", "Python", "R"));
+        internships.addInternship(new Internship("Microsoft", "Product Manager", 3, 6000, "-", "Excel", "PowerPoint"));
+        internships.addInternship(new Internship("Netflix", "UI/UX Designer", 2, 2500, "-", "Figma", "Sketch"));
 
         // Redirect System.out to capture output for testing
         System.setOut(new PrintStream(outContent));

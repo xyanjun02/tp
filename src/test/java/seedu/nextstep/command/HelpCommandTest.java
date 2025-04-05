@@ -30,7 +30,7 @@ public class HelpCommandTest {
         String output = outContent.toString();
         assertTrue(output.contains("Do help yourself to these commands! (0u0)"));
         assertTrue(output.contains("1. add [c/COMPANY] [r/ROLE]"));
-        assertTrue(output.contains("10. bye - Exit the application"));
+        assertTrue(output.contains("10. bye - Exits the application"));
     }
 
     @Test

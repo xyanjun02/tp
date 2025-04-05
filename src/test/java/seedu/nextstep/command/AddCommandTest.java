@@ -33,7 +33,7 @@ class AddCommandTest {
 
     @Test
     void testAddCommandValidInput() {
-        String input = "add c/Google r/Software Engineer d/6 a/2000 s/Java, React, C++";
+        String input = "add c/Google r/Software Engineer d/6 a/2000 s/Java, React, C++, st/A";
         AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
         try {
             addCommand.execute();
@@ -55,7 +55,7 @@ class AddCommandTest {
 
     @Test
     void testAddCommandMissingFields() {
-        String input = "add r/Computer Engineer d/12 a/1500 s/Verilog, C";
+        String input = "add r/Computer Engineer d/12 a/1500 s/Verilog, C, st/A";
         AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
         assertThrows(InvalidInputFormatException.class, addCommand::execute);
         assertEquals(0, internships.size());
@@ -63,7 +63,7 @@ class AddCommandTest {
 
     @Test
     void testAddCommandEmptyFields() {
-        String input = "add c/Apple r/ d/6 a/5000 s/C, Python";
+        String input = "add c/Apple r/ d/6 a/5000 s/C, Python, st/-";
         AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
         assertThrows(InvalidInputFormatException.class, addCommand::execute);
         assertEquals(0, internships.size());
@@ -79,7 +79,7 @@ class AddCommandTest {
 
     @Test
     void testAddCommandNonIntegerInput() {
-        String input = "add c/Microsoft r/Data Analyst d/Six a/2000 s/SQL, Python";
+        String input = "add c/Microsoft r/Data Analyst d/Six a/2000 s/SQL, Python, st/A";
         AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
         assertThrows(NumberFormatException.class, addCommand::execute);
         assertEquals(0, internships.size());
@@ -87,9 +87,17 @@ class AddCommandTest {
 
     @Test
     void testAddCommandNegativeAllowance() {
-        String input = "add c/Amazon r/Project Manager d/12 a/-3000 s/Excel";
+        String input = "add c/Amazon r/Project Manager d/12 a/-3000 s/Excel, st/-";
         AddCommand addComand = new AddCommand(input, internships, dummyStorage);
         assertThrows(InvalidIntegerException.class, addComand::execute);
+        assertEquals(0, internships.size());
+    }
+
+    @Test
+    void testAddCommandInvalidStatus() {
+        String input = "add c/Amazon r/Project Manager d/12 a/3000 s/Excel, st/Accepted";
+        AddCommand addComand = new AddCommand(input, internships, dummyStorage);
+        assertThrows(InvalidInputFormatException.class, addComand::execute);
         assertEquals(0, internships.size());
     }
 }

@@ -1,4 +1,4 @@
-add c/Google r/Software Engineer d/6 a/5000 s/Java,Python
+add c/Google r/Software Engineer d/6 a/5000 s/Java,Python st/P
 list
 find/s Java
 find/r Software Engineer
