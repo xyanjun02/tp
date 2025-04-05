@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
      * @throws NumberFormatException If index given is not an integer.
      */
     private int parseIndex(String input) throws EmptyInputException, InvalidIndexException, InvalidInputFormatException{
-        String[] tokens = input.trim().split("\\s+ ");
+        String[] tokens = input.trim().split("\\s+");
         if (tokens.length < 2) {
             throw new EmptyInputException("Error: Missing index. Use: delete <index>.");
         }
