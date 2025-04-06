@@ -64,17 +64,17 @@ public class Parser {
 
     private Command createCommand(String commandWord, String input) throws SimilarCommandException {
         return switch (commandWord) {
-            case "add" -> new AddCommand(input, internships, storage);
-            case "delete" -> new DeleteCommand(input, internships, storage);
-            case "edit" -> new EditCommand(input, internships, storage);
-            case "list" -> new ListCommand(internships);
-            case "help" -> new HelpCommand();
-            case "find/s" -> new FindSkillCommand(input, internships);
-            case "find/r" -> new FindRoleCommand(input, internships);
-            case "find/c" -> new FindCompanyCommand(input, internships);
-            case "filter/a", "filter/d" -> new FilterCommand(input, internships);
-            case "filter", "find" -> throw new SimilarCommandException();
-            default -> throw new IllegalArgumentException();
+        case "add" -> new AddCommand(input, internships, storage);
+        case "delete" -> new DeleteCommand(input, internships, storage);
+        case "edit" -> new EditCommand(input, internships, storage);
+        case "list" -> new ListCommand(internships);
+        case "help" -> new HelpCommand();
+        case "find/s" -> new FindSkillCommand(input, internships);
+        case "find/r" -> new FindRoleCommand(input, internships);
+        case "find/c" -> new FindCompanyCommand(input, internships);
+        case "filter/a", "filter/d" -> new FilterCommand(input, internships);
+        case "filter", "find" -> throw new SimilarCommandException();
+        default -> throw new IllegalArgumentException();
         };
     }
 

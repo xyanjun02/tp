@@ -69,82 +69,117 @@ public class EditCommand extends Command {
         return internships.getInternship(index);
     }
 
-    private void processFieldEdits(Internship internship, String[] fieldsToEdit)
-            throws EmptyInputException, InvalidInputFormatException, InvalidIntegerException {
+    private void processFieldEdits(Internship internship, String[] fieldsToEdit) throws EmptyInputException {
+        boolean isAnyFieldUpdated = false;
+        StringBuilder warningMessages = new StringBuilder();
+
         for (String field : fieldsToEdit) {
-            switch (field.toLowerCase()) {
-            case "company":
-                System.out.print("Updated Company: ");
-                String newCompany = scanner.nextLine().trim();
-                if (newCompany.isEmpty()) {
-                    throw new EmptyInputException("Error: Company cannot be empty.");
-                }
-                internship.setCompany(newCompany);
-                break;
-            case "role":
-                System.out.print("Updated Role: ");
-                String newRole = scanner.nextLine().trim();
-                if (newRole.isEmpty()) {
-                    throw new EmptyInputException("Error: Role cannot be empty.");
-                }
-                internship.setRole(newRole);
-                break;
-            case "duration":
-                System.out.print("Updated Duration (months): ");
-                String durationInput = scanner.nextLine().trim();
-                if (durationInput.isEmpty()) {
-                    throw new EmptyInputException("Error: Duration cannot be empty.");
-                }
+            boolean valid = false;
+
+            while (!valid) {
                 try {
-                    int durationInteger = Integer.parseInt(durationInput);
-                    if (durationInteger <= 0) {
-                        throw new InvalidIntegerException("Error: Duration must be greater than 0.");
+                    switch (field.toLowerCase()) {
+                    case "company":
+                        System.out.print("Updated Company: ");
+                        String newCompany = scanner.nextLine().trim();
+                        if (newCompany.isEmpty()) {
+                            throw new EmptyInputException("Company cannot be empty.");
+                        }
+                        internship.setCompany(newCompany);
+                        valid = true;
+                        isAnyFieldUpdated = true;
+                        break;
+
+                    case "role":
+                        System.out.print("Updated Role: ");
+                        String newRole = scanner.nextLine().trim();
+                        if (newRole.isEmpty()) {
+                            throw new EmptyInputException("Role cannot be empty.");
+                        }
+                        internship.setRole(newRole);
+                        valid = true;
+                        isAnyFieldUpdated = true;
+                        break;
+
+                    case "duration":
+                        System.out.print("Updated Duration (months): ");
+                        String durationInput = scanner.nextLine().trim();
+                        if (durationInput.isEmpty()) {
+                            throw new EmptyInputException("Duration cannot be empty.");
+                        }
+                        int durationInteger = Integer.parseInt(durationInput);
+                        if (durationInteger <= 0) {
+                            throw new InvalidIntegerException("Duration must be greater than 0.");
+                        }
+                        internship.setDuration(durationInteger);
+                        valid = true;
+                        isAnyFieldUpdated = true;
+                        break;
+
+                    case "allowance":
+                        System.out.print("Updated Allowance ($): ");
+                        String allowanceInput = scanner.nextLine().trim();
+                        if (allowanceInput.isEmpty()) {
+                            throw new EmptyInputException("Allowance cannot be empty.");
+                        }
+                        int allowanceInteger = Integer.parseInt(allowanceInput);
+                        if (allowanceInteger < 0) {
+                            throw new InvalidIntegerException("Allowance cannot be negative.");
+                        }
+                        internship.setAllowance(allowanceInteger);
+                        valid = true;
+                        isAnyFieldUpdated = true;
+                        break;
+
+                    case "skills":
+                        System.out.print("Updated Skills (comma-separated): ");
+                        String skillsInput = scanner.nextLine().trim();
+                        if (skillsInput.isEmpty()) {
+                            throw new EmptyInputException("Skills cannot be empty.");
+                        }
+                        internship.setSkills(skillsInput.split(",\\s*"));
+                        valid = true;
+                        isAnyFieldUpdated = true;
+                        break;
+
+                    case "status":
+                        System.out.print("Updated Status: ");
+                        String newStatus = scanner.nextLine().trim().toUpperCase();
+                        if (newStatus.isEmpty()) {
+                            throw new EmptyInputException("Status cannot be empty.");
+                        }
+                        if (!checkIsValidStatus(newStatus)) {
+                            throw new InvalidInputFormatException("Status must be 'A', 'P', 'R' or '-'");
+                        }
+                        internship.setStatus(newStatus);
+                        valid = true;
+                        isAnyFieldUpdated = true;
+                        break;
+
+                    default:
+                        warningMessages.append("Warning: '").append(field).append("' is not a valid field.\n");
+                        valid = true; // Skip invalid field without retry
+                        break;
                     }
-                    internship.setDuration(durationInteger);
-                } catch (NumberFormatException e) {
-                    throw new InvalidInputFormatException("Error: Duration must be a number.");
+                } catch (Exception e) {
+                    Ui.printLinebreak();
+                    Ui.printMessage("Invalid input for field '" + field + "'. " + e.getMessage() +
+                            " Please try again.");
+                    Ui.printLinebreak();
                 }
-                break;
-            case "allowance":
-                System.out.print("Updated Allowance ($): ");
-                String allowanceInput = scanner.nextLine().trim();
-                if (allowanceInput.isEmpty()) {
-                    throw new EmptyInputException("Error: Allowance cannot be empty.");
-                }
-                try {
-                    int allowanceInteger = Integer.parseInt(allowanceInput);
-                    if (allowanceInteger < 0) {
-                        throw new InvalidIntegerException("Error: Allowance cannot be negative.");
-                    }
-                    internship.setAllowance(allowanceInteger);
-                } catch (NumberFormatException e) {
-                    throw new InvalidInputFormatException("Error: Allowance must be a number.");
-                }
-                break;
-            case "skills":
-                System.out.print("Updated Skills (comma-separated): ");
-                String skillsInput = scanner.nextLine().trim();
-                if (skillsInput.isEmpty()) {
-                    throw new EmptyInputException("Error: Skills cannot be empty.");
-                }
-                internship.setSkills(skillsInput.split(",\\s*"));
-                break;
-            case "status":
-                System.out.print("Updated Status: ");
-                String newStatus = scanner.nextLine().trim().toUpperCase();
-                if (newStatus.isEmpty()) {
-                    throw new EmptyInputException("Error: Status cannot be empty.");
-                }
-                if (!checkIsValidStatus(newStatus)) {
-                    throw new InvalidInputFormatException("Error: Status must be 'A', 'P', 'R' or '-'.");
-                }
-                internship.setStatus(newStatus);
-                break;
-            default:
-                throw new InvalidInputFormatException("Error: " + field + " is an invalid field.");
             }
         }
+
+        if (!isAnyFieldUpdated) {
+            throw new EmptyInputException("Error: Invalid fields.");
+        }
+
+        if (!warningMessages.isEmpty()) {
+            Ui.printLinebreak();
+            Ui.printMessage(warningMessages.toString());
+        }
     }
+
 
     /**
      * Checks if status provided is valid.
