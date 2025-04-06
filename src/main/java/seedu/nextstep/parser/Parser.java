@@ -42,9 +42,12 @@ public class Parser {
             return;
         }
         //@@author
-        String[] words = input.split(" ");
+        String[] words = input.split("\\s+",2 );
+        String commandWord = words[0].toLowerCase();
+        String remaining = words.length > 1 ? words[1] : "";
+        String normalizedInput = commandWord + " " + (remaining.isEmpty() ? "" :" " + remaining);
         try {
-            Command command = createCommand(words[0], input);
+            Command command = createCommand(commandWord, normalizedInput);
             command.execute();
         } catch (EmptyInputException | InvalidInputFormatException |
                  InvalidIndexException | InvalidIntegerException e) {

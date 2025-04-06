@@ -33,7 +33,7 @@ public class FilterCommand extends Command {
             throw new EmptyInputException("Error: Please provide the details for the filter (e.g., MIN_VAL, MAX_VAL).");
         }
 
-        String[] words = input.split(" ");
+        String[] words = input.trim().split("\\s+");
         String filterType = words[0];
 
         int minVal = Integer.parseInt(words[1]);
