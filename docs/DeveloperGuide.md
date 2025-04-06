@@ -63,7 +63,7 @@ The **Core** component contains the core data model, which consists of **Interns
 
 ### Responsibilities:
 - **InternshipList**: Stores all internship data.
-- **Internship**: Represents individual internship details, such as job role, company, and description.
+- **Internship**: Represents individual internship details, such as job role, company, allowance, duration, skills, and status.
 
 ## 3. UI (User Interface)
 
@@ -177,47 +177,37 @@ Additionally, `DeleteCommand` implements various exception handling to deal with
 #### Value Proposition
 NextStep streamlines internship management for students by:
 1. Centralizing all opportunities in one searchable platform
-2. Automating tracking of application deadlines and statuses
-3. Providing smart matching based on skills and preferences
-4. Eliminating manual spreadsheet maintenance
+2. Eliminating manual spreadsheet maintenance
+3. Allowing for easy addition, deletion, filtering of internships.
 
 ### User Stories
 
-| Priority | As a... | I want to... | So that I can... |
-|----------|---------|--------------|------------------|
-| Critical | First-time user | See help instructions | Learn how to use the application |
-| Critical | User | Add internship details | Track opportunities I'm interested in |
-| Critical | User | Delete internship entries | Remove irrelevant opportunities |
-| Critical | Student | View internships in table format | Quickly assess all options |
-| Critical | Student | Find internships matching my skills | Identify relevant positions |
-| Critical | Student | Update application statuses | Track my progress |
-| Critical | User | Save internship data | Retain information between sessions |
-| High | Student | Edit internship details | Correct mistakes efficiently |
-| High | Student | Filter by salary/stipend | Find financially viable options |
-| High | Student | Filter by duration | Match my academic schedule |
-| High | Student | Search by company name | Target preferred employers |
-| High | Student | Search by role | Find position-specific opportunities |
-| Medium | Student | Check deadlines | Avoid missing applications |
-| Medium | Student | Filter by location | Find nearby opportunities |
-| Medium | Student | Set deadline reminders | Stay organized |
-| Medium | Student | View by industry | Find field-specific roles |
-| Low | Prospective intern | Add notes/to-do items | Prepare effectively |
-| Low | Prospective intern | Attach documents | Quick access during applications |
-| Low | Prospective intern | Save contact details | Enable follow-ups |
-| Low | Student | Share my list | Collaborate with peers |
+| Version | Priority | As a... | I want to...                        | So that I can...                         | 
+|---------|----------|---------|-------------------------------------|------------------------------------------|
+| v1.0    | Critical      | First-time user | See help instructions               | Learn how to use the application         |
+| v1.0    | Critical | User | Add internship details              | Track opportunities I'm interested in    |
+| v1.0    | Critical | User | Delete internship entries           | Remove irrelevant opportunities          |
+| v2.0    | Critical | Student | View internships in table format    | Quickly assess all options               |
+| v1.0    | Critical | Student | Find internships matching my skills | Identify relevant positions              |
+| v2.0    | Critical | Student | Update application statuses         | Track my progress                        |
+| v2.0    | Critical | User | Save internship data                | Retain information between sessions      |
+| v2.0    | High    | Student | Edit internship details             | Correct mistakes efficiently             |
+| v2.0    | High    | Student | Filter by salary/stipend            | Find financially viable options          |
+| v2.0    | High    | Student | Filter by duration                  | Match my academic schedule               |
+| v2.0    | High    | Student | Search by company name              | Target preferred employers               |
+| v2.0    | High    | Student | Search by role                      | Find position-specific opportunities     |
+| v2.0    | Medium  | Student | Search by skills                    | Find internships with relevant skillsets |
 
 ### Use Cases
-(For each major feature, describe the interaction flow)
+
 
 **Use Case: Add New Internship**
-1. User enters `add` command
-2. System prompts for required fields (Company, Role, etc.) missing.
-3. User provides information using the correct format step-by-step.
-4. System validates and confirms successful addition
+1. User enters `add` command along with required fiels.
+2. System validates and confirms successful addition, displaying success message.
 5. Updated list displays automatically upon entering `list` command
 
 **Use Case: Skill-Based Search**
-1. User enters `find/s JAVA`
+1. User enters `find/s Java`
 2. System scans all entries for matching skills
 3. Returns formatted table of matching internships
 
@@ -240,7 +230,7 @@ Before testing, ensure you have:
 1. **Initial Launch**
    - Download the NextStep.jar file and copy it into an empty folder
    - Start the application by running `java -jar NextStep.jar`
-   - Expected: Shows welcome message with basic help info
+   - Expected: Shows welcome message
    - Verify: `data/nextstep.txt` is created automatically
 
 2. **Help Command**
@@ -251,7 +241,7 @@ Before testing, ensure you have:
 ### Core Functionality Tests
 #### Adding Internships
 1. **Normal Add**
-   - Test case: `add c/Google r/SWE d/6 a/3000 s/Java,Python`
+   - Test case: `add c/Google r/SWE d/6 a/3000 s/Java,Python st/A`
    - Expected: Success message with added entry details
    - Verify: Entry appears in next `list` output
 
@@ -292,7 +282,7 @@ Before testing, ensure you have:
 #### Filtering Entries
 1. **Filtering Allowance**
    - Test case: `filter/a 1000 5000`
-   - Expected: Displays internships with allowances between $1000 and $5000.
+   - Expected: Displays internships with allowances between \$1000 and $5000.
 2. **Filtering Duration**
    - Test case: `filter/d 4`
    - Expected: Displays internships with duration equal to or above 4 months.

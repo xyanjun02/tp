@@ -52,8 +52,6 @@
 > **💡 Notes about the command format:**
 > - Words in **UPPER_CASE** represent parameters to be filled in by the user.
     >   - Example: `add c/COMPANY` → Replace `COMPANY` with actual data (`add c/Google`).
-> - Parameters **must be in the correct order**.
-    >   - Example: `c/COMPANY r/ROLE` ✅ **Correct**  | `r/ROLE c/COMPANY` ❌ **Incorrect**
 > - Commands that **do not take parameters** will ignore extra inputs.
     >   - Example: `help 123` is interpreted as `help`.
 
@@ -66,26 +64,28 @@ help
 ```
 
 ### Adding an Internship: `add`
-Adds a new internship with details, all fields are required.
+Adds a new internship with 6 required fields. Details of the fields are shown in a table below.
 
 **Format**:
 ```
-add c/COMPANY r/ROLE d/DURATION a/ALLOWANCE s/SKILLS
+add c/COMPANY r/ROLE d/DURATION a/ALLOWANCE s/SKILLS st/STATUS
 ```
 
 **Examples**:
 ```
-add c/Google r/Software Engineer d/6 a/5000 s/Java, Python
-add c/Microsoft r/Data Analyst d/12 a/1800 s/Python, SQL
+add c/Google r/Software Engineer d/6 a/5000 s/Java, Python st/P
+add c/Microsoft r/Data Analyst d/12 a/1800 s/Python, SQL st/-
 ```
 
-| Symbol | Parameter | Description                       |
-|--------|-----------|-----------------------------------|
-| `c/`   | COMPANY   | Internship company                |
-| `r/`   | ROLE      | Internship role                   |
-| `d/`   | DURATION  | Duration in months (integer)      |
-| `a/`   | ALLOWANCE | Monthly allowance (integer)       |
-| `s/`   | SKILLS    | Required skills (comma-separated) |
+| Symbol | Parameter | Description                              |
+|--------|-----------|------------------------------------------|
+| `c/`   | COMPANY   | Internship company                       |
+| `r/`   | ROLE      | Internship role                          |
+| `d/`   | DURATION  | Duration in months (Positive integer)    |
+| `a/`   | ALLOWANCE | Monthly allowance (Non-negative integer) |
+| `s/`   | SKILLS    | Required skills (comma-separated)        |
+| `st/`  | STATUS    | Internship status ('A': accepted, 'P': pending, 'R': rejected, '-': NA |
+
 
 ### Listing Internships: `list`
 Displays all saved internships with their current application status.
@@ -112,7 +112,6 @@ delete 2
 |--------|-----------|----------------------------|
 | `-`    | INDEX     | Internship index in `list` |
 
-//@@author xyanjun02
 ### Finding Internships
 #### By Skill: `find/s`
 Searches for internships that require a specific skill.
@@ -169,7 +168,6 @@ If no ```MAX``` is provided, finds internships above ```MIN```.
 filter/a 2000 5000  // Finds internships paying $2000 - $5000
 filter/a 3000       // Finds internships paying $3000 and above
 ```
-//@@author
 
 #### By Duration: `filter/d`
 Finds internships between a given duration range.
