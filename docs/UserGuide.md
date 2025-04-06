@@ -77,13 +77,13 @@ add c/Google r/Software Engineer d/6 a/5000 s/Java, Python st/P
 add c/Microsoft r/Data Analyst d/12 a/1800 s/Python, SQL st/-
 ```
 
-| Symbol | Parameter | Description                              |
-|--------|-----------|------------------------------------------|
-| `c/`   | COMPANY   | Internship company                       |
-| `r/`   | ROLE      | Internship role                          |
-| `d/`   | DURATION  | Duration in months (Positive integer)    |
-| `a/`   | ALLOWANCE | Monthly allowance (Non-negative integer) |
-| `s/`   | SKILLS    | Required skills (comma-separated)        |
+| Symbol | Parameter | Description                                                            |
+|--------|-----------|------------------------------------------------------------------------|
+| `c/`   | COMPANY   | Internship company                                                     |
+| `r/`   | ROLE      | Internship role                                                        |
+| `d/`   | DURATION  | Duration in months (Positive integer)                                  |
+| `a/`   | ALLOWANCE | Monthly allowance (Non-negative integer)                               |
+| `s/`   | SKILLS    | Required skills (comma-separated)                                      |
 | `st/`  | STATUS    | Internship status ('A': accepted, 'P': pending, 'R': rejected, '-': NA |
 
 
