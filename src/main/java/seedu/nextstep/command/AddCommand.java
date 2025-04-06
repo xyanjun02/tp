@@ -62,7 +62,6 @@ public class AddCommand extends Command {
         Internship internship = new Internship(company, role, duration, allowance, status, skills);
 
         // Assertions to verify key assumptions.
-        assert internship != null;
         assert !internship.getSkills().isEmpty() : "There should be at least one skill";
 
         internships.addInternship(internship);
@@ -73,19 +72,28 @@ public class AddCommand extends Command {
     /**
      * Extracts the value associated with the specified prefix from the input.
      * If the prefix is not found, returns an empty string.
+     * Warns if the same prefix appears multiple times.
      *
      * @param input  the full user input
      * @param prefix the prefix to look for (e.g., "c/", "r/")
      * @return the extracted value as a String
      */
     private String extractValue(String input, String prefix) {
-        int startIndex = input.indexOf(prefix);
-        if (startIndex == -1) {
+        // Check for multiple occurrences of the same prefix
+        int firstOccurrence = input.indexOf(prefix);
+        if (firstOccurrence == -1) {
             return "";
         }
-        startIndex += prefix.length();
 
+        int secondOccurrence = input.indexOf(prefix, firstOccurrence + prefix.length());
+        if (secondOccurrence != -1) {
+            Ui.printMessage("Warning: The parameter '" + prefix + "' appears multiple times. " +
+                    "Only the first occurrence will be used.");
+        }
+
+        int startIndex = firstOccurrence + prefix.length();
         int endIndex = input.length();
+
         // Look for the earliest occurrence of any other known prefix.
         for (String nextPrefix : new String[]{"c/", "r/", "d/", "a/", "s/", "st/"}) {
             if (!nextPrefix.equals(prefix)) {
