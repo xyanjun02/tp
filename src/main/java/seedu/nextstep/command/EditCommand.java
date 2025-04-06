@@ -58,7 +58,7 @@ public class EditCommand extends Command {
     }
 
     private Internship getInternshipToEdit() throws InvalidIndexException, InvalidInputFormatException {
-        String[] parts = input.split(" ");
+        String[] parts = input.trim().split("\\s+");
         if (parts.length < 2) {
             throw new InvalidInputFormatException("Error: Invalid format. Usage: edit <index>.");
         }

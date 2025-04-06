@@ -45,7 +45,7 @@ public class Parser {
         String[] words = input.split("\\s+",2 );
         String commandWord = words[0].toLowerCase();
         String remaining = words.length > 1 ? words[1] : "";
-        String normalizedInput = commandWord + " " + (remaining.isEmpty() ? "" :" " + remaining);
+        String normalizedInput = commandWord + (remaining.isEmpty() ? "" :" " + remaining);
         try {
             Command command = createCommand(commandWord, normalizedInput);
             command.execute();
@@ -63,32 +63,19 @@ public class Parser {
     }
 
     private Command createCommand(String commandWord, String input) throws SimilarCommandException {
-        switch (commandWord) {
-        case "add":
-            return new AddCommand(input, internships, storage);
-        case "delete":
-            return new DeleteCommand(input, internships, storage);
-        case "edit":
-            return new EditCommand(input, internships, storage);
-        case "list":
-            return new ListCommand(internships);
-        case "help":
-            return new HelpCommand();
-        case "find/s":
-            return new FindSkillCommand(input, internships);
-        case "find/r":
-            return new FindRoleCommand(input, internships);
-        case "find/c":
-            return new FindCompanyCommand(input, internships);
-        case "filter/a":
-        case "filter/d":
-            return new FilterCommand(input, internships);
-        case "filter":
-        case "find":
-            throw new SimilarCommandException();
-        default:
-            throw new IllegalArgumentException();
-        }
+        return switch (commandWord) {
+            case "add" -> new AddCommand(input, internships, storage);
+            case "delete" -> new DeleteCommand(input, internships, storage);
+            case "edit" -> new EditCommand(input, internships, storage);
+            case "list" -> new ListCommand(internships);
+            case "help" -> new HelpCommand();
+            case "find/s" -> new FindSkillCommand(input, internships);
+            case "find/r" -> new FindRoleCommand(input, internships);
+            case "find/c" -> new FindCompanyCommand(input, internships);
+            case "filter/a", "filter/d" -> new FilterCommand(input, internships);
+            case "filter", "find" -> throw new SimilarCommandException();
+            default -> throw new IllegalArgumentException();
+        };
     }
 
     private void handleNumberFormatException(String commandWord) {

@@ -222,7 +222,7 @@ bye
 ## 💾 Data Management
 - **Auto-save:** All changes are saved after each command.
 - **File Location:** Saved in `[JAR folder]/data/nextstep.txt`.
-- **⚠️ Warning:** Manual editing of `nextstep.txt` is **not allowed**.
+- **⚠️ Warning:** Manual editing of `nextstep.txt` is **not allowed**. Format of the text file is also non-readable.
 
 ---
 

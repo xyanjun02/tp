@@ -270,6 +270,7 @@ Before testing, ensure you have Java 17 downloaded on your system.
 1. **Guided Edit**
    - Test case: `edit 1`
    - Expected: Prompts the user to edit a particular field in the first internship.
+   ![img.png](images/editEntries.png)
    - Verify: Fields are prompted based on what is required to be edited.
 
 #### Deleting Entries
