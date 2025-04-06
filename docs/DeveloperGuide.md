@@ -2,7 +2,7 @@
 - [Acknowledgements](#acknowledgements)
 - [Setting up, Getting started](#Setting-up-getting-started)
 - [Design](#design)
-  - [Architecture](#architecture)
+  - [Architecture](#nextsteparchitecture)
   - [UI Component](#ui-component)
 - [Implementation](#implementation)
   - [Adding Internship](#adding-internship)
@@ -22,6 +22,14 @@
 - **JUnit:** Used for unit testing the NextStep application.
 - **Gradle:** Utilized as the build tool to compile and manage dependencies.
 - **PlantUML:** Employed to create UML diagrams for visualizing the design and architecture.
+
+---
+## Setting up, Getting started
+Before you begin, ensure you have Java 17, Intellij IDEA(Preferred), and Gradle 7+ downloaded. 
+1. Fork this repository and clone the fork into your local machine.
+2. **Open in intellij**: Launch & navigate to the `nextstep` directory. 
+3. **Build the project:** Using the gradle tool, compile the code and run unit tests.
+4. **Running the application:** Locate the main file in `src/main/java/seedu.nextstep/NextStep.java` and run.
 
 ---
 ## Design
