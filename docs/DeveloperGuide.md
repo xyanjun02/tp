@@ -55,7 +55,7 @@ The **Core** component contains the core data model, which consists of **Interns
 
 ### Responsibilities:
 - **InternshipList**: Stores all internship data.
-- **Internship**: Represents individual internship details, such as job role, company, and description.
+- **Internship**: Represents individual internship details, such as job role, company, allowance, duration, skills, and status.
 
 ## 3. UI (User Interface)
 
