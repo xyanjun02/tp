@@ -46,9 +46,11 @@ public class FindRoleCommand extends Command {
 
         for (Internship internship : internships.getAllInternships()) {
             String normalizedInternshipRole = internship.getRole().replaceAll("\\s+"," ").trim();
+            String roleWithoutSpaces = normalizedInternshipRole.replaceAll("\\s+","");
             for (String searchRole : searchRoles) {
                 String normalizedSearchRole = searchRole.replaceAll("\\s+", " ").trim();
-                if (normalizedInternshipRole.equalsIgnoreCase(normalizedSearchRole)) {
+                String searchRoleWithoutSpaces = normalizedSearchRole.replaceAll("\\s+", "");
+                if (roleWithoutSpaces.toLowerCase().contains(searchRoleWithoutSpaces.toLowerCase())) {
                     Ui.printInternship(internship);
                     Ui.printLinebreak();
                     found = true;
