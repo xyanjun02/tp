@@ -39,8 +39,14 @@ public class FindCompanyCommand extends Command {
         Ui.printSearchingForCompany(companyQuery);
         boolean found = false;
 
+        String normalizedSearchCompany = companyQuery.replaceAll("\\s+", "").toLowerCase();
+
+
+
         for (Internship internship : internships.getAllInternships()) {
-            if (internship.getCompany().equalsIgnoreCase(companyQuery)) {
+            String normalizedCompany = internship.getCompany().replaceAll("\\s+", " ").trim();
+            String companyWithoutSpaces = normalizedCompany.replaceAll("\\s+", "");
+            if (companyWithoutSpaces.toLowerCase().contains(normalizedSearchCompany)) {
                 Ui.printInternship(internship);
                 Ui.printLinebreak();
                 found = true;
