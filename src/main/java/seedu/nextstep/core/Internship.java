@@ -162,8 +162,12 @@ public class Internship implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         Internship that = (Internship) obj;
         return duration == that.duration &&
                 allowance == that.allowance &&

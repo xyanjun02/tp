@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
+import java.io.InvalidClassException;
 
 public class Storage {
     private static final String FILE_PATH = "./data/nextstep.txt";
@@ -45,9 +46,25 @@ public class Storage {
         try (ObjectInputStream ois = new ObjectInputStream(
                 new FileInputStream(FILE_PATH))) {
             return (InternshipList) ois.readObject();
-        } catch (ClassNotFoundException | IOException e) {
-            System.err.println("Error loading data: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error: Data format is incompatible. Starting with fresh data.");
             return new InternshipList();
+        } catch (InvalidClassException e) {
+            System.err.println("Warning: Data format has changed. Starting with fresh data.");
+            backupCorruptedFile();
+            return new InternshipList();
+        } catch (IOException e) {
+            System.err.println("Error loading data: " + e.getMessage() + "." + "Starting with fresh data.");
+            backupCorruptedFile();
+            return new InternshipList();
+        }
+    }
+
+    private void backupCorruptedFile() {
+        File original = new File(FILE_PATH);
+        File backup = new File(FILE_PATH + ".corrupted");
+        if (original.exists()) {
+            original.renameTo(backup);
         }
     }
 }

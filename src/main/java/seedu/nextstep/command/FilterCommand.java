@@ -55,7 +55,8 @@ public class FilterCommand extends Command {
         }
     }
 
-    private static int getMaxVal(String[] words, int minVal) throws InvalidIntegerException, InvalidInputFormatException {
+    private static int getMaxVal(String[] words, int minVal) throws InvalidIntegerException,
+            InvalidInputFormatException {
         int maxVal;
         if (words.length == 2) {
             maxVal = -1;
