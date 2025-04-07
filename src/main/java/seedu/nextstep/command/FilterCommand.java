@@ -40,6 +40,22 @@ public class FilterCommand extends Command {
         if (minVal < 0) {
             throw new InvalidIntegerException("Error: Minimum value cannot be negative.");
         }
+        int maxVal = getMaxVal(words, minVal);
+
+        boolean found = false;
+        for (Internship internship : internships.getAllInternships()) {
+            if (checkIsWithinRange(internship, filterType, minVal, maxVal)) {
+                Ui.printInternship(internship);
+                Ui.printLinebreak();
+                found = true;
+            }
+        }
+        if (!found) {
+            Ui.printNoFilteredInternshipFound();
+        }
+    }
+
+    private static int getMaxVal(String[] words, int minVal) throws InvalidIntegerException, InvalidInputFormatException {
         int maxVal;
         if (words.length == 2) {
             maxVal = -1;
@@ -54,21 +70,10 @@ public class FilterCommand extends Command {
         } else {
             throw new InvalidInputFormatException("Error: Please only provide 1 or 2 values.");
         }
-
-        boolean found = false;
-        for (Internship internship : internships.getAllInternships()) {
-            if (isWithinRange(internship, filterType, minVal, maxVal)) {
-                Ui.printInternship(internship);
-                Ui.printLinebreak();
-                found = true;
-            }
-        }
-        if (!found) {
-            Ui.printNoFilteredInternshipFound();
-        }
+        return maxVal;
     }
 
-    private boolean isWithinRange(Internship internship, String filterType, int minValue, int maxValue) {
+    private boolean checkIsWithinRange(Internship internship, String filterType, int minValue, int maxValue) {
         if (filterType.equals("filter/a")) {
             int allowance = internship.getAllowance();
             if (maxValue < 0) {
