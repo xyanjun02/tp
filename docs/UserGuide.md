@@ -31,14 +31,14 @@
 
 1. **Ensure you have Java 17 or above** installed on your computer.
 2. **Download** the latest `nextstep.jar` from our [releases page](https://github.com/AY2425S2-CS2113-F12-2/tp/releases).
-3. **Copy** the file to your preferred folder.
+3. **Copy** the file to an empty folder.
 4. **Run** the application using:
    ```
    java -jar nextstep.jar
    ```
 5. **Type commands** to manage your internships (see examples below):
    ```
-   add c/Google r/Software Engineer d/6 a/3000 s/Java,Python
+   add c/Google r/Software Engineer d/6 a/3000 s/Java,Python st/A
    list
    find/s Python
    bye
@@ -64,7 +64,9 @@ help
 ```
 
 ### Adding an Internship: `add`
-Adds a new internship with 6 required fields. Details of the fields are shown in a table below.
+Adds a new internship with 6 fields. Details of the fields are shown in a table below.
+
+*Note: All fields are required*
 
 **Format**:
 ```
@@ -77,14 +79,14 @@ add c/Google r/Software Engineer d/6 a/5000 s/Java, Python st/P
 add c/Microsoft r/Data Analyst d/12 a/1800 s/Python, SQL st/-
 ```
 
-| Symbol | Parameter | Description                                                            |
-|--------|-----------|------------------------------------------------------------------------|
-| `c/`   | COMPANY   | Internship company (Must not exceed 70 characters)                     |
-| `r/`   | ROLE      | Internship role (Must not exceed 50 characters)                        |
-| `d/`   | DURATION  | Duration in months (Positive integer, maximum of 24 months)            |
-| `a/`   | ALLOWANCE | Monthly allowance (Non-negative integer, must not exceed $99999)       |
-| `s/`   | SKILLS    | Required skills (comma-separated, maximum of 6 skills)                 |
-| `st/`  | STATUS    | Internship status ('A': accepted, 'P': pending, 'R': rejected, '-': NA |
+| Symbol | Parameter | Description                                                             |
+|--------|-----------|-------------------------------------------------------------------------|
+| `c/`   | COMPANY   | Internship company (Must not exceed 70 characters)                      |
+| `r/`   | ROLE      | Internship role (Must not exceed 50 characters)                         |
+| `d/`   | DURATION  | Duration in months (Positive integer, maximum of 24 months)             |
+| `a/`   | ALLOWANCE | Monthly allowance (Non-negative integer, must not exceed $99999)        |
+| `s/`   | SKILLS    | Required skills (comma-separated, maximum of 6 skills)                  |
+| `st/`  | STATUS    | Internship status ('A': accepted, 'P': pending, 'R': rejected, '-': NA) |
 
 
 ### Listing Internships: `list`
@@ -114,21 +116,23 @@ delete 2
 
 ### Finding Internships
 #### By Skill: `find/s`
-Searches for internships that require a specific skill.
+Searches for internships that require a specific skill, able to take multiple skiils (comma-separated).
+
+*Note: Searches for the exact term inputted by the user (eg. Searching "Java" will not output internships with "JavaScript")*
 
 **Format**:
 ```
-find/s SKILL
+find/s SKILLS
 ```
 
 **Examples**:
 ```
 find/s Java
-find/s Python
+find/s Python, C++
 ```
 
 #### By Role: `find/r`
-Finds internships for a given role.
+Finds internships for a given role, able to take multiple roles (comma-separated).
 
 **Format**:
 ```
@@ -138,6 +142,7 @@ find/r ROLE
 **Examples**:
 ```
 find/r Data Analyst
+find/r SWE, Cashier
 ```
 
 #### By Company: `find/c`
@@ -229,9 +234,6 @@ bye
 ## ❓ FAQ
 **Q: How do I transfer my data?**  
 ➡ Copy `nextstep.txt` to the new installation directory.
-
-**Q: Can I search for multiple skills?**  
-➡ Yes! Use commas: `find/s Python,SQL`
 
 **Q: Can I edit multiple entries at once?**  
 ➡ No, edit each entry one at a time using its index.
