@@ -259,13 +259,17 @@ Before testing, ensure you have Java 17 downloaded on your system.
    - Download the NextStep.jar file and copy it into an empty folder
    - Start the application by running `java -jar NextStep.jar`
    - Expected: Shows welcome message
+   
    ![img.png](images/initialLaunch.png)
+
    - Verify: `data/nextstep.txt` is created automatically
 
 2. **Help Command**
    - Test case: `help`
    - Expected: Displays command summary in printed format
+   
    ![img.png](images/helpCommand.png)
+
    - Verify: All commands in user guide are presented
 
 ### Core Functionality Tests
@@ -273,41 +277,53 @@ Before testing, ensure you have Java 17 downloaded on your system.
 1. **Normal Add**
    - Test case: `add c/Google r/SWE d/6 a/3000 s/Java,Python st/A`
    - Expected: Success message with added entry details
+   
    ![img.png](images/normalAdd.png)
+
    - Verify: Entry appears in next `list` output
 
 2. **Missing Fields**
    - Test case: `add c/Amazon`
    - Expected: Error highlighting missing required fields
+   
    ![img.png](images/missingField.png)
+
    - Verify: No data file modification occurred
 
 #### Listing Internships
 1. **Basic List**
    - Test case: `list`
    - Expected: Displays all entries in formatted table
+   
    ![img_1.png](images/list.png)
+
    - Verify: Column widths adjust to content length
 
 #### Editing Entries
 1. **Guided Edit**
    - Test case: `edit 1`
    - Expected: Prompts the user to edit a particular field in the first internship.
+   
    ![img.png](images/editEntries.png)
+
    - Verify: Fields are prompted based on what is required to be edited.
 
 #### Deleting Entries
 1. **Normal Delete**
    - Test case: `delete 1`
    - Expected: Deletes the first internship from the list.
+   
    ![img.png](images/deleteEntries.png)
+
    - Verify: `list` command no longer displays the selected internship.
 
 #### Finding Entries
 1. **Finding Company**
    - Test case: `find/c Google`
    - Expected: Displays all internships with "Google" as the company.
+   
    ![img.png](images/findCompanies.png)
+
 2. **Finding Role**
    - Test case: `find/r SWE`
    - Expected: Displays all internships with "SWE" as the role.

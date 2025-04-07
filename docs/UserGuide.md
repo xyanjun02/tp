@@ -66,7 +66,7 @@ help
 ### Adding an Internship: `add`
 Adds a new internship with 6 fields. Details of the fields are shown in a table below.
 
-*Note: All fields are required*
+*Note: All fields are required and the order of the fields does not matter*
 
 **Format**:
 ```

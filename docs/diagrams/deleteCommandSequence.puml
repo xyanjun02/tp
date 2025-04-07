@@ -1,14 +1,12 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 actor User
 participant ":NextStep" as NextStep
 participant ":Parser" as Parser
 participant ":DeleteCommand" as DeleteCommand
 participant ":InternshipList" as InternshipList
-participant ":Internship" as Internship
 participant ":Storage" as Storage
-participant "<<Class>> \nUi" as Ui
+participant "<<Class>>\nUi" as Ui
+skinparam sequenceReferenceBackgroundColor white
 
 User -> NextStep : enters "delete 1"
 activate NextStep
@@ -16,35 +14,30 @@ activate NextStep
 NextStep -> Parser : processCommand(input)
 activate Parser
 
+' Create the DeleteCommand and keep one activation bar for it
 Parser -> DeleteCommand : createCommand()
 activate DeleteCommand
-DeleteCommand --> Parser : return command
-deactivate DeleteCommand
+DeleteCommand --> Parser
 
+' Continue execution on the same activation bar
 Parser -> DeleteCommand : execute()
-activate DeleteCommand
+' (No additional activate call here; DeleteCommand remains active)
 
-DeleteCommand -> DeleteCommand : parseIndex(input)
-activate DeleteCommand #lightblue
-DeleteCommand --> DeleteCommand : return index
-deactivate DeleteCommand
+ref over DeleteCommand
+  parseIndex(input) & index validation
+end ref
 
 DeleteCommand -> InternshipList : deleteInternship(index)
 activate InternshipList
-InternshipList -> Internship : removeAt(index)
-activate Internship
-Internship --> InternshipList : return removedInternship
-deactivate Internship
-InternshipList --> DeleteCommand : return removedInternship
+InternshipList --> DeleteCommand
 deactivate InternshipList
 
 DeleteCommand -> Storage : save(internships)
-activate Storage
-Storage --> DeleteCommand
-deactivate Storage
+DeleteCommand --> Storage
 
-DeleteCommand -> Ui : printDeleteSuccess(removedInternship)
+DeleteCommand -> Ui : printDeleteSuccess(removed)
 activate Ui
+Ui -> User : show deletion success message
 Ui --> DeleteCommand
 deactivate Ui
 
@@ -54,6 +47,6 @@ deactivate DeleteCommand
 Parser --> NextStep
 deactivate Parser
 
-NextStep --> User : shows success message
+NextStep --> User
 deactivate NextStep
 @enduml
