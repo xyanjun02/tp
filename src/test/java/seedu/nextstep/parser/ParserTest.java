@@ -2,7 +2,15 @@ package seedu.nextstep.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.nextstep.command.*;
+import seedu.nextstep.command.AddCommand;
+import seedu.nextstep.command.DeleteCommand;
+import seedu.nextstep.command.EditCommand;
+import seedu.nextstep.command.FilterCommand;
+import seedu.nextstep.command.FindRoleCommand;
+import seedu.nextstep.command.FindSkillCommand;
+import seedu.nextstep.command.FindCompanyCommand;
+import seedu.nextstep.command.HelpCommand;
+import seedu.nextstep.command.ListCommand;
 import seedu.nextstep.core.InternshipList;
 import seedu.nextstep.exception.SimilarCommandException;
 import seedu.nextstep.storage.Storage;
