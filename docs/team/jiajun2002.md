@@ -1,4 +1,4 @@
-# Yan Jun - Project Portfolio Page
+# Jia Jun - Project Portfolio Page
 
 ## Overview
 
@@ -27,6 +27,8 @@ Given below are my contributions to the project.
 **Enhancement: Existing Classses**
 - Ui Class: Implemented the Ui class along with various printing messages and formatting for user interactions.
 - Parser Class: Implemented the Parser class to process user input and execute the appropriate commands.
+- Exception Handling: Created multiple custom exceptions for improved robustness of application.
+- Testing: Added JUnit tests for add and filter to increase reliability of application.
 
 ### Documentation
 
@@ -35,7 +37,7 @@ Given below are my contributions to the project.
 - Enhanced explanations for `edit` and `filter`
 
 #### Contributions to the Developer Guide
-- Added UML sequence Diagram for `add`, and UML Class diagram for the commands component.
+- Added UML sequence Diagrams for `add`, `filter`, UML Class diagram for the commands component, and improvements on the architecture diagram.
 - Implemented additional instructions in the "Instructions for Manual Testing".
 
 ### Project Management
