@@ -1,5 +1,7 @@
 package seedu.nextstep.command;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import seedu.nextstep.core.Internship;
 import seedu.nextstep.core.InternshipList;
@@ -156,21 +158,19 @@ public class EditCommand extends Command {
                         valid = true;
                         isAnyFieldUpdated = true;
                         break;
-
                     case "skills":
                         System.out.print("Updated Skills (comma-separated): ");
                         String skillsInput = scanner.nextLine().trim();
                         if (skillsInput.isEmpty()) {
                             throw new EmptyInputException("Skills cannot be empty.");
-                        } else if (skillsInput.length() > MAX_SKILLS) {
-                            throw new InvalidInputFormatException("You cannot have more than " +
-                                    MAX_SKILLS + " skills.");
                         }
-                        internship.setSkills(skillsInput.split(",\\s*"));
+
+                        String[] skills = processSkills(skillsInput);
+
+                        internship.setSkills(skills);
                         valid = true;
                         isAnyFieldUpdated = true;
                         break;
-
                     case "status":
                         System.out.print("Updated Status: ");
                         String newStatus = scanner.nextLine().trim().toUpperCase();
@@ -212,6 +212,30 @@ public class EditCommand extends Command {
         }
     }
 
+    private String[] processSkills(String skillsInput) throws InvalidInputFormatException, EmptyInputException {
+        String[] rawSkills = skillsInput.split(",\\s*");
+        List<String> validSkills = new ArrayList<>();
+
+        // Filter out empty skills and count valid ones
+        for (String skill : rawSkills) {
+            if (!skill.trim().isEmpty()) {
+                validSkills.add(skill.trim());
+            }
+        }
+
+        // Check maximum skills limit
+        if (validSkills.size() > MAX_SKILLS) {
+            throw new InvalidInputFormatException(
+                    "You cannot have more than " + MAX_SKILLS + " skills.");
+        }
+
+        // Check at least one valid skill
+        if (validSkills.isEmpty()) {
+            throw new EmptyInputException("You must provide at least one valid skill.");
+        }
+
+        return validSkills.toArray(new String[0]);
+    }
 
     /**
      * Checks if status provided is valid.
