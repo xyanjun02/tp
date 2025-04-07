@@ -1,0 +1,66 @@
+@startuml
+actor User
+participant ":NextStep" as NextStep
+participant ":Parser" as Parser
+participant ":FilterCommand" as FilterCommand
+participant ":Internship" as Internship
+participant ":InternshipList" as InternshipList
+participant "<<Class>> \nUi" as Ui
+skinparam sequenceReferenceBackgroundColor white
+
+User -> NextStep : enters "filter/a 500 2000"
+activate NextStep
+
+NextStep -> Parser : processCommand(input)
+activate Parser
+
+Parser -> FilterCommand : createCommand()
+activate FilterCommand
+FilterCommand --> Parser : return command
+deactivate FilterCommand
+
+Parser -> FilterCommand : execute()
+activate FilterCommand
+
+ref over FilterCommand
+  Input Processing and validation
+end ref
+
+  FilterCommand -> InternshipList : getAllInternships()
+  activate InternshipList
+  InternshipList --> FilterCommand : return internships
+  deactivate InternshipList
+
+loop for each internship
+  FilterCommand -> Internship : getAllowance()
+  activate Internship
+  Internship --> FilterCommand : return value
+  deactivate Internship
+
+  FilterCommand -> FilterCommand : checkIsWithinRange()
+  activate FilterCommand #lightblue
+  FilterCommand --> FilterCommand : true/false
+  deactivate FilterCommand
+
+  alt is within range
+    FilterCommand -> Ui : printInternship()
+    activate Ui
+    Ui -> User : shows internship
+    deactivate Ui
+  end
+end
+
+FilterCommand -> Ui : printNoFilteredInternshipFound() [if none]
+activate Ui
+Ui -> User : "No internships found"
+deactivate Ui
+
+FilterCommand --> Parser
+deactivate FilterCommand
+
+Parser --> NextStep
+deactivate Parser
+
+NextStep --> User
+deactivate NextStep
+@enduml
