@@ -58,7 +58,11 @@ public class EditCommand extends Command {
             throw new EmptyInputException("Error: Fields to edit cannot be empty.");
         }
 
-        processFieldEdits(internship, fieldsInput.split(",\\s*"));
+        String[] fields = fieldsInput.split(",\\s*");
+        for (int i = 0; i < fields.length; i++) {
+            fields[i] = fields[i].trim();
+        }
+        processFieldEdits(internship, fields);
         storage.save(internships);
         Ui.printEditSuccess(internship);
     }
