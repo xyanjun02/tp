@@ -18,7 +18,6 @@ activate Parser
 
 Parser -> DeleteCommand : createCommand()
 activate DeleteCommand
-DeleteCommand -> DeleteCommand
 DeleteCommand --> Parser : return command
 deactivate DeleteCommand
 

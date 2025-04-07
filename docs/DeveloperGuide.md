@@ -99,7 +99,6 @@ The **Parser** is responsible for processing user input. It reads and interprets
 #### Responsibilities:
 - Reads and processes user commands.
 - Determines which **Command** should be executed based on the user’s input.
-- Interacts with **InternshipList**, **Storage**, and **UI** to execute the required action.
 
 ### 6. Commands
 
@@ -109,7 +108,9 @@ The **Commands** component contains various actions that users can perform, such
 
 #### Responsibilities:
 - Each command interacts with **InternshipList** to modify or retrieve data.
+- Interacts with **Ui** for messages to the user.
 - Handles operations like **Add**, **Delete**, **Find**, and **Filter**.
+- Some operations like **Add**, **Delete** interact with the storage component.
 - Commands are created by the **Parser** and executed based on user input.
 
 ---
@@ -123,8 +124,9 @@ The ```add``` command allows users to add new internships and requires the follo
 - Duration
 - Allowance
 - Skills
+- Status
 
-Example input: ```add c/Google r/SWE d/6 a/5000 s/Java, Python ```
+Example input: ```add c/Google r/SWE d/6 a/5000 s/Java, Python st/P```
 
 #### Implementation Flow
 1. The user enters an ```add``` command along with the required fields.
@@ -203,7 +205,6 @@ NextStep streamlines internship management for students by:
 | v2.0    | High     | Student         | Filter by duration                  | Match my academic schedule                |
 | v2.0    | High     | Student         | Search by company name              | Target preferred employers                |
 | v2.0    | High     | Student         | Search by role                      | Find position-specific opportunities      |
-| v2.0    | Medium   | Student         | Search by skills                    | Find internships with relevant skill sets |
 
 ### Use Cases
 
@@ -284,6 +285,7 @@ Before testing, ensure you have Java 17 downloaded on your system.
 1. **Finding Company**
    - Test case: `find/c Google`
    - Expected: Displays all internships with "Google" as the company.
+   ![img.png](images/findCompanies.png)
 2. **Finding Role**
    - Test case: `find/r SWE`
    - Expected: Displays all internships with "SWE" as the role.

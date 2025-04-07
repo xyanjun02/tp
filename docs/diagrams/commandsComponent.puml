@@ -55,15 +55,15 @@ Command --> InternshipList
 AddCommand --> Storage
 DeleteCommand --> Storage
 EditCommand --> Storage
-AddCommand --> Ui
-DeleteCommand --> Ui
-EditCommand --> Ui
-FindCompanyCommand --> Ui
-FindRoleCommand --> Ui
-FindSkillCommand --> Ui
-FilterCommand --> Ui
-HelpCommand --> Ui
-ListCommand --> Ui
+AddCommand ..> Ui
+DeleteCommand ..> Ui
+EditCommand ..> Ui
+FindCompanyCommand ..> Ui
+FindRoleCommand ..> Ui
+FindSkillCommand ..> Ui
+FilterCommand ..> Ui
+HelpCommand ..> Ui
+ListCommand ..> Ui
 
 @enduml
 
