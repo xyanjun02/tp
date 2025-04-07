@@ -88,8 +88,8 @@ class AddCommandTest {
     @Test
     void testAddCommandNegativeAllowance() {
         String input = "add c/Amazon r/Project Manager d/12 a/-3000 s/Excel, st/-";
-        AddCommand addComand = new AddCommand(input, internships, dummyStorage);
-        assertThrows(InvalidIntegerException.class, addComand::execute);
+        AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
+        assertThrows(InvalidIntegerException.class, addCommand::execute);
         assertEquals(0, internships.size());
     }
 
@@ -98,6 +98,14 @@ class AddCommandTest {
         String input = "add c/Amazon r/Project Manager d/12 a/3000 s/Excel, st/Accepted";
         AddCommand addComand = new AddCommand(input, internships, dummyStorage);
         assertThrows(InvalidInputFormatException.class, addComand::execute);
+        assertEquals(0, internships.size());
+    }
+
+    @Test
+    void testAddCommandUnrecognizedFlag() {
+        String input = "add c/Amazon r/Project Manager d/12 a/3000 xyz/Unknown s/Excel st/A";
+        AddCommand addCommand = new AddCommand(input, internships, dummyStorage);
+        assertThrows(InvalidInputFormatException.class, addCommand::execute);
         assertEquals(0, internships.size());
     }
 }

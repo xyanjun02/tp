@@ -77,13 +77,13 @@ add c/Google r/Software Engineer d/6 a/5000 s/Java, Python st/P
 add c/Microsoft r/Data Analyst d/12 a/1800 s/Python, SQL st/-
 ```
 
-| Symbol | Parameter | Description                              |
-|--------|-----------|------------------------------------------|
-| `c/`   | COMPANY   | Internship company                       |
-| `r/`   | ROLE      | Internship role                          |
-| `d/`   | DURATION  | Duration in months (Positive integer)    |
-| `a/`   | ALLOWANCE | Monthly allowance (Non-negative integer) |
-| `s/`   | SKILLS    | Required skills (comma-separated)        |
+| Symbol | Parameter | Description                                                            |
+|--------|-----------|------------------------------------------------------------------------|
+| `c/`   | COMPANY   | Internship company (Must not exceed 70 characters)                     |
+| `r/`   | ROLE      | Internship role (Must not exceed 50 characters)                        |
+| `d/`   | DURATION  | Duration in months (Positive integer, maximum of 24 months)            |
+| `a/`   | ALLOWANCE | Monthly allowance (Non-negative integer, must not exceed $99999)       |
+| `s/`   | SKILLS    | Required skills (comma-separated, maximum of 6 skills)                 |
 | `st/`  | STATUS    | Internship status ('A': accepted, 'P': pending, 'R': rejected, '-': NA |
 
 
@@ -222,7 +222,7 @@ bye
 ## 💾 Data Management
 - **Auto-save:** All changes are saved after each command.
 - **File Location:** Saved in `[JAR folder]/data/nextstep.txt`.
-- **⚠️ Warning:** Manual editing of `nextstep.txt` is **not allowed**.
+- **⚠️ Warning:** Manual editing of `nextstep.txt` is **not allowed**. Format of the text file is also non-readable.
 
 ---
 

@@ -137,5 +137,9 @@ public class Ui {
         System.out.println("No internships found here!");
         Ui.printLinebreak();
     }
+
+    public static void printMessage(String string) {
+        System.out.println(string);
+    }
 }
 
