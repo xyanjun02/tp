@@ -32,29 +32,29 @@ package "Commands" {
 ' Main relationships
 Main --> StorageComponent
 Main --> ParserComponent
-Main --> Ui
+Main ..> Ui
 Main --> InternshipList
 
 ' Parser relationships
-ParserComponent --> Command
-ParserComponent --> InternshipList
-ParserComponent --> StorageComponent
-ParserComponent --> Ui
+ParserComponent --> Command : creates
+ParserComponent ..> Ui
+
+' Command relationships
+Command --> InternshipList
+Command --> StorageComponent
+Command ..> Ui
 
 ' Storage relationships
-StorageComponent --> InternshipList
+StorageComponent <..> InternshipList : loads/saves
 
 ' Core relationships
-InternshipList "1" *-- "0..*" Internship
-
-' UI relationships
-Ui --> Internship
+InternshipList "1" *--- "*" Internship
 
 note right of Main
   <b>Execution Flow:</b>
   1. Main initializes components
   2. Parser processes commands
-  3. Commands modify model
+  3. Commands modify InternshipList
   4. Storage persists data
 end note
 

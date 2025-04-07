@@ -1,16 +1,15 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 actor User
 participant ":NextStep" as NextStep
 participant ":Parser" as Parser
 participant ":AddCommand" as AddCommand
-participant ":InternshipList" as InternshipList
 participant ":Internship" as Internship
+participant ":InternshipList" as InternshipList
 participant ":Storage" as Storage
 participant "<<Class>> \nUi" as Ui
+skinparam sequenceReferenceBackgroundColor white
 
-User -> NextStep : enters "add c/Google r/SWE d/6 a/5000 s/Java,Python"
+User -> NextStep : enters "add c/Google r/SWE d/6 a/5000 s/Java,Python st/P"
 activate NextStep
 
 NextStep -> Parser : processCommand(input)
@@ -24,37 +23,22 @@ deactivate AddCommand
 Parser -> AddCommand : execute()
 activate AddCommand
 
-AddCommand -> AddCommand : extractValue() for each field
-activate AddCommand #lightblue
-AddCommand --> AddCommand : return values
-deactivate AddCommand
+ref over AddCommand
+  Input Validation & Processing
+end ref
 
-AddCommand -> AddCommand : validateFields()
-activate AddCommand #lightblue
-AddCommand --> AddCommand : validation result
-deactivate AddCommand
-
-AddCommand -> AddCommand : processSkills()
-activate AddCommand #lightblue
-AddCommand --> AddCommand : return skills[]
-deactivate AddCommand
-
-AddCommand -> InternshipList : create entry
-activate InternshipList
-InternshipList -> Internship : new(company, role, duration, allowance, skills)
+AddCommand -> Internship : new Internship(company, role, duration, allowance, status, skills)
 activate Internship
-Internship --> InternshipList : return new Internship
+Internship --> AddCommand : return internship
 deactivate Internship
-InternshipList --> AddCommand
-deactivate InternshipList
+
+AddCommand -> InternshipList : addInternship(internship)
 
 AddCommand -> Storage : save(internships)
-activate Storage
-Storage --> AddCommand
-deactivate Storage
 
 AddCommand -> Ui : printAddingMessage(internship)
 activate Ui
+Ui -> User : show success message
 Ui --> AddCommand
 deactivate Ui
 
@@ -64,6 +48,6 @@ deactivate AddCommand
 Parser --> NextStep
 deactivate Parser
 
-NextStep --> User : show success message
+NextStep --> User
 deactivate NextStep
 @enduml

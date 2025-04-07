@@ -58,7 +58,7 @@ The **NextStep component** serves as the central hub of the system, coordinating
 
 #### Responsibilities:
 - Acts as the main entry point for user interactions.
-- Directs requests to the appropriate components (Parser, Storage, UI, and InternshipList).
+- Directs requests to the appropriate components (Parser, Storage, and InternshipList).
 - Ensures smooth execution of user commands.
 
 ### 2. Core (InternshipList & Internship)
@@ -74,6 +74,7 @@ The **Core** component contains the core data model, which consists of **Interns
 ### 3. UI (User Interface)
 
 The **UI** is responsible for interacting with the user. It displays information such as internship data, command results, and error messages. The UI acts as the front-end interface that communicates with the backend logic to display the processed data to the user.
+It consists of the Ui and TablePrinter class.
 
 ![uiComponent.png](images/uiComponent.png)
 
@@ -81,6 +82,7 @@ The **UI** is responsible for interacting with the user. It displays information
 - Handles user interactions.
 - Displays internship data and the results of executed commands.
 - Provides a responsive and intuitive interface for the user.
+- Provides static methods for other components to utilise.
 
 ### 4. Storage
 
@@ -99,7 +101,6 @@ The **Parser** is responsible for processing user input. It reads and interprets
 #### Responsibilities:
 - Reads and processes user commands.
 - Determines which **Command** should be executed based on the user’s input.
-- Interacts with **InternshipList**, **Storage**, and **UI** to execute the required action.
 
 ### 6. Commands
 
@@ -109,12 +110,14 @@ The **Commands** component contains various actions that users can perform, such
 
 #### Responsibilities:
 - Each command interacts with **InternshipList** to modify or retrieve data.
+- Interacts with **Ui** for messages to the user.
 - Handles operations like **Add**, **Delete**, **Find**, and **Filter**.
+- Some operations like **Add**, **Delete** interact with the storage component.
 - Commands are created by the **Parser** and executed based on user input.
 
 ---
 ## **Implementation**
-This section describes how some noteworthy features are implemented.
+This section describes how a few noteworthy features have been implemented.
 
 ### Adding Internship
 The ```add``` command allows users to add new internships and requires the following fields:
@@ -123,8 +126,9 @@ The ```add``` command allows users to add new internships and requires the follo
 - Duration
 - Allowance
 - Skills
+- Status
 
-Example input: ```add c/Google r/SWE d/6 a/5000 s/Java, Python ```
+Example input: ```add c/Google r/SWE d/6 a/5000 s/Java, Python st/P```
 
 #### Implementation Flow
 1. The user enters an ```add``` command along with the required fields.
@@ -171,6 +175,26 @@ Additionally, `DeleteCommand` implements various exception handling to deal with
 - `InvalidIndexException`: Thrown when the index given is out of bounds.
 - `NumberFormatException`: Thrown when the provided index is not a valid integer.
 
+### Filtering Internship
+The `filter` command allows users to filter internships in their list by allowance/duration.
+
+Example input: ```filter\a 500 2000```
+#### Implementation Flow
+1. The user enters either a `filter\a` or `filter\d` command with the desired ranges.
+2. The parser receives the command and creates a new `FilterCommand` instance.
+3. Once the new instance is created, `FilterCommand.execute()` is invoked.
+4. The `execute()` method gets all internships from `InternshipsList`, loops each internship and prints it if it is within the range via the `Ui`.
+5. If no internships are found, shows a message to the user as well via the `Ui` class.
+
+![filterCommandSequence.png](images/filterCommandSequence.png)
+
+#### Error Handling
+Additionally, `FilterCommand` implements various exception handling to deal with errors.
+- `EmptyInputException`: Thrown when no index is provided after `filter/a` or `filter/d`.
+- `InvalidInputFormatException`: Thrown when more than 2 values are provided as ranges.
+-  `NumberFormatException`: Thrown if the ranges provided are not integers.
+- `NumberFormatException`: Thrown when the provided index is not a valid integer.
+
 ---
 ## Appendix: Requirements
 
@@ -203,7 +227,6 @@ NextStep streamlines internship management for students by:
 | v2.0    | High     | Student         | Filter by duration                  | Match my academic schedule                |
 | v2.0    | High     | Student         | Search by company name              | Target preferred employers                |
 | v2.0    | High     | Student         | Search by role                      | Find position-specific opportunities      |
-| v2.0    | Medium   | Student         | Search by skills                    | Find internships with relevant skill sets |
 
 ### Use Cases
 
@@ -284,6 +307,7 @@ Before testing, ensure you have Java 17 downloaded on your system.
 1. **Finding Company**
    - Test case: `find/c Google`
    - Expected: Displays all internships with "Google" as the company.
+   ![img.png](images/findCompanies.png)
 2. **Finding Role**
    - Test case: `find/r SWE`
    - Expected: Displays all internships with "SWE" as the role.

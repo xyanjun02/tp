@@ -9,7 +9,7 @@ class Storage {
 
 class InternshipList
 
-Storage ..> InternshipList : persists
+Storage <..> InternshipList : persists
 
 @enduml
 
