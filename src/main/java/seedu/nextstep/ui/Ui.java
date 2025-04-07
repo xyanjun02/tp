@@ -51,7 +51,7 @@ public class Ui {
      */
     public static void printSimilarCommandError(String input) {
         if (input.equals("filter")) {
-            System.out.println("No command found.! Perhaps you mean filter/a or filter/d?");
+            System.out.println("No command found. Perhaps you mean filter/a or filter/d?");
         } else if (input.equals("find")) {
             System.out.println("No command found. Perhaps you mean find/c, find/r, or find/s?");
         }

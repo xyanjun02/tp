@@ -62,7 +62,7 @@ public class Parser {
         }
     }
 
-    private Command createCommand(String commandWord, String input) throws SimilarCommandException {
+    protected Command createCommand(String commandWord, String input) throws SimilarCommandException {
         return switch (commandWord) {
         case "add" -> new AddCommand(input, internships, storage);
         case "delete" -> new DeleteCommand(input, internships, storage);

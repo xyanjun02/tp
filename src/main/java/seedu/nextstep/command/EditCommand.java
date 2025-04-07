@@ -14,6 +14,12 @@ import seedu.nextstep.ui.Ui;
  * Represents a command to edit an existing internship entry.
  */
 public class EditCommand extends Command {
+    private static final int MAX_COMPANY_LENGTH = 70;
+    private static final int MAX_ROLE_LENGTH = 50;
+    private static final int MAX_DURATION = 24; // max 2 years internship
+    private static final int MAX_ALLOWANCE = 99999; // max allowance limit
+    private static final int MAX_SKILLS = 6; // max 6 skills
+
     private final Scanner scanner;
     private final Storage storage;
 
@@ -62,6 +68,10 @@ public class EditCommand extends Command {
         if (parts.length < 2) {
             throw new InvalidInputFormatException("Error: Invalid format. Usage: edit <index>.");
         }
+        if (parts.length > 2) {
+            throw new InvalidInputFormatException("Error: You can only edit one entry at a time. " +
+                    "More than one index provided.");
+        }
         int index = Integer.parseInt(parts[1]) - 1;
         if (index < 0 || index >= internships.size()) {
             throw new InvalidIndexException("Error: Invalid index. Please enter a valid internship number.");
@@ -73,7 +83,8 @@ public class EditCommand extends Command {
         boolean isAnyFieldUpdated = false;
         StringBuilder warningMessages = new StringBuilder();
 
-        for (String field : fieldsToEdit) {
+        for (int i = 0; i < fieldsToEdit.length; i++) {
+            String field = fieldsToEdit[i];
             boolean valid = false;
 
             while (!valid) {
@@ -84,6 +95,9 @@ public class EditCommand extends Command {
                         String newCompany = scanner.nextLine().trim();
                         if (newCompany.isEmpty()) {
                             throw new EmptyInputException("Company cannot be empty.");
+                        } else if (newCompany.length() > MAX_COMPANY_LENGTH) {
+                            throw new InvalidInputFormatException("Company name cannot exceed " +
+                                    MAX_COMPANY_LENGTH + " characters.");
                         }
                         internship.setCompany(newCompany);
                         valid = true;
@@ -95,6 +109,9 @@ public class EditCommand extends Command {
                         String newRole = scanner.nextLine().trim();
                         if (newRole.isEmpty()) {
                             throw new EmptyInputException("Role cannot be empty.");
+                        } else if (newRole.length() > MAX_ROLE_LENGTH) {
+                            throw new InvalidInputFormatException("Role cannot exceed " +
+                                    MAX_ROLE_LENGTH + " characters.");
                         }
                         internship.setRole(newRole);
                         valid = true;
@@ -110,6 +127,9 @@ public class EditCommand extends Command {
                         int durationInteger = Integer.parseInt(durationInput);
                         if (durationInteger <= 0) {
                             throw new InvalidIntegerException("Duration must be greater than 0.");
+                        } else if (durationInteger > MAX_DURATION) {
+                            throw new InvalidIntegerException("Duration cannot be more than " + MAX_DURATION +
+                                    " months.");
                         }
                         internship.setDuration(durationInteger);
                         valid = true;
@@ -125,6 +145,8 @@ public class EditCommand extends Command {
                         int allowanceInteger = Integer.parseInt(allowanceInput);
                         if (allowanceInteger < 0) {
                             throw new InvalidIntegerException("Allowance cannot be negative.");
+                        } else if (allowanceInteger > MAX_ALLOWANCE) {
+                            throw new InvalidIntegerException("Allowance cannot exceed $" + MAX_ALLOWANCE + ".");
                         }
                         internship.setAllowance(allowanceInteger);
                         valid = true;
@@ -136,6 +158,9 @@ public class EditCommand extends Command {
                         String skillsInput = scanner.nextLine().trim();
                         if (skillsInput.isEmpty()) {
                             throw new EmptyInputException("Skills cannot be empty.");
+                        } else if (skillsInput.length() > MAX_SKILLS) {
+                            throw new InvalidInputFormatException("You cannot have more than " +
+                                    MAX_SKILLS + " skills.");
                         }
                         internship.setSkills(skillsInput.split(",\\s*"));
                         valid = true;
@@ -157,7 +182,10 @@ public class EditCommand extends Command {
                         break;
 
                     default:
-                        warningMessages.append("Warning: '").append(field).append("' is not a valid field.\n");
+                        warningMessages.append("Warning: '").append(field).append("' is not a valid field.");
+                        if (i < fieldsToEdit.length - 1) {
+                            warningMessages.append("\n");
+                        }
                         valid = true; // Skip invalid field without retry
                         break;
                     }
