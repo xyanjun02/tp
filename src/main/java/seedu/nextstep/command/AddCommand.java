@@ -12,8 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AddCommand extends Command {
-    private final Storage storage;
-
     private static final int MAX_COMPANY_LENGTH = 70;
     private static final int MAX_ROLE_LENGTH = 50;
     private static final int MAX_DURATION = 24; // max 2 years internship
@@ -21,6 +19,8 @@ public class AddCommand extends Command {
     private static final int MAX_SKILLS = 6; // max 6 skills
 
     private static final String[] VALID_FLAGS = {"c/", "r/", "d/", "a/", "s/", "st/"};
+
+    private final Storage storage;
 
     public AddCommand(String input, InternshipList internships, Storage storage) {
         super(input, internships);
