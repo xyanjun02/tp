@@ -42,4 +42,13 @@ public class InternshipList implements Serializable {
     public boolean isEmpty() {
         return this.size() == 0;
     }
+
+    public boolean contains(Internship internship) {
+        for (Internship existing : internships) {
+            if (existing.equals(internship)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -90,6 +90,10 @@ public class AddCommand extends Command {
         // Assertions to verify key assumptions.
         assert !internship.getSkills().isEmpty() : "There should be at least one skill";
 
+        if (internships.contains(internship)) {
+            throw new InvalidInputFormatException("Error: This internship already exists in your list.");
+        }
+
         internships.addInternship(internship);
         storage.save(internships);
         Ui.printAddingMessage(internship);

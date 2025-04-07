@@ -1,7 +1,9 @@
 package seedu.nextstep.core;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents an internship with company details, role, duration, allowance, and required skills.
@@ -156,5 +158,23 @@ public class Internship implements Serializable {
                 "Skills    : " + String.join(", ", skills) + System.lineSeparator() +
                 "Status    : " + status + System.lineSeparator() +
                 "--------------------------------";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Internship that = (Internship) obj;
+        return duration == that.duration &&
+                allowance == that.allowance &&
+                company.equals(that.company) &&
+                role.equals(that.role) &&
+                status.equals(that.status) &&
+                Arrays.equals(skills, that.skills);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(company, role, duration, allowance, status, Arrays.hashCode(skills));
     }
 }
