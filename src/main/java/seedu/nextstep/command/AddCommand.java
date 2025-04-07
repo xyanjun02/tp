@@ -101,26 +101,28 @@ public class AddCommand extends Command {
      */
     private void validateFlags(String input) throws InvalidInputFormatException {
         Set<String> seenFlags = new HashSet<>();
-        Set<String> inputFlags = new HashSet<>();
+        String[] words = input.split(" ");
 
         // Loop through all parts of the input to detect flags and ensure no unrecognized ones exist
-        String[] words = input.split(" ");
         for (String word : words) {
+            boolean isValidFlag = false;
+
+            // Check if word is a valid flag
             for (String validFlag : VALID_FLAGS) {
                 if (word.startsWith(validFlag)) {
                     if (!seenFlags.add(validFlag)) {
                         throw new InvalidInputFormatException("Error: Duplicate flag '" + validFlag +
                                 "' detected. Each flag should appear only once.");
                     }
-                    inputFlags.add(validFlag);
+                    isValidFlag = true;
                     break;
                 }
             }
 
             // If no valid flag is found, it's an unrecognized flag
-            if (!inputFlags.contains(word) && word.contains("/")) {
+            if (!isValidFlag && word.contains("/")) {
                 throw new InvalidInputFormatException("Error: Unrecognized flag '" + word +
-                        "'. Valid flags are: c/, r/, d/, a/, s/, st/");
+                        "'. Valid flags are: c/, r/, d/, a/, s/, st/.");
             }
         }
     }
