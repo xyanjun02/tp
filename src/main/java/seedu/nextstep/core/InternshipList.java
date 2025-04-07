@@ -2,11 +2,14 @@ package seedu.nextstep.core;
 
 import seedu.nextstep.exception.InvalidIndexException;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InternshipList implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final ArrayList<Internship> internships;
 
     public InternshipList() {
@@ -41,5 +44,14 @@ public class InternshipList implements Serializable {
 
     public boolean isEmpty() {
         return this.size() == 0;
+    }
+
+    public boolean contains(Internship internship) {
+        for (Internship existing : internships) {
+            if (existing.equals(internship)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

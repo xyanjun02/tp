@@ -8,7 +8,9 @@ import seedu.nextstep.exception.InvalidIntegerException;
 import seedu.nextstep.storage.Storage;
 import seedu.nextstep.ui.Ui;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class AddCommand extends Command {
@@ -82,14 +84,15 @@ public class AddCommand extends Command {
 
         // Process skills: split by commas, trim each entry and check for skill limit
         String[] skills = processSkills(skillsInput);
-        if (skills.length > MAX_SKILLS) {
-            throw new InvalidInputFormatException("Error: You cannot have more than " + MAX_SKILLS + " skills.");
-        }
 
         Internship internship = new Internship(company, role, duration, allowance, status, skills);
 
         // Assertions to verify key assumptions.
         assert !internship.getSkills().isEmpty() : "There should be at least one skill";
+
+        if (internships.contains(internship)) {
+            throw new InvalidInputFormatException("Error: This internship already exists in your list.");
+        }
 
         internships.addInternship(internship);
         storage.save(internships);
@@ -188,11 +191,31 @@ public class AddCommand extends Command {
         return status.equals("A") || status.equals("P") || status.equals("R") || status.equals("-");
     }
 
-    private String[] processSkills(String skillsInput) {
-        String[] skills = skillsInput.split(",");
-        for (int i = 0; i < skills.length; i++) {
-            skills[i] = skills[i].trim();
+    private String[] processSkills(String skillsInput) throws InvalidInputFormatException{
+        // Split by comma and trim each skill
+        String[] rawSkills = skillsInput.split(",");
+        List<String> validSkills = getStrings(rawSkills);
+
+        if (validSkills.size() > MAX_SKILLS) {
+            throw new InvalidInputFormatException("Error: You cannot have more than " + MAX_SKILLS + " skills.");
         }
-        return skills;
+
+        return validSkills.toArray(new String[0]);
+    }
+
+    private static List<String> getStrings(String[] rawSkills) throws InvalidInputFormatException {
+        List<String> validSkills = new ArrayList<>();
+
+        for (String skill : rawSkills) {
+            String trimmedSkill = skill.trim();
+            if (!trimmedSkill.isEmpty()) {
+                validSkills.add(trimmedSkill);
+            }
+        }
+
+        if (validSkills.isEmpty()) {
+            throw new InvalidInputFormatException("Error: You must provide at least one valid skill.");
+        }
+        return validSkills;
     }
 }

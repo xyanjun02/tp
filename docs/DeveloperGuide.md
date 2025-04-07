@@ -1,5 +1,4 @@
- # Developer Guide
- 
+# Developer Guide
 - [Acknowledgements](#acknowledgements)
 - [Setting up, Getting started](#Setting-up-getting-started)
 - [Design](#design)

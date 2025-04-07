@@ -141,5 +141,13 @@ public class Ui {
     public static void printMessage(String string) {
         System.out.println(string);
     }
+
+    public static void printDataLoadError(String message) {
+        printLinebreak();
+        System.out.println("We encountered an issue loading your data:");
+        System.out.println(message);
+        System.out.println("Starting with a fresh internship list.");
+        printLinebreak();
+    }
 }
 
