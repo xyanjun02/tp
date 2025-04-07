@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.nextstep.command.*;
 import seedu.nextstep.core.InternshipList;
-import seedu.nextstep.exception.*;
+import seedu.nextstep.exception.SimilarCommandException;
 import seedu.nextstep.storage.Storage;
 
 import java.io.ByteArrayOutputStream;
