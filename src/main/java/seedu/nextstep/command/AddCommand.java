@@ -8,8 +8,19 @@ import seedu.nextstep.exception.InvalidIntegerException;
 import seedu.nextstep.storage.Storage;
 import seedu.nextstep.ui.Ui;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class AddCommand extends Command {
     private final Storage storage;
+
+    private static final int MAX_COMPANY_LENGTH = 70;
+    private static final int MAX_ROLE_LENGTH = 50;
+    private static final int MAX_DURATION = 24; // max 2 years internship
+    private static final int MAX_ALLOWANCE = 999999; // max allowance limit
+    private static final int MAX_SKILLS = 6; // max 6 skills
+
+    private static final String[] VALID_FLAGS = {"c/", "r/", "d/", "a/", "s/", "st/"};
 
     public AddCommand(String input, InternshipList internships, Storage storage) {
         super(input, internships);
@@ -30,6 +41,8 @@ public class AddCommand extends Command {
                     " (e.g. c/, r/, d/, a/, s/, st/).");
         }
 
+        validateFlags(input); // Validate flags (both invalid and duplicates)
+
         // Extract values for each field.
         String company = extractValue(input, "c/");
         String role = extractValue(input, "r/");
@@ -41,14 +54,25 @@ public class AddCommand extends Command {
         // Validate that none of the required fields are empty.
         validateFields(company, role, durationStr, allowanceStr, skillsInput, status);
 
+        // Validate company and role length
+        if (company.length() > MAX_COMPANY_LENGTH) {
+            throw new InvalidInputFormatException("Error: Company name cannot exceed " + MAX_COMPANY_LENGTH +
+                    " characters.");
+        }
+        if (role.length() > MAX_ROLE_LENGTH) {
+            throw new InvalidInputFormatException("Error: Role name cannot exceed " + MAX_ROLE_LENGTH +
+                    " characters.");
+        }
+
         // Validate duration and allowance.
         int duration = Integer.parseInt(durationStr);
-        if (duration <= 0) {
-            throw new InvalidIntegerException("Error: Duration must be greater than 0.");
+        if (duration <= 0 || duration > MAX_DURATION) {
+            throw new InvalidIntegerException("Error: Duration must be greater than 0 and less than or equal to " +
+                    MAX_DURATION + " months.");
         }
         int allowance = Integer.parseInt(allowanceStr);
-        if (allowance < 0) {
-            throw new InvalidIntegerException("Error: Allowance cannot be negative.");
+        if (allowance < 0 || allowance > MAX_ALLOWANCE) {
+            throw new InvalidIntegerException("Error: Allowance must be between 0 and " + MAX_ALLOWANCE + ".");
         }
 
         // Validate Status.
@@ -56,8 +80,11 @@ public class AddCommand extends Command {
             throw new InvalidInputFormatException("Error: Status must be 'A', 'P', 'R' or '-'.");
         }
 
-        // Process skills: split by commas and trim each entry.
+        // Process skills: split by commas, trim each entry and check for skill limit
         String[] skills = processSkills(skillsInput);
+        if (skills.length > MAX_SKILLS) {
+            throw new InvalidInputFormatException("Error: You cannot have more than " + MAX_SKILLS + " skills.");
+        }
 
         Internship internship = new Internship(company, role, duration, allowance, status, skills);
 
@@ -70,6 +97,35 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Validates flags to check for invalid or duplicate flags.
+     */
+    private void validateFlags(String input) throws InvalidInputFormatException {
+        Set<String> seenFlags = new HashSet<>();
+        Set<String> inputFlags = new HashSet<>();
+
+        // Loop through all parts of the input to detect flags and ensure no unrecognized ones exist
+        String[] words = input.split(" ");
+        for (String word : words) {
+            for (String validFlag : VALID_FLAGS) {
+                if (word.startsWith(validFlag)) {
+                    if (!seenFlags.add(validFlag)) {
+                        throw new InvalidInputFormatException("Error: Duplicate flag '" + validFlag +
+                                "' detected. Each flag should appear only once.");
+                    }
+                    inputFlags.add(validFlag);
+                    break;
+                }
+            }
+
+            // If no valid flag is found, it's an unrecognized flag
+            if (!inputFlags.contains(word) && word.contains("/")) {
+                throw new InvalidInputFormatException("Error: Unrecognized flag '" + word +
+                        "'. Valid flags are: c/, r/, d/, a/, s/, st/");
+            }
+        }
+    }
+
+    /**
      * Extracts the value associated with the specified prefix from the input.
      * If the prefix is not found, returns an empty string.
      * Warns if the same prefix appears multiple times.
@@ -79,30 +135,32 @@ public class AddCommand extends Command {
      * @return the extracted value as a String
      */
     private String extractValue(String input, String prefix) {
-        // Check for multiple occurrences of the same prefix
-        int firstOccurrence = input.indexOf(prefix);
-        if (firstOccurrence == -1) {
+        int startIndex;
+        if (input.startsWith(prefix)) {
+            startIndex = 0;
+        } else {
+            startIndex = input.indexOf(" " + prefix);
+            if (startIndex != -1) {
+                startIndex += 1; // skip the space
+            }
+        }
+
+        if (startIndex == -1) {
             return "";
         }
 
-        int secondOccurrence = input.indexOf(prefix, firstOccurrence + prefix.length());
-        if (secondOccurrence != -1) {
-            Ui.printMessage("Warning: The parameter '" + prefix + "' appears multiple times. " +
-                    "Only the first occurrence will be used.");
-        }
+        startIndex += prefix.length();
 
-        int startIndex = firstOccurrence + prefix.length();
         int endIndex = input.length();
-
-        // Look for the earliest occurrence of any other known prefix.
-        for (String nextPrefix : new String[]{"c/", "r/", "d/", "a/", "s/", "st/"}) {
+        for (String nextPrefix : VALID_FLAGS) {
             if (!nextPrefix.equals(prefix)) {
-                int nextPrefixIndex = input.indexOf(nextPrefix, startIndex);
+                int nextPrefixIndex = input.indexOf(" " + nextPrefix, startIndex);
                 if (nextPrefixIndex != -1 && nextPrefixIndex < endIndex) {
                     endIndex = nextPrefixIndex;
                 }
             }
         }
+
         return input.substring(startIndex, endIndex).trim();
     }
 
