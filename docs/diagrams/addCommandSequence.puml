@@ -9,12 +9,13 @@ participant ":Storage" as Storage
 participant "<<Class>> \nUi" as Ui
 skinparam sequenceReferenceBackgroundColor white
 
-User -> NextStep : enters "add c/Google r/SWE d/6 a/5000 s/Java,Python st/P"
+User -> NextStep : enters "add c/Google r/SWE d/6 a/5000 s/Java, Python st/P"
 activate NextStep
 
 NextStep -> Parser : processCommand(input)
 activate Parser
 
+create AddCommand
 Parser -> AddCommand : createCommand()
 activate AddCommand
 AddCommand --> Parser : return command
@@ -27,6 +28,7 @@ ref over AddCommand
   Input Validation & Processing
 end ref
 
+create Internship
 AddCommand -> Internship : new Internship(company, role, duration, allowance, status, skills)
 activate Internship
 Internship --> AddCommand : return internship

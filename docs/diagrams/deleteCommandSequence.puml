@@ -14,26 +14,23 @@ activate NextStep
 NextStep -> Parser : processCommand(input)
 activate Parser
 
-' Create the DeleteCommand and keep one activation bar for it
+create DeleteCommand
 Parser -> DeleteCommand : createCommand()
 activate DeleteCommand
-DeleteCommand --> Parser
+DeleteCommand --> Parser : return command
+deactivate DeleteCommand
 
-' Continue execution on the same activation bar
 Parser -> DeleteCommand : execute()
-' (No additional activate call here; DeleteCommand remains active)
+activate DeleteCommand
 
 ref over DeleteCommand
   parseIndex(input) & index validation
 end ref
 
 DeleteCommand -> InternshipList : deleteInternship(index)
-activate InternshipList
-InternshipList --> DeleteCommand
-deactivate InternshipList
+
 
 DeleteCommand -> Storage : save(internships)
-DeleteCommand --> Storage
 
 DeleteCommand -> Ui : printDeleteSuccess(removed)
 activate Ui

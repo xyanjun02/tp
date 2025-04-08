@@ -20,6 +20,7 @@ public class DeleteCommand extends Command {
      * Executes the deletion of an internship.
      * @throws EmptyInputException If no index is given.
      * @throws InvalidIndexException If index given is out of bounds.
+     * @throws InvalidInputFormatException If too many indexes are provided.
      * @throws NumberFormatException If index given is not an integer.
      */
     @Override
@@ -40,6 +41,7 @@ public class DeleteCommand extends Command {
      * @return the 0-based index
      * @throws EmptyInputException If no index is given.
      * @throws InvalidIndexException If index given is out of bounds.
+     * @throws InvalidInputFormatException If too many indexes are provided.
      * @throws NumberFormatException If index given is not an integer.
      */
     private int parseIndex(String input) throws EmptyInputException, InvalidIndexException, InvalidInputFormatException{

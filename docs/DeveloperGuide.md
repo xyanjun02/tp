@@ -147,6 +147,7 @@ The sequence diagram below showcases the flow of execution:
 Additionally, ```AddCommand``` implements various exception handling to deal with errors.
 + ```EmptyInputException```: Thrown when no details are provided after "add"
 + ```InvalidInputFormatException```: Thrown when required fields are missing
++ ```InvalidIntegerException```: Thrown when allowance given is negative or when duration given is non-positive.
 + ```NumberFormatException```: Caught by the Parser when allowance/duration are not integers
 
 ### Deleting Internship
@@ -172,6 +173,7 @@ The sequence diagram below showcases the flow of execution:
 #### Error Handling
 Additionally, `DeleteCommand` implements various exception handling to deal with errors.
 - `EmptyInputException`: Thrown when no index is provided after "delete".
+- `InvalidInputFormatException`: Thrown when number of indexes provided after "delete" is more than 1.
 - `InvalidIndexException`: Thrown when the index given is out of bounds.
 - `NumberFormatException`: Thrown when the provided index is not a valid integer.
 
@@ -183,7 +185,7 @@ Example input: ```filter\a 500 2000```
 1. The user enters either a `filter\a` or `filter\d` command with the desired ranges.
 2. The parser receives the command and creates a new `FilterCommand` instance.
 3. Once the new instance is created, `FilterCommand.execute()` is invoked.
-4. The `execute()` method gets all internships from `InternshipsList`, loops each internship and prints it if it is within the range via the `Ui`.
+4. The `execute()` method gets all internships from `InternshipsList`, loops each internship and prints it via the `Ui` class if it is within the range provided.
 5. If no internships are found, shows a message to the user as well via the `Ui` class.
 
 ![filterCommandSequence.png](images/filterCommandSequence.png)
@@ -192,8 +194,8 @@ Example input: ```filter\a 500 2000```
 Additionally, `FilterCommand` implements various exception handling to deal with errors.
 - `EmptyInputException`: Thrown when no index is provided after `filter/a` or `filter/d`.
 - `InvalidInputFormatException`: Thrown when more than 2 values are provided as ranges.
--  `NumberFormatException`: Thrown if the ranges provided are not integers.
-- `NumberFormatException`: Thrown when the provided index is not a valid integer.
+- `InvalidIntegerException`: Thrown when values given are negative.
+- `NumberFormatException`: Thrown if the ranges provided are not integers.
 
 ---
 ## Appendix: Requirements
@@ -257,7 +259,7 @@ Before testing, ensure you have Java 17 downloaded on your system.
 ### Launch and Basic Commands
 1. **Initial Launch**
    - Download the NextStep.jar file and copy it into an empty folder
-   - Start the application by running `java -jar NextStep.jar`
+   - Start the application by running `java -jar nextstep.jar`
    - Expected: Shows welcome message
    
    ![img.png](images/initialLaunch.png)

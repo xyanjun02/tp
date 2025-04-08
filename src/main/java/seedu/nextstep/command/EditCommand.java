@@ -45,8 +45,8 @@ public class EditCommand extends Command {
      * @throws EmptyInputException         if the user provides an empty input.
      * @throws InvalidIndexException       if the provided index is out of bounds.
      * @throws InvalidInputFormatException if the user input format is incorrect.
-     * @throws NumberFormatException       if numeric values are not properly formatted.
      * @throws InvalidIntegerException     if allowance is negative or duration is non-positive.
+     * @throws NumberFormatException       if numeric values are not properly formatted.
      */
     @Override
     public void execute()
