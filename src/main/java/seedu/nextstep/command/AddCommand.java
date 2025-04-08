@@ -33,8 +33,8 @@ public class AddCommand extends Command {
      * Executes the adding of a new Internship.
      * @throws EmptyInputException If no details are given after "add".
      * @throws InvalidInputFormatException If there are missing fields.
-     * @throws NumberFormatException If allowance/duration are not integers.
      * @throws InvalidIntegerException If allowance is negative or duration is non-positive.
+     * @throws NumberFormatException If allowance/duration are not integers.
      */
     @Override
     public void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIntegerException {
@@ -101,6 +101,7 @@ public class AddCommand extends Command {
 
     /**
      * Validates flags to check for invalid or duplicate flags.
+     * @throws InvalidInputFormatException if duplicate flag is found
      */
     private void validateFlags(String input) throws InvalidInputFormatException {
         Set<String> seenFlags = new HashSet<>();

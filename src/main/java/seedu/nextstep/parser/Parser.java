@@ -33,6 +33,10 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Takes in user input, creates and executes the appropriate command.
+     * @param input User input
+     */
     public void processCommand(String input) {
         //@@author jiajun2002
         input = input.trim();
@@ -62,6 +66,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates the correct command based on the commandWord.
+     * @param commandWord The commandWord.
+     * @param input User input.
+     * @return The created command.
+     * @throws SimilarCommandException if the commandWord does not exist but is similar to an existing command.
+     */
     protected Command createCommand(String commandWord, String input) throws SimilarCommandException {
         return switch (commandWord) {
         case "add" -> new AddCommand(input, internships, storage);
@@ -78,6 +89,10 @@ public class Parser {
         };
     }
 
+    /**
+     * Handles NumberFormatExceptions thrown by various command executions.
+     * @param commandWord
+     */
     private void handleNumberFormatException(String commandWord) {
         if (commandWord.equals("add")) {
             Ui.showError("Error: Allowance/duration have to be integers.");

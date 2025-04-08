@@ -3,8 +3,8 @@ actor User
 participant ":NextStep" as NextStep
 participant ":Parser" as Parser
 participant ":FilterCommand" as FilterCommand
-participant ":Internship" as Internship
 participant ":InternshipList" as InternshipList
+participant ":Internship" as Internship
 participant "<<Class>> \nUi" as Ui
 skinparam sequenceReferenceBackgroundColor white
 
@@ -14,6 +14,7 @@ activate NextStep
 NextStep -> Parser : processCommand(input)
 activate Parser
 
+create FilterCommand
 Parser -> FilterCommand : createCommand()
 activate FilterCommand
 FilterCommand --> Parser : return command
@@ -23,13 +24,13 @@ Parser -> FilterCommand : execute()
 activate FilterCommand
 
 ref over FilterCommand
-  Input Processing and validation
+  Input Processing and validation:
 end ref
 
-  FilterCommand -> InternshipList : getAllInternships()
-  activate InternshipList
-  InternshipList --> FilterCommand : return internships
-  deactivate InternshipList
+FilterCommand -> InternshipList : getAllInternships()
+activate InternshipList
+InternshipList --> FilterCommand : return internships
+deactivate InternshipList
 
 loop for each internship
   FilterCommand -> Internship : getAllowance()
@@ -37,23 +38,31 @@ loop for each internship
   Internship --> FilterCommand : return value
   deactivate Internship
 
-  FilterCommand -> FilterCommand : checkIsWithinRange()
+  FilterCommand -> FilterCommand : checkIsWithinRange
   activate FilterCommand #lightblue
   FilterCommand --> FilterCommand : true/false
   deactivate FilterCommand
 
   alt is within range
-    FilterCommand -> Ui : printInternship()
+    FilterCommand -> Ui : printInternship(internship)
     activate Ui
     Ui -> User : shows internship
+    Ui --> FilterCommand
     deactivate Ui
+
+    FilterCommand -> FilterCommand : found = true
+    activate FilterCommand #lightblue
+    deactivate FilterCommand
   end
 end
 
-FilterCommand -> Ui : printNoFilteredInternshipFound() [if none]
-activate Ui
-Ui -> User : "No internships found"
-deactivate Ui
+alt if !found
+  FilterCommand -> Ui : printNoFilteredInternshipFound()
+  activate Ui
+  Ui -> User : "No internships found"
+  Ui --> FilterCommand
+  deactivate Ui
+end
 
 FilterCommand --> Parser
 deactivate FilterCommand

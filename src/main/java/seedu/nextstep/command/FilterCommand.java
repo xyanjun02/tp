@@ -24,8 +24,8 @@ public class FilterCommand extends Command {
      *
      * @throws EmptyInputException         if no range is given by the user.
      * @throws InvalidInputFormatException if more than 2 values are provided.
-     * @throws NumberFormatException       if the ranges provided are not integers.
      * @throws InvalidIntegerException     if values provided are negative.
+     * @throws NumberFormatException       if the ranges provided are not integers.
      */
     @Override
     public void execute() throws EmptyInputException, InvalidInputFormatException, InvalidIntegerException {
@@ -74,6 +74,14 @@ public class FilterCommand extends Command {
         return maxVal;
     }
 
+    /**
+     * Helper function to check if a particular internship is within range.
+     * @param internship Internship to check.
+     * @param filterType Type of filter - duration/allowance
+     * @param minValue The minimum value provided by the user.
+     * @param maxValue The maximum value provided by the user.
+     * @return True if internship fields are within range, false otherwise.
+     */
     private boolean checkIsWithinRange(Internship internship, String filterType, int minValue, int maxValue) {
         if (filterType.equals("filter/a")) {
             int allowance = internship.getAllowance();

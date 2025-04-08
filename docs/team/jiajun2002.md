@@ -24,10 +24,10 @@ Given below are my contributions to the project.
 - Highlights:
     - Added error and exception handling to prevent incorrect formatting.
 
-**Enhancement: Existing Classses**
-- Ui Class: Implemented the Ui class along with various printing messages and formatting for user interactions.
+**Enhancement: Existing Classes**
+- Ui Class: Implemented the Ui class along with various printing methods and formatting for user interactions.
 - Parser Class: Implemented the Parser class to process user input and execute the appropriate commands.
-- Exception Handling: Created multiple custom exceptions for improved robustness of application.
+- Exception Handling: Created multiple custom exception classes for improved robustness of application.
 - Testing: Added JUnit tests for add and filter to increase reliability of application.
 
 ### Documentation
@@ -37,11 +37,12 @@ Given below are my contributions to the project.
 - Enhanced explanations for `edit` and `filter`
 
 #### Contributions to the Developer Guide
-- Added UML sequence Diagrams for `add`, `filter`, UML Class diagram for the commands component, and improvements on the architecture diagram.
-- Implemented additional instructions in the "Instructions for Manual Testing".
+- Added UML sequence diagrams for `add` and `filter`.
+- Added UML class diagram for commands component, improvements on the architecture diagram and other existing diagrams.
+- Implemented additional instructions in the "Instructions for Manual Testing" section.
 
 ### Project Management
-- Managed 2 releases on GitHub (v1.0 and v2.0).
+- Managed 3 releases on GitHub (v1.0, v2.0 and v2.1).
 - Initiated and closed issues to help track team progress.
 - Conducted code reviews for team members.
 
